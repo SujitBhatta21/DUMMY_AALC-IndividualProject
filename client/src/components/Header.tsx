@@ -1,7 +1,8 @@
 // Components should include all shared components only.
-import './Header.css';
-import logo from '../assets/Logo pack AAL 2-12.png'
+import '../styles/Header.css';
+import logo from '../assets/logo/Logo pack AAL 2-12.png'
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 function Header() {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -22,8 +23,8 @@ function Header() {
                 <div className='header-text-container'>
                     <img src={logo} alt="AALC Logo"/>
                     <div className="header-title">
-                        <h3>AALC Interactive</h3>
-                        <h3>Anti-Apartheid Story</h3>
+                        <h3>AALC Interactive <br/> Anti-Apartheid Story</h3>
+                        {/*<h3>Anti-Apartheid Story</h3>*/}
                     </div>
                     <button
                         className={`hamburger ${menuOpen ? 'active' : ''}`}
@@ -39,11 +40,11 @@ function Header() {
                 {/* Desktop Navigation */}
                 <nav className='desktop-nav'>
                     <ul>
-                        <li><a href='#'>Who We Are</a></li>
-                        <li><a href='#'>Museum</a></li>
-                        <li><a href='#'>Settings/Accessibility</a></li>
+                        <li><Link to='/who-we-are'>Who We Are</Link></li>
+                        <li><Link to='/museum'>Museum</Link></li>
+                        <li><Link to='/settings'>Settings/Accessibility</Link></li>
                     </ul>
-                    <button className="shard-btn"><a href='#'>Shard Collection</a></button>
+                    <button className="shard-btn"><Link to='/shards'>Shard Collection</Link></button>
                 </nav>
             </section>
 
@@ -58,11 +59,11 @@ function Header() {
                 >
                     <nav className='sidebar-nav'>
                         <ul>
-                            <li><a href='#'>Who We Are</a></li>
-                            <li><a href='#'>Museum</a></li>
-                            <li><a href='#'>Settings/Accessibility</a></li>
+                            <li><Link to='/who-we-are' onClick={() => { setMenuOpen(false); }}>Who We Are</Link></li>
+                            <li><Link to='/museum' onClick={() => { setMenuOpen(false); }}>Museum</Link></li>
+                            <li><Link to='/settings' onClick={() => { setMenuOpen(false); }}>Settings/Accessibility</Link></li>
                         </ul>
-                        <button className="shard-btn"><a href='#'>Shard Collection</a></button>
+                        <button className="shard-btn"><Link to='/shards' onClick={() => { setMenuOpen(false); }}>Shard Collection</Link></button>
                     </nav>
                 </div>
             </div>
@@ -71,4 +72,5 @@ function Header() {
 }
 
 
-export {Header}
+export default Header;
+export { Header };
