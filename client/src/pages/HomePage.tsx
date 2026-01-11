@@ -1,8 +1,13 @@
-// import { Header } from "../components/Header";
 import '../App.css'
-import {Header} from "../components/Header.tsx";
+import "../styles/HomePage.css"
+import { Header } from "../components/Header.tsx";
+import { useNavigate } from "react-router-dom";
+import anc_logo from "../assets/ancplaque-copy-2.jpg"
+import AALC_Design from "../assets/DesignForAALC_Museum.jpg"
 
 function HomePage() {
+    const navigate = useNavigate();
+
     return (
         <div className="home-page">
             <Header />
@@ -13,12 +18,34 @@ function HomePage() {
             </div>
 
             <section className="home-section">
-                <div className="section-content">
-                    <h1>Welcome To the Homepage</h1>
-                    <p>Build something amazing with React and TypeScript</p>
-                    <button onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}>
-                        Get Started
+                <div className="home-top-container">
+                    <h1>"Rebuild the Story, Piece together the struggle"</h1>
+
+                    {/* void inside navigate cause of strict TS "I know it's a promise but don't wait for it to finish"*/}
+                    <button onClick={() => { void navigate("/timeline"); }}>
+                        Start Experience
                     </button>
+                </div>
+                <div className="home-middle-container">
+                    {/*  ADD IMAGEes and TEXT in this container  */}
+                    <img id="anc_logo_img" alt="anc_logo" src={ anc_logo }/>
+                    <div className="aalc_design_logo">
+                        <img id="aalc_design_img" alt="aalc_design" src={ AALC_Design }/>
+                        <p>Home-middle-container : Contains images</p>
+                    </div>
+                </div>
+                <div className="home-bottom-container">
+                    {/*  Add What we believe in this container  */}
+                    <h2><b>WHAT WE BELIEVE</b></h2>
+                    <div className="We-believe-text-container ">
+
+                        <p>
+                            We believe learning comes from experiencing via interacting. <br/>
+                            The project is dedicated to someone who is not familiar with the apartheid regime, serving as
+                            an introduction to its cruelty, struggles, and triumphs in an interactive format, inspiring
+                            users to delve deeper into this dark phase of South African history.
+                        </p>
+                    </div>
                 </div>
             </section>
         </div>
