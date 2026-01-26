@@ -21,7 +21,9 @@ function Header() {
         <>
             <section id='header'>
                 <div className='header-text-container'>
-                    <img src={logo} alt="AALC Logo"/>
+                    <Link to={"/"}>
+                        <img src={logo} alt="AALC Logo"/>
+                    </Link>
                     <div className="header-title">
                         <h3>AALC Interactive <br/> Anti-Apartheid Story</h3>
                         {/*<h3>Anti-Apartheid Story</h3>*/}
@@ -63,7 +65,7 @@ function Header() {
                             <li><Link to='/museum' onClick={() => { setMenuOpen(false); }}>Museum</Link></li>
                             <li><Link to='/settings' onClick={() => { setMenuOpen(false); }}>Settings/Accessibility</Link></li>
                         </ul>
-                        <button className="shard-btn"><Link to='/shards' onClick={() => { setMenuOpen(false); }}>Shard Collection</Link></button>
+                        <button className="shard-btn"><Link to='/shard-collection' onClick={() => { setMenuOpen(false); }}>Shard Collection</Link></button>
                     </nav>
                 </div>
             </div>

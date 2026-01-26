@@ -43,6 +43,10 @@ body.menu-open {
     height: auto;
 }
 
+.header-text-container img:hover {
+    cursor: pointer;
+}
+
 /* Desktop Navigation */
 .desktop-nav {
     display: flex;
