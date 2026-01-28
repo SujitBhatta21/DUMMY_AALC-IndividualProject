@@ -1,0 +1,312 @@
+.timeline-page {
+    min-height: 100vh;
+}
+
+.timeline-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+}
+
+.timeline-section h1 {
+    text-align: center;
+    padding: 1.5rem 2rem;
+    margin-bottom: 0.5rem;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    border-bottom: 3px solid #FFD700;
+}
+
+#timeline-heading-quote {
+    color: #FFD700;
+    padding: 1rem 2rem;
+    font-style: italic;
+    text-align: center;
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    max-width: 600px;
+}
+
+/* Shards Collection Button */
+.shards-collected-btn {
+    background: linear-gradient(135deg, #426B1F 0%, #5a8f2a 100%);
+    color: white;
+    padding: 1rem 2rem;
+    margin-bottom: 2rem;
+    border: none;
+    border-radius: 50px;
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    font-weight: bold;
+    letter-spacing: 1px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(66, 107, 31, 0.4);
+    transition: 0.3s linear;
+    position: relative;
+    overflow: hidden;
+}
+
+.shards-collected-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.shards-collected-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(66, 107, 31, 0.5);
+}
+
+.shards-collected-btn:hover::before {
+    left: 100%;
+}
+
+/* Tracks Container */
+.tracks {
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(180deg, #666666 0%, #888888 50%, #666666 100%);
+    border: 2px solid #FFD700;
+    padding: 1.5rem;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 900px;
+    gap: 1.5rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* Common Track Styles */
+.timeline-track1,
+.timeline-track2,
+.timeline-track3 {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    border-radius: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.timeline-track1:hover,
+.timeline-track2:hover,
+.timeline-track3:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.timeline-section h3 {
+    margin: 0 0 1rem 0;
+    padding: 0.5rem 1rem;
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    border-radius: 8px;
+}
+
+/* TRACK 1 - Apartheid (South Africa) - Warm Earth Tones */
+.timeline-track1 {
+    background: linear-gradient(135deg, #f5e6d3 0%, #e8d4c0 100%);
+    border: 2px solid #c9a66b;
+}
+
+.timeline-track1 h3 {
+    background: #8B4513;
+    color: white;
+}
+
+.tt1-shards {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem;
+    gap: 5%;
+}
+
+.tt1-shards button {
+    flex: 1;
+    max-width: 120px;
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+    border: none;
+    border-radius: 12px;
+    padding: clamp(1rem, 4vw, 2rem) clamp(0.5rem, 2vw, 1rem);
+    text-align: center;
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(255, 165, 0, 0.4);
+    transition: all 0.3s ease;
+}
+
+.tt1-shards button:hover {
+    background: linear-gradient(135deg, #FFA500 0%, #FF8C00 100%);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(255, 165, 0, 0.5);
+}
+
+/* TRACK 2 - UK Actions - Cool Blue Tones */
+.timeline-track2 {
+    background: linear-gradient(135deg, #e3eef9 0%, #cde0f2 100%);
+    border: 2px solid #5b8cb8;
+}
+
+.timeline-track2 h3 {
+    background: #1e3a5f;
+    color: white;
+}
+
+.tt2-shards {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem;
+    gap: 5%;
+}
+
+.tt2-shards button {
+    flex: 1;
+    max-width: 120px;
+    background: linear-gradient(135deg, #4a90d9 0%, #2563a8 100%);
+    border: none;
+    border-radius: 12px;
+    padding: clamp(1rem, 4vw, 2rem) clamp(0.5rem, 2vw, 1rem);
+    text-align: center;
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(37, 99, 168, 0.4);
+    transition: all 0.3s ease;
+}
+
+.tt2-shards button:hover {
+    background: linear-gradient(135deg, #2563a8 0%, #1a4b7c 100%);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(37, 99, 168, 0.5);
+}
+
+/* TRACK 3 - Global Solidarity - Green/Teal Tones */
+.timeline-track3 {
+    background: linear-gradient(135deg, #e0f2e9 0%, #c8e6d8 100%);
+    border: 2px solid #4a9f7e;
+}
+
+.timeline-track3 h3 {
+    background: #1a5f4a;
+    color: white;
+}
+
+.tt3-shards {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem;
+    gap: 5%;
+}
+
+.tt3-shards button {
+    flex: 1;
+    max-width: 120px;
+    background: linear-gradient(135deg, #3cb371 0%, #228b55 100%);
+    border: none;
+    border-radius: 12px;
+    padding: clamp(1rem, 4vw, 2rem) clamp(0.5rem, 2vw, 1rem);
+    text-align: center;
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(34, 139, 85, 0.4);
+    transition: all 0.3s ease;
+}
+
+.tt3-shards button:hover {
+    background: linear-gradient(135deg, #228b55 0%, #166b3f 100%);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(34, 139, 85, 0.5);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .timeline-section {
+        padding: 1rem 0.5rem;
+    }
+
+    .tracks {
+        width: 95%;
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    .timeline-track1,
+    .timeline-track2,
+    .timeline-track3 {
+        padding: 0.75rem;
+    }
+
+    .tt1-shards,
+    .tt2-shards,
+    .tt3-shards {
+        gap: 3%;
+        padding: 0.5rem;
+    }
+
+    .tt1-shards button,
+    .tt2-shards button,
+    .tt3-shards button {
+        max-width: 100px;
+        border-radius: 10px;
+    }
+
+    .shards-collected-btn {
+        padding: 0.8rem 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .timeline-section h1 {
+        padding: 1rem;
+    }
+
+    #timeline-heading-quote {
+        padding: 0.75rem 1rem;
+    }
+
+    .tracks {
+        padding: 0.75rem;
+        border-radius: 15px;
+    }
+
+    .timeline-track1,
+    .timeline-track2,
+    .timeline-track3 {
+        padding: 0.5rem;
+        border-radius: 10px;
+    }
+
+    .timeline-section h3 {
+        font-size: 0.9rem;
+        padding: 0.4rem 0.75rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .tt1-shards,
+    .tt2-shards,
+    .tt3-shards {
+        gap: 8px;
+        padding: 0.25rem;
+    }
+
+    .tt1-shards button,
+    .tt2-shards button,
+    .tt3-shards button {
+        max-width: 80px;
+        border-radius: 8px;
+        padding: 0.75rem 0.5rem;
+    }
+
+    .shards-collected-btn {
+        padding: 0.7rem 1.2rem;
+        border-radius: 30px;
+    }
+}
