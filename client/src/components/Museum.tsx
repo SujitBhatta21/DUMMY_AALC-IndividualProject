@@ -1,5 +1,5 @@
 import Header from "./Header.tsx";
-import "../App.css"
+import "../styles/Museum.css"
 import Footer from "./Footer.tsx";
 
 
