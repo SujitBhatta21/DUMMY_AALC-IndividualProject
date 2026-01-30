@@ -2,13 +2,11 @@ import '../App.css'
 import "../styles/HomePage.css"
 import { Header } from "../components/Header.tsx";
 import Footer from "../components/Footer";
-import { useNavigate } from "react-router-dom";
+import {Link} from "react-router-dom";
 import anc_logo from "../assets/ancplaque-copy-2.jpg"
 import AALC_Design from "../assets/DesignForAALC_Museum.jpg"
 
 function HomePage() {
-    const navigate = useNavigate();
-
     return (
         <div className="home-page">
             <Header />
@@ -18,9 +16,14 @@ function HomePage() {
                     <h1>"Rebuild the Story, Piece together the struggle"</h1>
 
                     {/* void inside navigate cause of strict TS "I know it's a promise but don't wait for it to finish"*/}
-                    <button onClick={() => { void navigate("/timeline"); }}>
-                        Start Experience
-                    </button>
+
+                    <Link to="/storyline">
+                        <button>Start <br/> Experience</button>
+                    </Link>
+
+                    {/*<button onClick={() => { void navigate("/timeline"); }}>*/}
+                    {/*Start Experience*/}
+                    {/*</button>*/}
                 </div>
                 <div className="home-middle-container">
                     {/*  ADD IMAGEes and TEXT in this container  */}

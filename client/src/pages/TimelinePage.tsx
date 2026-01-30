@@ -1,10 +1,12 @@
 import '../styles/TimelinePage.css'
-import { Header } from "../components/Header.tsx";
+import {Header} from "../components/Header.tsx";
+import {Link} from "react-router-dom";
+
 
 function TimelinePage() {
     return (
         <div className="timeline-page">
-            <Header />
+            <Header/>
             <section className="timeline-section">
                 <h1>StoryLine Tracks</h1>
                 <p id="timeline-heading-quote">""PUT A QUOTE HERE...""</p>
@@ -13,7 +15,10 @@ function TimelinePage() {
                     <div className="timeline-track1">
                         <h3>Apartheid (South Africa)<br/></h3>
                         <div className="tt1-shards">
-                            <button className="shard-btn">1</button>
+                            <Link to="/storyline/1">
+                                <button className="shard-btn">1</button>
+                            </Link>
+
                             <button className="shard-btn">2</button>
                             <button className="shard-btn">3</button>
                         </div>

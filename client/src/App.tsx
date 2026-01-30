@@ -11,10 +11,11 @@ function App() {
         <Router>
             <Routes>
                 <Route path="/" element={<HomePage />} />
-                <Route path="/timeline" element={<TimelinePage />} />
+                <Route path="/storyline" element={(<TimelinePage />)} />
                 <Route path="/who-we-are" element={<WhoWeAre />} />
                 <Route path="/museum" element={<Museum />} />
                 <Route path="/settings" element={<Settings />} />
+                <Route path="/storyline/shard/1" element={<WhoWeAre />}/>
             </Routes>
         </Router>
     )
