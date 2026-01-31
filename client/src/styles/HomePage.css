@@ -9,27 +9,41 @@
     justify-content: center;
     align-items: center;
     margin-top: 3rem;
-    margin-bottom: 2rem
+    margin-bottom: 2rem;
+    border: solid 1px red;
 }
 
 .home-top-container h1 {
     margin-bottom: 2rem;
 }
 
-.home-top-container button {
-    width: 10%;
-    height: 40px;
+.home-top-container a button {
+    width: 100%;
+    height: auto;
     margin: 20px;
     border-radius: 10px;
     transition: 1s;
 }
+.home-top-container a button {
+    width: 75%;
+    height: auto;
+    padding: 10px 0;
+    margin: 20px;
+    border-radius: 10px;
+    transition: 1s;
 
-.home-top-container button:hover {
+    /* clamp(min, preferred, max) prevents text from disappearing */
+    font-size: clamp(14px, 2vw, 20px);
+
+    white-space: normal;
+    line-height: 1.2; /* Controls spacing between the two lines */
+}
+
+.home-top-container a button:hover {
     cursor: pointer;
     background-color: #426B1F;
     color: white;
-    transform: scale(1.2);
-        transition: 1s;
+    transform: scale(1.1);
 }
 
 .home-middle-container {
@@ -85,4 +99,13 @@
 .We-believe-text-container p {
     margin: 0; /* Remove default margin */
     line-height: 1.6; /* Better readability */
+}
+
+
+/* RESPONSIVE STYLES */
+@media (max-width=480px) {
+    .home-top-container a button {
+        width: 90%;
+        margin: 10px auto;
+    }
 }
