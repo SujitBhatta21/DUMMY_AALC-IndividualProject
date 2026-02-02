@@ -1,14 +1,54 @@
 import '../styles/TimelinePage.css'
 import { Header } from "../components/Header.tsx";
 import {Link} from "react-router-dom";
-import { useEffect } from "react";
+import {useEffect, useState} from "react";
 import { driver } from 'driver.js';
 import 'driver.js/dist/driver.css';
+
+interface Shard {
+    id: number;
+    title: string;
+    contextText: string[];
+    rewardsText: string;
+    puzzleType: string;
+    trackNumber: number;
+    isUnlocked: boolean;
+    isCompleted: boolean;
+}
+
+
+async function fetchShards() : Promise<Shard[]> {
+    const response = await fetch("http://localhost:8080/api/shard");
+
+    if (!response.ok) {
+        throw new Error(response.statusText);
+    }
+
+    const data = (await response.json()) as Shard[];
+    return data;
+}
 
 
 function TimelinePage() {
     const DEVELOPMENT_MODE = true; // I set this up so that I can test popup tour.
 
+    const [shards, setShards] = useState<Shard[]>([]);
+
+    // Fetching shards data from server.
+    useEffect(() => {
+        const getShards = async() => {
+            try {
+                const response = await fetchShards();
+                setShards(response);
+            } catch (err) {
+                console.error("Failed to load the shards", err)
+            }
+        }
+        getShards();
+    }, []);
+
+
+    // Tutorial Tour of Timeline Page.
     useEffect(() => {
         const hasSeenTutorial = localStorage.getItem('hasSeenTimelineTutorial');
 
@@ -77,7 +117,7 @@ function TimelinePage() {
                         <h3>Apartheid (South Africa)<br/></h3>
                         <div className="tt1-shards">
                             <Link to="/storyline/1">
-                                <button className="shard-btn">1</button>
+                                <button className="shard-btn">{ shards[0]?.title }</button>
                             </Link>
 
                             <button className="shard-btn">2</button>
@@ -87,17 +127,17 @@ function TimelinePage() {
                     <div className="timeline-track2">
                         <h3>UK Actions<br/></h3>
                         <div className="tt2-shards">
-                            <button className="shard-btn">1</button>
-                            <button className="shard-btn">2</button>
-                            <button className="shard-btn">3</button>
+                            <button className="shard-btn">4</button>
+                            <button className="shard-btn">5</button>
+                            <button className="shard-btn">6</button>
                         </div>
                     </div>
                     <div className="timeline-track3">
                         <h3>Global Solidarity<br/></h3>
                         <div className="tt3-shards">
-                            <button className="shard-btn">1</button>
-                            <button className="shard-btn">2</button>
-                            <button className="shard-btn">3</button>
+                            <button className="shard-btn">7</button>
+                            <button className="shard-btn">8</button>
+                            <button className="shard-btn">9</button>
                         </div>
                     </div>
                 </div>
