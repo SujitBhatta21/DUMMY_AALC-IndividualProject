@@ -12,7 +12,9 @@ import java.util.List;
 public class ShardController {
 
     private final List<Shard> shards = new ArrayList<>(List.of(
-            new Shard(1, "Shard-1", "Rewards Text", "MULTIPLE_CHOICE", true),
+            new Shard(1, "Shard-1", "In 1952, Black South Africans were required to carry passbooks" +
+                    " controlling where they could live, work, or travel. These laws turned daily life into a constant threat."
+                    , "MULTIPLE_CHOICE", true),
             new Shard(2, "Shard-2", "Rewards Text", "MULTIPLE_CHOICE", false),
             new Shard(3, "Shard-3", "Rewards Text", "MATCHING", false),
             new Shard(4, "Shard-4", "Rewards Text", "FILL_IN_BLANK", false),

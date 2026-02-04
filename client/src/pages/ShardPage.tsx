@@ -68,7 +68,10 @@ function ShardPage() {
             )}
 
             {currentStep === 2 && shardData && (
-                <JigSaw onComplete={() => { handleShardComplete(); }}/>
+                <JigSaw
+                    onComplete={() => { handleShardComplete(); }}
+                    rewardsText={shardData.rewardsText}
+                />
             )}
 
             {/*{shardData?.id === 1 ? <FillInTheBlank props={shardData.}} /> : null}*/}
