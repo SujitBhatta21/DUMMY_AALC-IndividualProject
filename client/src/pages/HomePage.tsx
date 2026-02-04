@@ -3,8 +3,7 @@ import "../styles/HomePage.css"
 import { Header } from "../components/Header.tsx";
 import Footer from "../components/Footer";
 import {Link} from "react-router-dom";
-import anc_logo from "../assets/ancplaque-copy-2.jpg"
-import AALC_Design from "../assets/DesignForAALC_Museum.jpg"
+import kids_puzzle_image from "../assets/Close_up_of_Hand_Cut_Jigsaw_Puzzle.jpeg"
 
 function HomePage() {
     return (
@@ -14,39 +13,38 @@ function HomePage() {
             <section className="home-section">
                 <div className="home-top-container">
                     <h1>"Rebuild the Story, Piece together the struggle"</h1>
-
-                    {/* void inside navigate cause of strict TS "I know it's a promise but don't wait for it to finish"*/}
-
                     <Link to="/storyline">
-                        <button>Start <br/> Experience</button>
+                        <button>Start Puzzle Experience</button>
                     </Link>
-
-                    {/*<button onClick={() => { void navigate("/timeline"); }}>*/}
-                    {/*Start Experience*/}
-                    {/*</button>*/}
                 </div>
+
                 <div className="home-middle-container">
-                    {/*  ADD IMAGEes and TEXT in this container  */}
-                    <img id="anc_logo_img" alt="anc_logo" src={ anc_logo }/>
-                    <div className="aalc_design_logo">
-                        <img id="aalc_design_img" alt="aalc_design" src={ AALC_Design }/>
-                        <p>Home-middle-container : Contains images</p>
+                    <img id="anc_logo_img" alt="Kids solving a jigsaw puzzle" src={ kids_puzzle_image }/>
+                    <div className="puzzle-about-content">
+                        <h2>What is this?</h2>
+                        <p>
+                            Solve puzzles. Collect shards. Uncover history.
+                        </p>
+                        <p>
+                            Each shard reveals a piece of the real story of apartheid
+                            in South Africa and the people who fought against it —
+                            right here from London's 28 Penton Street.
+                        </p>
+                        <p className="age-note">Designed for learners aged 10–14</p>
                     </div>
                 </div>
-                <div className="home-bottom-container">
-                    {/*  Add What we believe in this container  */}
-                    <h2><b>WHAT WE <br/>BELIEVE </b></h2>
-                    <div className="We-believe-text-container ">
 
-                        <p>
-                            We believe learning comes from experiencing via interacting. <br/><br/>
-                            The project is dedicated to someone who is not familiar with the apartheid regime, serving as
-                            an introduction to its cruelty, struggles, and triumphs in an interactive format, inspiring
-                            users to delve deeper into this dark phase of South African history.
-                        </p>
-                    </div>
+                <div className="home-bottom-container">
+                    <h2>What We Believe</h2>
+                    <p>
+                        We believe learning comes from experiencing via interacting. <br/><br/>
+                        The project is dedicated to someone who is not familiar with the apartheid regime, serving as
+                        an introduction to its cruelty, struggles, and triumphs in an interactive format, inspiring
+                        users to delve deeper into this dark phase of South African history.
+                    </p>
                 </div>
             </section>
+
             <Footer />
         </div>
     )

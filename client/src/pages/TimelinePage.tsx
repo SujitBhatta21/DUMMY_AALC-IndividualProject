@@ -94,14 +94,15 @@ function TimelinePage() {
         }
     }, []);
 
+    const totalSolvedShards = shards.filter(s => s.completed).length
 
     return (
         <div className="timeline-page">
             <Header/>
             <section className="timeline-section">
-                <h1>StoryLine Tracks</h1>
-                <p id="timeline-heading-quote">""PUT A QUOTE HERE...""</p>
-                <button className="shards-collected-btn">SHARDS COLLECTED: 0/9</button>
+                <h1>[Solve the Puzzles]</h1>
+                <p id="timeline-heading-quote">""About the puzzle button to see context.""</p>
+                <button className="shards-collected-btn">SHARDS COLLECTED: { totalSolvedShards }/9</button>
                 <div className="tracks">
                     <div className="timeline-track1">
                         <h3>Apartheid (South Africa)<br/></h3>
@@ -120,7 +121,7 @@ function TimelinePage() {
                                     }
                                 }}
                             >
-                                <button>{ shards[1]?.id }</button>
+                                <button className="shard-btn">{ shards[1]?.id }</button>
                             </Link>
 
                             <button className="shard-btn">3</button>
