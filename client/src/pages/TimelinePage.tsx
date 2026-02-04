@@ -4,17 +4,7 @@ import {Link} from "react-router-dom";
 import {useEffect, useState} from "react";
 import { driver } from 'driver.js';
 import 'driver.js/dist/driver.css';
-
-interface Shard {
-    id: number;
-    title: string;
-    contextText: string[];
-    rewardsText: string;
-    puzzleType: string;
-    trackNumber: number;
-    isUnlocked: boolean;
-    isCompleted: boolean;
-}
+import type { Shard } from "../types.ts";
 
 
 async function fetchShards() : Promise<Shard[]> {
@@ -116,11 +106,23 @@ function TimelinePage() {
                     <div className="timeline-track1">
                         <h3>Apartheid (South Africa)<br/></h3>
                         <div className="tt1-shards">
-                            <Link to="/storyline/1">
-                                <button className="shard-btn">{ shards[0]?.title }</button>
+                            {/* eslint-disable-next-line @typescript-eslint/restrict-template-expressions */}
+                            <Link to={`/storyline/shard/${ shards[0]?.id }`}>
+                                <button className="shard-btn">{ shards[0]?.id }</button>
                             </Link>
 
-                            <button className="shard-btn">2</button>
+                            <Link
+                                to={`/storyline/shard/${ shards[1]?.id }`}
+                                onClick={(e) => {
+                                    const allowNavigate : boolean = shards[0]?.completed;
+                                    if (!allowNavigate) {
+                                        e.preventDefault();
+                                    }
+                                }}
+                            >
+                                <button>{ shards[1]?.id }</button>
+                            </Link>
+
                             <button className="shard-btn">3</button>
                         </div>
                     </div>
