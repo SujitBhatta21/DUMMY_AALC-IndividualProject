@@ -20,13 +20,14 @@ function Museum() {
                 </div>
                 <div className="museum-contents">
                     <h1>ADDRESS</h1>
-                    <p>28 Penton Street, London, N1 9PW</p>
+                    <p>28 Penton Street, London, N1 9PS</p>
                     <h1>OPENING HOURS</h1>
-                    <ul>
-                        <li>Monday-Friday (....)</li>
-                        <li>Saturday (....)</li>
-                        <li>Sunday Closed</li>
-                    </ul>
+                    <p>Currently Under Construction</p>
+                    {/*<ul>*/}
+                    {/*    <li>Monday-Friday (....)</li>*/}
+                    {/*    <li>Saturday (....)</li>*/}
+                    {/*    <li>Sunday Closed</li>*/}
+                    {/*</ul>*/}
                     <h1>CONTACT</h1>
                     <h2>(+44) ...</h2>
 

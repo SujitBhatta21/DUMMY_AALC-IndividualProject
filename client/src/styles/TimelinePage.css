@@ -144,6 +144,21 @@
     box-shadow: 0 8px 20px rgba(255, 165, 0, 0.5);
 }
 
+/* Link wrappers inside shard tracks */
+.tt1-shards a,
+.tt2-shards a,
+.tt3-shards a {
+    flex: 1;
+    max-width: 120px;
+    text-decoration: none;
+}
+
+.tt1-shards a button,
+.tt2-shards a button,
+.tt3-shards a button {
+    width: 100%;
+}
+
 /* TRACK 2 - UK Actions - Cool Blue Tones */
 .timeline-track2 {
     background: linear-gradient(135deg, #e3eef9 0%, #cde0f2 100%);
@@ -295,6 +310,20 @@
     .tt3-shards {
         gap: 8px;
         padding: 0.25rem;
+    }
+
+    .tt1-shards a,
+    .tt2-shards a,
+    .tt3-shards a {
+        flex: 1;
+        max-width: 120px;
+        text-decoration: none;
+    }
+
+    .tt1-shards a button,
+    .tt2-shards a button,
+    .tt3-shards a button {
+        width: 100%;
     }
 
     .tt1-shards button,

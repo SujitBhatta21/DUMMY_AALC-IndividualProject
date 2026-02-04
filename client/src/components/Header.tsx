@@ -25,7 +25,7 @@ function Header() {
                         <img src={logo} alt="AALC Logo"/>
                     </Link>
                     <div className="header-title">
-                        <h3>AALC Interactive <br/> Anti-Apartheid Story</h3>
+                        <h3>Anti-Apartheid Legacy Centre <br/> Interactive Anti-Apartheid History Puzzle</h3>
                         {/*<h3>Anti-Apartheid Story</h3>*/}
                     </div>
                     <button

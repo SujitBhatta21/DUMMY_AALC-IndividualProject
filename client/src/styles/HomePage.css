@@ -3,109 +3,137 @@
     flex-direction: column;
 }
 
+/* Hero section */
 .home-top-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 3rem;
-    margin-bottom: 2rem;
-    border: solid 1px red;
+    padding: 4rem 2rem;
 }
 
 .home-top-container h1 {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    text-align: center;
     margin-bottom: 2rem;
+    max-width: 600px;
+}
+
+.home-top-container a {
+    text-decoration: none;
 }
 
 .home-top-container a button {
-    width: 100%;
-    height: auto;
-    margin: 20px;
-    border-radius: 10px;
-    transition: 1s;
-}
-.home-top-container a button {
-    width: 75%;
-    height: auto;
-    padding: 10px 0;
-    margin: 20px;
-    border-radius: 10px;
-    transition: 1s;
-
-    /* clamp(min, preferred, max) prevents text from disappearing */
-    font-size: clamp(14px, 2vw, 20px);
-
-    white-space: normal;
-    line-height: 1.2; /* Controls spacing between the two lines */
+    padding: 1rem 2.5rem;
+    border: none;
+    border-radius: 50px;
+    font-size: clamp(0.95rem, 2vw, 1.1rem);
+    font-weight: bold;
+    letter-spacing: 1px;
+    background: linear-gradient(135deg, #426B1F 0%, #5a8f2a 100%);
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(66, 107, 31, 0.4);
+    transition: all 0.3s ease;
 }
 
 .home-top-container a button:hover {
-    cursor: pointer;
-    background-color: #426B1F;
-    color: white;
-    transform: scale(1.1);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(66, 107, 31, 0.5);
 }
 
+/* Middle section — image + text side by side */
 .home-middle-container {
     display: flex;
-    flex-wrap: nowrap;
-    object-fit: cover;
+    flex-direction: row;
     align-items: center;
-    justify-content: center;
-    gap: 2rem;
-    padding: 2rem;
-    border : solid 5px black;
+    gap: 3rem;
+    padding: 3rem;
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
 #anc_logo_img {
-    width: 45%;
+    width: 100%;
+    max-width: 400px;
     height: auto;
-    border : solid 5px  blue;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-#aalc_design_img {
-    width: 85%;
-    height: auto;
-    border : solid 5px  blue;
+.puzzle-about-content {
+    flex: 1;
 }
 
-.aalc_design_logo {
+.puzzle-about-content h2 {
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    margin: 0 0 1rem 0;
+    color: #8B4513;
+}
+
+.puzzle-about-content p {
+    margin: 0 0 0.75rem 0;
+    line-height: 1.7;
+    font-size: clamp(0.95rem, 2vw, 1.1rem);
+}
+
+.puzzle-about-content .age-note {
+    font-style: italic;
+    color: #666;
+    font-size: clamp(0.85rem, 1.5vw, 0.95rem);
+    margin-top: 0.5rem;
+}
+
+/* Bottom section — What We Believe */
+.home-bottom-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border : solid 5px pink;
-}
-
-
-.home-bottom-container {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start; /* Aligns items to the top */
-    gap: 3rem; /* Space between heading and text */
-    padding: 3rem; /* Space around the container */
-    border: solid 5px pink;
+    text-align: center;
+    padding: 3rem 2rem;
+    margin-top: 1rem;
+    background: linear-gradient(135deg, #f5e6d3, #e8d4c0);
 }
 
 .home-bottom-container h2 {
-    flex-shrink: 0; /* Prevents heading from shrinking */
-    min-width: 200px; /* Ensures heading has consistent width */
-    margin: 0; /* Remove default margin */
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    margin: 0 0 1rem 0;
+    color: #8B4513;
 }
 
-.We-believe-text-container {
-    flex: 1; /* Takes up remaining space */
+.home-bottom-container p {
+    margin: 0;
+    line-height: 1.6;
+    font-size: clamp(1rem, 2vw, 1.1rem);
+    max-width: 600px;
 }
 
-.We-believe-text-container p {
-    margin: 0; /* Remove default margin */
-    line-height: 1.6; /* Better readability */
+/* Responsive */
+@media (max-width: 768px) {
+    .home-middle-container {
+        flex-direction: column;
+        padding: 2rem 1.5rem;
+    }
+
+    #anc_logo_img {
+        max-width: 100%;
+    }
 }
 
+@media (max-width: 480px) {
+    .home-top-container {
+        padding: 3rem 1rem;
+    }
 
-/* RESPONSIVE STYLES */
-@media (max-width=480px) {
     .home-top-container a button {
-        width: 90%;
-        margin: 10px auto;
+        padding: 0.8rem 2rem;
+    }
+
+    .home-middle-container {
+        padding: 1.5rem 1rem;
+    }
+
+    .home-bottom-container {
+        padding: 2rem 1rem;
     }
 }
