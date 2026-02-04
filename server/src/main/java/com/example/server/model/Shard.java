@@ -13,19 +13,16 @@ public class Shard {
     @Id
     private Integer id;
     private String title;
-    @ElementCollection
-    private List<String> context_text;
     private String rewardsText;             // Confusion on types...
     private String puzzleType;
     private Integer trackNumber;
     private boolean isUnlocked;            // If isCompleted True then isUnlocked true for shard+1.
     private boolean isCompleted = false;
 
-    public Shard(Integer id, String title, List<String> context_text,
+    public Shard(Integer id, String title,
                  String rewardsText, String puzzleType, boolean isUnlocked) {
         this.id = id;
         this.title = title;
-        this.context_text = context_text;
         this.rewardsText = rewardsText;
         this.puzzleType = puzzleType;
         this.isUnlocked = isUnlocked;
@@ -68,14 +65,6 @@ public class Shard {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public List<String> getContext_text() {
-        return context_text;
-    }
-
-    public void setContext_text(List<String> context_text) {
-        this.context_text = context_text;
     }
 
     public String getRewardsText() {

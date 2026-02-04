@@ -4,6 +4,7 @@ import TimelinePage from "./pages/TimelinePage.tsx";
 import WhoWeAre from "./components/WhoWeAre.tsx";
 import Museum from "./components/Museum";
 import Settings from "./components/Settings.tsx";
+import ShardPage from "./pages/ShardPage.tsx";
 
 
 function App() {
@@ -15,7 +16,7 @@ function App() {
                 <Route path="/who-we-are" element={<WhoWeAre />} />
                 <Route path="/museum" element={<Museum />} />
                 <Route path="/settings" element={<Settings />} />
-                <Route path="/storyline/shard/1" element={<WhoWeAre />}/>
+                <Route path="/storyline/shard/:id" element={<ShardPage />}/>
             </Routes>
         </Router>
     )
