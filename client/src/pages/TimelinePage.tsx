@@ -96,6 +96,22 @@ function TimelinePage() {
 
     const totalSolvedShards = shards.filter(s => s.completed).length
 
+    const isShardAccessible = (index : number) : boolean => {
+        if (index === 0) return true;
+        return (shards[index - 1]?.completed ?? false);
+    }
+
+    // Helper function to get the appropriate CSS class for a shard button
+    const getShardButtonClass = (index: number): string => {
+        const isAccessible = isShardAccessible(index);
+        const isCompleted = shards[index]?.completed ?? false;
+
+        let className = 'shard-btn';
+        if (!isAccessible) className += ' shard-locked';
+        if (isCompleted) className += ' shard-completed';
+        return className;
+    };
+
     return (
         <div className="timeline-page">
             <Header/>
@@ -107,40 +123,105 @@ function TimelinePage() {
                     <div className="timeline-track1">
                         <h3>Apartheid (South Africa)<br/></h3>
                         <div className="tt1-shards">
-                            {/* eslint-disable-next-line @typescript-eslint/restrict-template-expressions */}
                             <Link to={`/storyline/shard/${ shards[0]?.id }`}>
-                                <button className="shard-btn">{ shards[0]?.id }</button>
+                                <button className={getShardButtonClass(0)}>{ shards[0]?.id }</button>
                             </Link>
 
                             <Link
                                 to={`/storyline/shard/${ shards[1]?.id }`}
                                 onClick={(e) => {
-                                    const allowNavigate : boolean = shards[0]?.completed;
-                                    if (!allowNavigate) {
+                                    if (!isShardAccessible(1)) {
                                         e.preventDefault();
                                     }
                                 }}
                             >
-                                <button className="shard-btn">{ shards[1]?.id }</button>
+                                <button className={getShardButtonClass(1)}>{ shards[1]?.id }</button>
                             </Link>
 
-                            <button className="shard-btn">3</button>
+                            <Link
+                                to={`/storyline/shard/${ shards[2]?.id }`}
+                                onClick={(e) => {
+                                    if (!isShardAccessible(2)) {
+                                        e.preventDefault();
+                                    }
+                                }}
+                            >
+                                <button className={getShardButtonClass(2)}>{ shards[2]?.id }</button>
+                            </Link>
                         </div>
                     </div>
                     <div className="timeline-track2">
                         <h3>UK Actions<br/></h3>
                         <div className="tt2-shards">
-                            <button className="shard-btn">4</button>
-                            <button className="shard-btn">5</button>
-                            <button className="shard-btn">6</button>
+                            <Link
+                                to={`/storyline/shard/${ shards[3]?.id }`}
+                                onClick={(e) => {
+                                    if (!isShardAccessible(3)) {
+                                        e.preventDefault();
+                                    }
+                                }}
+                            >
+                                <button className={getShardButtonClass(3)}>{ shards[3]?.id }</button>
+                            </Link>
+
+                            <Link
+                                to={`/storyline/shard/${ shards[4]?.id }`}
+                                onClick={(e) => {
+                                    if (!isShardAccessible(4)) {
+                                        e.preventDefault();
+                                    }
+                                }}
+                            >
+                                <button className={getShardButtonClass(4)}>{ shards[4]?.id }</button>
+                            </Link>
+
+                            <Link
+                                to={`/storyline/shard/${ shards[5]?.id }`}
+                                onClick={(e) => {
+                                    if (!isShardAccessible(5)) {
+                                        e.preventDefault();
+                                    }
+                                }}
+                            >
+                                <button className={getShardButtonClass(5)}>{ shards[5]?.id }</button>
+                            </Link>
                         </div>
                     </div>
                     <div className="timeline-track3">
                         <h3>Global Solidarity<br/></h3>
                         <div className="tt3-shards">
-                            <button className="shard-btn">7</button>
-                            <button className="shard-btn">8</button>
-                            <button className="shard-btn">9</button>
+                            <Link
+                                to={`/storyline/shard/${ shards[6]?.id }`}
+                                onClick={(e) => {
+                                    if (!isShardAccessible(6)) {
+                                        e.preventDefault();
+                                    }
+                                }}
+                            >
+                                <button className={getShardButtonClass(6)}>{ shards[6]?.id }</button>
+                            </Link>
+
+                            <Link
+                                to={`/storyline/shard/${ shards[7]?.id }`}
+                                onClick={(e) => {
+                                    if (!isShardAccessible(7)) {
+                                        e.preventDefault();
+                                    }
+                                }}
+                            >
+                                <button className={getShardButtonClass(7)}>{ shards[7]?.id }</button>
+                            </Link>
+
+                            <Link
+                                to={`/storyline/shard/${ shards[8]?.id }`}
+                                onClick={(e) => {
+                                    if (!isShardAccessible(8)) {
+                                        e.preventDefault();
+                                    }
+                                }}
+                            >
+                                <button className={getShardButtonClass(8)}>{ shards[8]?.id }</button>
+                            </Link>
                         </div>
                     </div>
                 </div>
