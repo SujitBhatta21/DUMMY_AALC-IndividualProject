@@ -13,7 +13,13 @@ import java.util.Map;
 public class ShardController {
 
     private final List<Shard> shards = new ArrayList<>(List.of(
-            new Shard(1, "Shard-1","Question-1______", Map.of(1, List.of("trial1", "trial2")), "In 1952, Black South Africans were required to carry passbooks" +
+            new Shard(1, "Shard-1",
+                    "The word “apartheid\" means ___. The National Party, a white minority political party, took power in ___ after an election in which only ___ people could vote. These laws controlled where black South Africans could live, work, and move. The ___ was one of the organisations that resisted apartheid.",
+                    Map.of(1, List.of("separateness", "inequality", "supremacy", "division"),
+                            2, List.of("1948", "1938", "1952"),
+                            3, List.of("white", "wealthy", "male"),
+                            4, List.of("ANC (African National Congress)", "NAP (National African Party)", "APC (African People's Congress)", "SAC (South African Council)")),
+                    "In 1952, Black South Africans were required to carry passbooks" +
                     " controlling where they could live, work, or travel. These laws turned daily life into a constant threat."
                     , "JIGSAW", true),
             new Shard(2, "Shard-2", "Q2", Map.of(1, List.of("")), "Rewards Text", "MULTIPLE_CHOICE", false),

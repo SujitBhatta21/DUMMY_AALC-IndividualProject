@@ -61,7 +61,8 @@ function ShardPage() {
 
             { currentStep === 1 && shardData && (
                 <FillInTheBlank
-                    question={shardData.puzzleType}   // NOTE::: HAVE QUESTION IN HERE
+                    question={shardData.fitb_question}   // NOTE::: HAVE QUESTION IN HERE
+                    answers={ shardData.fitb_answer }    // Contains wrong options as well.
                     onCorrect={() => { setCurrentStep(currentStep + 1); }}
                     onBack={() => { setCurrentStep(currentStep - 1); }}
                 />
