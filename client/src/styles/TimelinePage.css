@@ -144,6 +144,54 @@
     box-shadow: 0 8px 20px rgba(255, 165, 0, 0.5);
 }
 
+/* Locked Shard Styles */
+.shard-btn.shard-locked {
+    background: linear-gradient(135deg, #6b6b6b 0%, #4a4a4a 100%) !important;
+    color: #999 !important;
+    cursor: not-allowed;
+    opacity: 0.7;
+    position: relative;
+}
+
+.shard-btn.shard-locked::after {
+    content: '\1F512';      /* Locked emoji... */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1.5);
+    font-size: 1.5rem;
+    opacity: 0.8;
+}
+
+.shard-btn.shard-locked:hover {
+    transform: none !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3) !important;
+    background: linear-gradient(135deg, #6b6b6b 0%, #4a4a4a 100%) !important;
+}
+
+/* Completed Shard Styles */
+.shard-btn.shard-completed {
+    position: relative;
+    box-shadow: 0 0 15px rgba(76, 175, 80, 0.6);
+    border: 2px solid #4CAF50;
+}
+
+.shard-btn.shard-completed::after {
+    content: '\2714';       /* Tick mark Unicode */
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #4CAF50;
+    color: white;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 /* Link wrappers inside shard tracks */
 .tt1-shards a,
 .tt2-shards a,

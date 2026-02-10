@@ -40,7 +40,7 @@ function HomePage() {
                         We believe learning comes from experiencing via interacting. <br/><br/>
                         The project is dedicated to someone who is not familiar with the apartheid regime, serving as
                         an introduction to its cruelty, struggles, and triumphs in an interactive format, inspiring
-                        users to delve deeper into this dark phase of South African history.
+                        users to delve deeper into this dark phase of African history not only in South Africa.
                     </p>
                 </div>
             </section>
