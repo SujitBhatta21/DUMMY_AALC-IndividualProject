@@ -75,13 +75,16 @@ function ShardPage() {
                     { shardData.puzzleType === "JIGSAW" && (
                         <JigSaw
                             onComplete={() => { handleShardComplete(); }}
-                            rewardsText={shardData.rewardsText}
-                    />
+                            rewardsText={ shardData.rewardsText }
+                        />
                     )}
 
                     {/* For Shard-2 Redacted Reveal */}
                     { shardData.puzzleType === "REDACTED_REVEAL" && (
-                        <RedactedReveal />
+                        <RedactedReveal
+                            onComplete={() => { handleShardComplete(); }}
+                            rewardsText={ shardData.rewardsText }
+                        />
                     )}
                 </>
             }

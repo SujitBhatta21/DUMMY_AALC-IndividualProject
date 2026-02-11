@@ -21,6 +21,7 @@ function JigSaw({ onComplete, rewardsText }: JigSawProps) {
 
     return (
         <div className="jigsaw-page">
+            <h1>Jigsaw Puzzle (Drag and Drop pieces in correct slot)</h1>
             <div className="jigsaw-container">
                 <div className="jigsaw-puzzle">
                     <h3>Jigsaw Puzzle</h3>
