@@ -22,7 +22,7 @@ public class ShardController {
                     "In 1952, Black South Africans were required to carry passbooks" +
                     " controlling where they could live, work, or travel. These laws turned daily life into a constant threat."
                     , "JIGSAW", true),
-            new Shard(2, "Shard-2", "Q2", Map.of(1, List.of("")), "Rewards Text", "MULTIPLE_CHOICE", false),
+            new Shard(2, "Shard-2", "", Map.of(1, List.of("")), "Rewards Text", "MULTIPLE_CHOICE", false),
             new Shard(3, "Shard-3", "Q3", Map.of(1, List.of("")), "Rewards Text", "MATCHING", false),
             new Shard(4, "Shard-4", "Q4", Map.of(1, List.of("")), "Rewards Text", "FILL_IN_BLANK", false),
             new Shard(5, "Shard-5", "Q5", Map.of(1, List.of("")), "Rewards Text", "MULTIPLE_CHOICE", false),
