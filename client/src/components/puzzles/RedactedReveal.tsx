@@ -39,8 +39,23 @@ function RedactedReveal({ onComplete, rewardsText }: RedactedRevealProps) {
     const [activePopup, setActivePopup] = useState<number | null>(null);
     const [shakeId, setShakeId] = useState<number | null>(null);
     const [solved, setSolved] = useState<boolean>(false);
+    const popupRef = useRef<HTMLSpanElement>(null);
 
 
+    useEffect(() => {
+        if (activePopup === null) return;
+
+        const handleClickOutside = (e: MouseEvent) => {
+            if (popupRef.current && !popupRef.current.contains(e.target as Node)) {
+                setActivePopup(null);
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => { document.removeEventListener("mousedown", handleClickOutside) };
+    }, [activePopup]);
+
+    
     // Function called to do something when redacted block is clicked.
     const handleRedactedClick = (wordId: number) => {
         if (revealedText[wordId]) return;
@@ -91,7 +106,7 @@ function RedactedReveal({ onComplete, rewardsText }: RedactedRevealProps) {
                     {word.answer}
                 </span>
                 {activePopup === word.id && (
-                    <span className="options-popup">
+                    <span className="options-popup" ref={popupRef}>
                         {word.options.map((option) => (
                             <button
                                 key={option}
