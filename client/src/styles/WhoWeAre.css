@@ -1,0 +1,162 @@
+/* Hero Section */
+.who-we-are-hero {
+    text-align: center;
+    padding: 3rem 2rem 2rem;
+    background-color: #f5f5f0;
+}
+
+.who-we-are-hero h1 {
+    font-size: 2.5rem;
+    color: #2d2d2d;
+    margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+    font-size: 1.15rem;
+    color: #555;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Green Box - About Section */
+.green-box-container {
+    display: flex;
+    background-color: #426B1F;
+    padding: 4rem 3rem;
+    gap: 3rem;
+    align-items: center;
+}
+
+.img-readmore-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    flex-shrink: 0;
+}
+
+.img-readmore-section img {
+    width: 280px;
+    height: auto;
+}
+
+.img-readmore-section button {
+    font-size: 16px;
+    background-color: #2d2d2d;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 12px 24px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color 0.2s;
+}
+
+.img-readmore-section button:hover {
+    background-color: #1a1a1a;
+}
+
+.text-container {
+    color: white;
+    font-size: 18px;
+    line-height: 1.6;
+    max-width: 900px;
+    text-align: center;
+}
+
+.text-container p {
+    margin-bottom: 1.5rem;
+}
+
+/* Mission Section */
+.mission-section {
+    text-align: center;
+    padding: 4rem 2rem;
+    background-color: #fff;
+    max-width: 850px;
+    margin: 0 auto;
+}
+
+.mission-section h2 {
+    font-size: 2rem;
+    color: #2d2d2d;
+    margin-bottom: 1.5rem;
+}
+
+.mission-section p {
+    font-size: 1.1rem;
+    color: #444;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+}
+
+/* What We Offer Section */
+.what-we-offer-section {
+    padding: 4rem 2rem;
+    background-color: #f5f5f0;
+    text-align: center;
+}
+
+.what-we-offer-section h2 {
+    font-size: 2rem;
+    color: #2d2d2d;
+    margin-bottom: 2.5rem;
+}
+
+.offer-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.offer-card {
+    background-color: #426B1F;
+    color: white;
+    border-radius: 12px;
+    padding: 2rem 1.5rem;
+    width: 280px;
+    text-align: center;
+    transition: transform 0.2s;
+}
+
+.offer-card:hover {
+    transform: translateY(-4px);
+}
+
+.offer-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+}
+
+.offer-card p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    opacity: 0.9;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .green-box-container {
+        flex-direction: column;
+        padding: 2.5rem 1.5rem;
+    }
+
+    .who-we-are-hero h1 {
+        font-size: 2rem;
+    }
+
+    .offer-cards {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .offer-card {
+        width: 100%;
+        max-width: 350px;
+    }
+}
