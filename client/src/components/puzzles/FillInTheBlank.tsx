@@ -57,6 +57,17 @@ function FillInTheBlank({ question, answers, onCorrect, onBack }: FITBlankProps)
         const isCorrect = correctAnswer.every((ans, i) => ans === userAnswers[i]);
         if (isCorrect) {
             onCorrect(question);
+        } else {
+            // Send wrong answers back to word bank, keep correct ones in place.
+            setFilledBlanks(prev => {
+                const updated = {...prev};
+                for (let i = 0; i < blankCount; i++) {
+                    if (updated[i] !== correctAnswer[i]) {
+                        delete updated[i];
+                    }
+                }
+                return updated;
+            })
         }
     };
 
@@ -134,7 +145,7 @@ function FillInTheBlank({ question, answers, onCorrect, onBack }: FITBlankProps)
                                 draggable={!!filledBlanks[index]}
                                 onDragStart={(e) => handleBlankDragStart(e, index)}
                                 onClick={() => handleBlankClick(index)}
-                                title={filledBlanks[index] ? "Click to remove" : "Drop a word here"}
+                                title={filledBlanks[index] ? "Click to remove" : "Drag & Drop a word here"}
                             >
                                 {filledBlanks[index] || "___"}
                             </button>
@@ -150,13 +161,13 @@ function FillInTheBlank({ question, answers, onCorrect, onBack }: FITBlankProps)
         return (
             <div className="random-word-collection">
                 <div className="a-word">
-                    {shuffledWords.map((word, index) => {
+                    {shuffledWords.map((word: string, index: number) => {
                         const isUsed = usedWords.includes(word);
                         return (
                             <button
                                 key={`${word}-${index}`}
                                 draggable={!isUsed}
-                                onDragStart={(e) => handleDragStart(e, word)}
+                                onDragStart={(e) => { handleDragStart(e, word)} }
                                 className={isUsed ? "used" : ""}
                                 disabled={isUsed}
                             >
@@ -171,7 +182,7 @@ function FillInTheBlank({ question, answers, onCorrect, onBack }: FITBlankProps)
 
     return (
         <div>
-            <h1 style={{ textAlign: "center", padding: "2 rem"}}>Fill In The Blank (Drag & Drop)</h1>
+            <h1 id="h1-fitb">Fill In The Blank (Drag & Drop)</h1>
             <div className="FillInTheBlank-section">
                 <div className="FillInTheBlank">
                     { renderQuestionWithBlank() }
