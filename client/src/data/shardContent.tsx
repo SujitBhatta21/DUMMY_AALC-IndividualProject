@@ -28,7 +28,18 @@ const shardContent: Record<number, ReactNode> = {
             </p>
         </div>
     ),
-    2: <p>Shard 2 content</p>,
+    2: (<div>
+            <p>
+                Under apartheid, the government banned any protests. Under the Terrorism Act anyone who spoke out could be sentenced to long prison terms on Robben Island or detained indefinitely without trial.
+            </p>
+            <p>
+                Strikes by black workers were illegal.
+            </p>
+            <p>
+                But people continued to organise, forming underground networks to sabotage installations like power networks and smuggle people out to join the banned liberation movements outside the country.
+            </p>
+        </div>
+    ),
     3: <p>Shard 3 content</p>,
     4: <p>Shard 4 content</p>,
     5: <p>Shard 5 content</p>,
