@@ -7,6 +7,7 @@ import type { Shard } from "../types.ts";
 import ContextView from "../components/puzzles/ContextView.tsx";
 import JigSaw from "../components/puzzles/JigSaw.tsx";
 import shardContent from "../data/shardContent.tsx";
+import RedactedReveal from "../components/puzzles/RedactedReveal.tsx";
 
 
 function ShardPage() {
@@ -68,12 +69,25 @@ function ShardPage() {
                 />
             )}
 
-            {currentStep === 2 && shardData && (
-                <JigSaw
-                    onComplete={() => { handleShardComplete(); }}
-                    rewardsText={shardData.rewardsText}
-                />
-            )}
+            { currentStep === 2 && shardData &&
+                <>
+                    {/* For Shard-1 jigsaw. */}
+                    { shardData.puzzleType === "JIGSAW" && (
+                        <JigSaw
+                            onComplete={() => { handleShardComplete(); }}
+                            rewardsText={ shardData.rewardsText }
+                        />
+                    )}
+
+                    {/* For Shard-2 Redacted Reveal */}
+                    { shardData.puzzleType === "REDACTED_REVEAL" && (
+                        <RedactedReveal
+                            onComplete={() => { handleShardComplete(); }}
+                            rewardsText={ shardData.rewardsText }
+                        />
+                    )}
+                </>
+            }
 
             {/*{shardData?.id === 1 ? <FillInTheBlank props={shardData.}} /> : null}*/}
             <div className="shard-container">

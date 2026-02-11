@@ -1,0 +1,203 @@
+/* ── Page heading ── */
+.redactedReveal-section h1 {
+    text-align: center;
+    border: solid 2px #c9a66b;
+    padding: 2rem 1rem;
+}
+
+.redactedReveal-instruction {
+    text-align: center;
+    color: #aaa;
+    font-size: 0.95rem;
+    margin: 0.75rem 0 1.5rem;
+}
+
+/* ── Document container (aged paper look) ── */
+.redactedReveal-container {
+    max-width: 750px;
+    margin: 0 auto 2rem;
+    padding: 2rem 2.5rem;
+    background: linear-gradient(135deg, #f5e6d3, #ece0d0);
+    border: 2px solid #c9a66b;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    font-family: "Georgia", "Times New Roman", serif;
+    color: #2c2c2c;
+    line-height: 1.8;
+}
+
+/* ── Document header ── */
+.document-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #c9a66b;
+}
+
+.confidential-stamp {
+    display: inline-block;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #b22222;
+    border: 3px solid #b22222;
+    padding: 0.25rem 1.2rem;
+    letter-spacing: 4px;
+    transform: rotate(2deg);
+    margin-bottom: 0.5rem;
+}
+
+.document-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin: 0.5rem 0 0.25rem;
+}
+
+.document-date {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+/* ── Document body text ── */
+.document-description-redacted {
+    font-size: 1.05rem;
+    line-height: 2;
+}
+
+/* ── Redacted bars ── */
+.redacted-wrapper {
+    position: relative;
+    display: inline;
+}
+
+.redacted {
+    background-color: #1a1a1a;
+    color: transparent;
+    padding: 2px 6px;
+    border-radius: 3px;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.3s ease;
+}
+
+.redacted:hover {
+    background-color: #333;
+    color: transparent;
+}
+
+/* ── Shake animation for wrong answer ── */
+.redacted.shake {
+    animation: shake 0.4s ease;
+    background-color: #5c1a1a;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-6px); }
+    40% { transform: translateX(6px); }
+    60% { transform: translateX(-4px); }
+    80% { transform: translateX(4px); }
+}
+
+/* ── Revealed word ── */
+.revealed-word {
+    color: #1a6b1a;
+    font-weight: bold;
+    background-color: rgba(34, 139, 34, 0.1);
+    padding: 2px 6px;
+    border-radius: 3px;
+    animation: fadeReveal 0.5s ease;
+}
+
+@keyframes fadeReveal {
+    0% {
+        background-color: rgba(34, 139, 34, 0.4);
+        color: #0a4a0a;
+    }
+    100% {
+        background-color: rgba(34, 139, 34, 0.1);
+        color: #1a6b1a;
+    }
+}
+
+/* ── Options popup ── */
+.options-popup {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    background: #2c2c2c;
+    border: 1px solid #c9a66b;
+    border-radius: 8px;
+    padding: 6px;
+    min-width: 160px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+    animation: popupIn 0.15s ease;
+}
+
+.options-popup::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: #c9a66b;
+}
+
+
+
+@keyframes popupIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(4px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+.option-btn {
+    background: transparent;
+    color: #e8d4c0;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.15s ease;
+    font-family: "Georgia", "Times New Roman", serif;
+}
+
+.option-btn:hover {
+    background: #c9a66b;
+    color: #1a1a1a;
+    border-color: #c9a66b;
+}
+
+/* ── Disclaimer ── */
+.document-disclaimer {
+    font-size: 0.8rem;
+    color: #888;
+    font-style: italic;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px dashed #c9a66b;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+    .redactedReveal-container {
+        margin: 0 1rem 2rem;
+        padding: 1.5rem 1.25rem;
+    }
+
+    .options-popup {
+        min-width: 140px;
+    }
+}

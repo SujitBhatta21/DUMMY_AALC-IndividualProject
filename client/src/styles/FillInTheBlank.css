@@ -12,6 +12,12 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
+#h1-fitb {
+    text-align: center;
+    border: solid 2px #c9a66b;
+    padding: 2rem 1rem;
+}
+
 /* Question area */
 .FillInTheBlank {
     width: 100%;

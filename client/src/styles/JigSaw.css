@@ -10,6 +10,13 @@
     border-radius: 10px;
 }
 
+
+.jigsaw-page h1 {
+    text-align: center;
+    border: solid 2px #c9a66b;
+    padding: 2rem 1rem;
+}
+
 .jigsaw-puzzle {
     flex: 1;
     max-width: 450px;

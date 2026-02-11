@@ -28,19 +28,40 @@ const shardContent: Record<number, ReactNode> = {
             </p>
         </div>
     ),
-    2: (<div>
+    2: (
+        <div>
             <p>
-                Under apartheid, the government banned any protests. Under the Terrorism Act anyone who spoke out could be sentenced to long prison terms on Robben Island or detained indefinitely without trial.
+                Under apartheid, the government banned all forms of protest.
+                The <strong>Terrorism Act</strong> meant anyone who spoke out could be
+                sentenced to long prison terms on <strong>Robben Island</strong> — or
+                detained <strong>indefinitely without trial</strong>.
             </p>
             <p>
-                Strikes by black workers were illegal.
+                Strikes by black workers were illegal. Even gathering in groups could lead to arrest.
             </p>
             <p>
-                But people continued to organise, forming underground networks to sabotage installations like power networks and smuggle people out to join the banned liberation movements outside the country.
+                But none of this stopped the resistance. People organised in secret,
+                forming underground networks to sabotage power stations,
+                and smuggle activists out of the country to join banned liberation
+                movements - some of which operated from right here in London.
             </p>
         </div>
     ),
-    3: <p>Shard 3 content</p>,
+    3: (
+        <div>
+            <p>
+                Apartheid sparked growing resistance — especially among young people.
+                In <strong>1960</strong>, police opened fire on peaceful protesters
+                in <strong>Sharpeville</strong>, killing 69 people, including women and children.
+            </p>
+            <p>
+                In <strong>1976</strong>, students in <strong>Soweto</strong> rose up
+                against forced Afrikaans-language instruction. Police responded with
+                bullets. These moments shook the world when images taken by
+                photographers on the ground were shared internationally.
+            </p>
+        </div>
+    ),
     4: <p>Shard 4 content</p>,
     5: <p>Shard 5 content</p>,
     6: <p>Shard 6 content</p>,

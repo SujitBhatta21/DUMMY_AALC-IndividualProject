@@ -13,7 +13,7 @@ import java.util.Map;
 public class ShardController {
 
     private final List<Shard> shards = new ArrayList<>(List.of(
-            new Shard(1, "Shard-1",
+            new Shard(1, "Shard-1: The Passbook Fragment",
                     "The word “apartheid\" means ___. The National Party, a white minority political party, took power in ___ after an election in which only ___ people could vote. These laws controlled where black South Africans could live, work, and move. The ___ was one of the organisations that resisted apartheid.",
                     Map.of(1, List.of("separateness", "inequality", "supremacy", "division"),
                             2, List.of("1948", "1938", "1952"),
@@ -22,13 +22,13 @@ public class ShardController {
                     "In 1952, Black South Africans were required to carry passbooks" +
                     " controlling where they could live, work, or travel. These laws turned daily life into a constant threat."
                     , "JIGSAW", true),
-            new Shard(2, "Shard-2", "", Map.of(1, List.of("")), "Rewards Text", "MULTIPLE_CHOICE", false),
-            new Shard(3, "Shard-3", "Q3", Map.of(1, List.of("")), "Rewards Text", "MATCHING", false),
-            new Shard(4, "Shard-4", "Q4", Map.of(1, List.of("")), "Rewards Text", "FILL_IN_BLANK", false),
-            new Shard(5, "Shard-5", "Q5", Map.of(1, List.of("")), "Rewards Text", "MULTIPLE_CHOICE", false),
-            new Shard(6, "Shard-6", "Q6", Map.of(1, List.of("")), "Rewards Text", "MATCHING", false),
-            new Shard(7, "Shard-7", "Q7", Map.of(1, List.of("")), "Rewards Text", "FILL_IN_BLANK", false),
-            new Shard(8, "Shard-8", "Q8", Map.of(1, List.of("")), "Rewards Text", "MULTIPLE_CHOICE", false),
+            new Shard(2, "Shard-2: Protests Crushed", "Question for shard 2 ___.", Map.of(1, List.of("this", "that", "those")), "Rewards Text", "REDACTED_REVEAL", false),
+            new Shard(3, "Shard-3: The Uprising ", "Q3", Map.of(1, List.of("")), "Rewards Text", "MATCHING", false),
+            new Shard(4, "Shard-4: The London Leaflet Fragment", "Q4", Map.of(1, List.of("")), "Rewards Text", "FILL_IN_BLANK", false),
+            new Shard(5, "Shard-5: Penton Street Office Map", "Q5", Map.of(1, List.of("")), "Rewards Text", "MULTIPLE_CHOICE", false),
+            new Shard(6, "Shard-6: Bombing Puzzle", "Q6", Map.of(1, List.of("")), "Rewards Text", "MATCHING", false),
+            new Shard(7, "Shard-7: The Sanctions Decision Boards", "Q7", Map.of(1, List.of("")), "Rewards Text", "FILL_IN_BLANK", false),
+            new Shard(8, "Shard-8: Music", "Q8", Map.of(1, List.of("")), "Rewards Text", "MULTIPLE_CHOICE", false),
             new Shard(9, "Shard-9", "Q9", Map.of(1, List.of("")), "Rewards Text", "MATCHING", false)
     ));
 
