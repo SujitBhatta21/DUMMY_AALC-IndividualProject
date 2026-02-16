@@ -121,7 +121,8 @@ function TimelinePage() {
                 <button className="shards-collected-btn">SHARDS COLLECTED: { totalSolvedShards }/9</button>
                 <div className="tracks">
                     <div className="timeline-track1">
-                        <Link to={`/storyline/shard/2`}>
+                        {/* TESTING PROTOTYPE OF SHARD N. */}
+                        <Link to={`/storyline/shard/3`}>
                             <button> TESTING SHARD </button>
                         </Link>
                         <h3>Apartheid (South Africa)<br/></h3>

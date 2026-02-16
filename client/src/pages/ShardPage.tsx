@@ -8,6 +8,7 @@ import ContextView from "../components/puzzles/ContextView.tsx";
 import JigSaw from "../components/puzzles/JigSaw.tsx";
 import shardContent from "../data/shardContent.tsx";
 import RedactedReveal from "../components/puzzles/RedactedReveal.tsx";
+import OrderEventsChronological from "../components/puzzles/OrderEventsChronological.tsx";
 
 
 function ShardPage() {
@@ -25,8 +26,8 @@ function ShardPage() {
 
         const fetchPuzzles = async() => {
             try {
-                const res = await fetch(`http://localhost:8080/api/shard/${id}`);
-                const data = await res.json();
+                const res : Response = await fetch(`http://localhost:8080/api/shard/${id}`);
+                const data: Shard = await res.json() as Shard; // await deconstructs return type Promise<Shard>.
                 setShardData(data);
             }
             catch (err) {
@@ -41,7 +42,7 @@ function ShardPage() {
 
     // NOTE: Calls the onComplete method from @PostMapping("/{id}/complete") in ShardController.java
     function handleShardComplete() {
-        fetch(`http://localhost:8080/api/shard/${id}/complete`, {
+        void fetch(`http://localhost:8080/api/shard/${id}/complete`, {
             method: "POST"
         })
             .then(res => res.json())
@@ -82,6 +83,14 @@ function ShardPage() {
                     {/* For Shard-2 Redacted Reveal */}
                     { shardData.puzzleType === "REDACTED_REVEAL" && (
                         <RedactedReveal
+                            onComplete={() => { handleShardComplete(); }}
+                            rewardsText={ shardData.rewardsText }
+                        />
+                    )}
+
+                    {/* For Shard-3 Redacted Reveal */}
+                    { shardData.puzzleType === "ORDER_EVENTS_CHRONOLOGICALLY" && (
+                        <OrderEventsChronological
                             onComplete={() => { handleShardComplete(); }}
                             rewardsText={ shardData.rewardsText }
                         />

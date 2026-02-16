@@ -18,6 +18,7 @@ function shuffle<T>(array: T[]): T[] {
     return array
 }
 
+
 function FillInTheBlank({ question, answers, onCorrect, onBack }: FITBlankProps) {
 
     const [correctAnswer, setCorrectAnswer] = useState<string[]>([])
@@ -27,7 +28,7 @@ function FillInTheBlank({ question, answers, onCorrect, onBack }: FITBlankProps)
 
         for (const key of Object.keys(answers)) {
             const value : string[] = answers[Number(key)];
-            if (value && value.length > 0) {
+            if (value.length > 0) {
                 results.push(value[0])
             }
         }
@@ -76,7 +77,7 @@ function FillInTheBlank({ question, answers, onCorrect, onBack }: FITBlankProps)
     }
 
     // --- Drag & Drop handlers ---
-    const handleDragStart = (e: React.DragEvent, word: string) => {
+    const handleDragStart = (e : React.DragEvent, word : string) => {
         e.dataTransfer.setData("text/plain", word);
         e.dataTransfer.setData("source", "wordbank");
     };
@@ -141,10 +142,10 @@ function FillInTheBlank({ question, answers, onCorrect, onBack }: FITBlankProps)
                             <button
                                 className={`blank-button ${filledBlanks[index] ? "filled" : ""}`}
                                 onDragOver={handleDragOver}
-                                onDrop={(e) => handleDropOnBlank(e, index)}
+                                onDrop={(e) => { handleDropOnBlank(e, index)} }
                                 draggable={!!filledBlanks[index]}
-                                onDragStart={(e) => handleBlankDragStart(e, index)}
-                                onClick={() => handleBlankClick(index)}
+                                onDragStart={(e) => { handleBlankDragStart(e, index)} }
+                                onClick={() => { handleBlankClick(index)} }
                                 title={filledBlanks[index] ? "Click to remove" : "Drag & Drop a word here"}
                             >
                                 {filledBlanks[index] || "___"}
@@ -165,7 +166,7 @@ function FillInTheBlank({ question, answers, onCorrect, onBack }: FITBlankProps)
                         const isUsed = usedWords.includes(word);
                         return (
                             <button
-                                key={`${word}-${index}`}
+                                key={`${ word }-${ String(index) }`}
                                 draggable={!isUsed}
                                 onDragStart={(e) => { handleDragStart(e, word)} }
                                 className={isUsed ? "used" : ""}

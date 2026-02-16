@@ -55,7 +55,7 @@ function RedactedReveal({ onComplete, rewardsText }: RedactedRevealProps) {
         return () => { document.removeEventListener("mousedown", handleClickOutside) };
     }, [activePopup]);
 
-    
+
     // Function called to do something when redacted block is clicked.
     const handleRedactedClick = (wordId: number) => {
         if (revealedText[wordId]) return;
