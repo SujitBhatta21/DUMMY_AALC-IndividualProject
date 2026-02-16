@@ -22,8 +22,8 @@ public class ShardController {
                     "In 1952, Black South Africans were required to carry passbooks" +
                     " controlling where they could live, work, or travel. These laws turned daily life into a constant threat."
                     , "JIGSAW", true),
-            new Shard(2, "Shard-2: Protests Crushed", "Question for shard 2 ___.", Map.of(1, List.of("this", "that", "those")), "Rewards Text", "REDACTED_REVEAL", false),
-            new Shard(3, "Shard-3: The Uprising ", "Q3", Map.of(1, List.of("")), "Rewards Text", "MATCHING", false),
+            new Shard(2, "Shard-2: Protests Crushed", "(TESTING) Question for shard 2 ___.", Map.of(1, List.of("this", "that", "those")), "Rewards Text", "REDACTED_REVEAL", false),
+            new Shard(3, "Shard-3: The Uprising ", "(Testing) Question for shard 3 ___.", Map.of(1, List.of("this", "that", "those")), "Rewards Text", "ORDER_EVENTS_CHRONOLOGICALLY", false),
             new Shard(4, "Shard-4: The London Leaflet Fragment", "Q4", Map.of(1, List.of("")), "Rewards Text", "FILL_IN_BLANK", false),
             new Shard(5, "Shard-5: Penton Street Office Map", "Q5", Map.of(1, List.of("")), "Rewards Text", "MULTIPLE_CHOICE", false),
             new Shard(6, "Shard-6: Bombing Puzzle", "Q6", Map.of(1, List.of("")), "Rewards Text", "MATCHING", false),
