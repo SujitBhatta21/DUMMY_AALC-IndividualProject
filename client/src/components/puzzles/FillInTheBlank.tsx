@@ -1,5 +1,6 @@
 import "../../styles/FillInTheBlank.css"
 import {useEffect, useMemo, useState} from "react";
+import { shuffle } from "../../utils"
 
 
 interface FITBlankProps {
@@ -7,15 +8,6 @@ interface FITBlankProps {
     answers: Record<number, string[]>;
     onCorrect: (question: string) => void;
     onBack: () => void;
-}
-
-// Shuffling the word bank words.
-function shuffle<T>(array: T[]): T[] {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array
 }
 
 
