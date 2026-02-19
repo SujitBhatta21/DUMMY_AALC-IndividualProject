@@ -64,24 +64,28 @@ function WhoWeAre(){
                 <h2>What We Offer</h2>
                 <div className="offer-cards">
                     <div className="offer-card">
-                        <h3>Permanent Exhibition</h3>
-                        <p>Explore the history of the anti-apartheid movement and the UK's role in the struggle for freedom.</p>
+                        <h3>About Us</h3>
+                        <p>Information about The Liliesleaf Trust UK’s aims and values, our staff, board and advisory group</p>
                     </div>
                     <div className="offer-card">
-                        <h3>Temporary Gallery</h3>
-                        <p>Rotating exhibitions featuring contemporary art and stories connected to social justice themes.</p>
+                        <h3>Heritage, Arts & Culture</h3>
+                        <p>Collections, Exhibitions and Artists’ Commissions as well as contemporary socio- cultural responses to the heritage of the movement against apartheid.</p>
                     </div>
                     <div className="offer-card">
-                        <h3>Learning Garden</h3>
-                        <p>A community green space for outdoor learning, reflection and events.</p>
+                        <h3>Programme</h3>
+                        <p>Learning opportunities for schools, young people and communities including heritage talks, special events and more</p>
                     </div>
                     <div className="offer-card">
-                        <h3>Seminar Spaces</h3>
-                        <p>Flexible spaces for workshops, talks and community gatherings.</p>
+                        <h3>Centre of Memory and Learning</h3>
+                        <p>The Anti-Apartheid Legacy: Centre of Memory and Learning at 28 Penton Street and the parallel digital offer</p>
                     </div>
                     <div className="offer-card">
-                        <h3>Archive Reading Room</h3>
-                        <p>Access historical documents, photographs and records from the anti-apartheid movement.</p>
+                        <h3>Blogs</h3>
+                        <p>Visit our blog section to learn more about our collaborations, launches, activities and more.</p>
+                    </div>
+                    <div className="offer-card">
+                        <h3>Get Involved</h3>
+                        <p>Find our contact information and ways to get involved in our work (e.g. volunteering, collaborations or partnerships)</p>
                     </div>
                 </div>
             </section>

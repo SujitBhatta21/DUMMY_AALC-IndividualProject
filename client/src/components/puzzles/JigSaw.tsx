@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { JigsawPuzzle } from "react-jigsaw-puzzle"
 import "react-jigsaw-puzzle/lib/jigsaw-puzzle.css";
+import "../../styles/Puzzle.css";
 import "../../styles/JigSaw.css";
 
 interface JigSawProps {
@@ -21,7 +22,10 @@ function JigSaw({ onComplete, rewardsText }: JigSawProps) {
 
     return (
         <div className="jigsaw-page">
-            <h1>Jigsaw Puzzle (Drag and Drop pieces in correct slot)</h1>
+            <h1 className="puzzle-title">Jigsaw Puzzle</h1>
+            <p className="puzzle-instruction">
+                Drag and Drop fragments of real passbook image in correct slot
+            </p>
             <div className="jigsaw-container">
                 <div className="jigsaw-puzzle">
                     <h3>Jigsaw Puzzle</h3>

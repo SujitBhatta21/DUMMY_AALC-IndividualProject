@@ -1,0 +1,72 @@
+/* ── Shared puzzle styles ── */
+
+.puzzle-title {
+    text-align: center;
+    border: solid 2px #c9a66b;
+    padding: 2rem 1rem;
+}
+
+.puzzle-instruction {
+    text-align: center;
+    color: #aaa;
+    font-size: 0.95rem;
+    margin: 0.75rem 0 1.5rem;
+}
+
+/* ── Reward popup (shared across puzzles) ── */
+.reward-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.reward-popup {
+    background: linear-gradient(135deg, #f5e6d3, #e8d4c0);
+    border: 2px solid #c9a66b;
+    border-radius: 20px;
+    padding: 2rem 2.5rem;
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.reward-popup h3 {
+    color: #8B4513;
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    margin-bottom: 1rem;
+}
+
+.reward-popup p {
+    font-size: clamp(0.95rem, 2vw, 1.1rem);
+    line-height: 1.75;
+    color: #2c2c2c;
+    margin-bottom: 1.5rem;
+}
+
+.reward-popup .next-button {
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+    border: none;
+    border-radius: 50px;
+    padding: 0.8rem 2.5rem;
+    font-size: clamp(0.95rem, 2vw, 1.1rem);
+    font-weight: bold;
+    color: #2c2c2c;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(255, 165, 0, 0.4);
+    transition: all 0.3s ease;
+    letter-spacing: 1px;
+}
+
+.reward-popup .next-button:hover {
+    background: linear-gradient(135deg, #FFA500 0%, #FF8C00 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255, 165, 0, 0.5);
+}

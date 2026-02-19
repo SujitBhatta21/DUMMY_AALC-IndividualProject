@@ -15,15 +15,34 @@ public class ShardController {
     private final List<Shard> shards = new ArrayList<>(List.of(
             new Shard(1, "Shard-1: The Passbook Fragment",
                     "The word “apartheid\" means ___. The National Party, a white minority political party, took power in ___ after an election in which only ___ people could vote. These laws controlled where black South Africans could live, work, and move. The ___ was one of the organisations that resisted apartheid.",
-                    Map.of(1, List.of("separateness", "inequality", "supremacy", "division"),
+                    Map.of(1, List.of("separateness", "supremacy", "division"),
                             2, List.of("1948", "1938", "1952"),
                             3, List.of("white", "wealthy", "male"),
                             4, List.of("ANC (African National Congress)", "NAP (National African Party)", "APC (African People's Congress)", "SAC (South African Council)")),
                     "In 1952, Black South Africans were required to carry passbooks" +
                     " controlling where they could live, work, or travel. These laws turned daily life into a constant threat."
                     , "JIGSAW", true),
-            new Shard(2, "Shard-2: Protests Crushed", "(TESTING) Question for shard 2 ___.", Map.of(1, List.of("this", "that", "those")), "Rewards Text", "REDACTED_REVEAL", false),
-            new Shard(3, "Shard-3: The Uprising ", "(Testing) Question for shard 3 ___.", Map.of(1, List.of("this", "that", "those")), "Rewards Text", "ORDER_EVENTS_CHRONOLOGICALLY", false),
+            new Shard(2, "Shard-2: The Silencing",
+                    " The ___ Act meant anyone who spoke out could be sentenced to prison on ___." +
+                            " ___ by black workers were illegal.",
+                    Map.of(1, List.of("Terrorism", "Elections"),
+                            2, List.of("Robben Island", "Johannesburg", "Protests"),
+                            3, List.of("Strikes", "Freedom", "Treason")),
+                    "The government aimed to silence resistance with Imprisonment and bannings " +
+                            "– but South Africans continued to organise underground and to smuggle people " +
+                            "out to continue the struggle from outside the country. Resistance found a way.",
+                    "REDACTED_REVEAL", false),
+            new Shard(3, "Shard-3: The Uprising ",
+                    "In ___, police opened fire on peaceful protesters in ___, killing at least ___ people including children." +
+                            " In 1976, students in ___ rose up against forced ___-language instruction.",
+                    Map.of(1, List.of("1960", "1948", "Joannesburg", "45", "Cape Town", "English"),
+                            2, List.of("Sharpeville"),
+                            3, List.of("69"),
+                            4, List.of("Soweto"),
+                            5, List.of("Afrikaans")),
+                    "From Sharpeville to Soweto, uprisings revealed the courage of ordinary people — and the cruelty of the state.\n" +
+                            "These events lit a spark that spread around the world.”\n",
+                    "ORDER_EVENTS_CHRONOLOGICALLY", false),
             new Shard(4, "Shard-4: The London Leaflet Fragment", "Q4", Map.of(1, List.of("")), "Rewards Text", "FILL_IN_BLANK", false),
             new Shard(5, "Shard-5: Penton Street Office Map", "Q5", Map.of(1, List.of("")), "Rewards Text", "MULTIPLE_CHOICE", false),
             new Shard(6, "Shard-6: Bombing Puzzle", "Q6", Map.of(1, List.of("")), "Rewards Text", "MATCHING", false),

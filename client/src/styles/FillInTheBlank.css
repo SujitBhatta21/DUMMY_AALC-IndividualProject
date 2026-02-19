@@ -12,12 +12,6 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-#h1-fitb {
-    text-align: center;
-    border: solid 2px #c9a66b;
-    padding: 2rem 1rem;
-}
-
 /* Question area */
 .FillInTheBlank {
     width: 100%;
@@ -104,6 +98,10 @@
     cursor: grab;
 }
 
+.a-word button:active {
+    cursor: grabbing;
+}
+
 .a-word button:hover:not(:disabled) {
     background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
     border-color: #FFA500;
@@ -113,7 +111,7 @@
 
 .a-word button.used {
     opacity: 0.35;
-    cursor: default;
+    cursor: not-allowed;
     border-style: dashed;
     transform: none;
     box-shadow: none;
@@ -144,6 +142,21 @@
     transform: translateY(-3px);
     box-shadow: 0 6px 20px rgba(255, 165, 0, 0.5);
 }
+
+.success-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+}
+
 
 /* Responsive */
 @media (max-width: 600px) {
