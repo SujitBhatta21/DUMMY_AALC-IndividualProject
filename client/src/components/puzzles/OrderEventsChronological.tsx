@@ -1,5 +1,8 @@
 import {useState} from "react";
 import { shuffle } from "../../utils.ts"
+import "../../styles/Puzzle.css"
+import "../../styles/OrderEventsChronolical.css"
+
 
 interface OrderEventsProps {
     onComplete?: () => void;
@@ -67,10 +70,9 @@ function OrderEventsChronological ({ onComplete, rewardsText }: OrderEventsProps
 
     return (
         <div className="order-events-chronological">
-            <h1>Order Events Chronologically</h1>
+            <h1 className="puzzle-title">Order Events Chronologically</h1>
+            <p className="puzzle-instruction">Drag and drop the events into the correct chronological order.</p>
             <section className="order-events-section">
-                <p>ORDER THIS THINGSsdfdfdf...</p>
-
                 <div className="events-list">
                     { userAnswerOrder.map((event : Events, index : number) =>  (
                         <div
@@ -79,18 +81,17 @@ function OrderEventsChronological ({ onComplete, rewardsText }: OrderEventsProps
                             onDragOver={ dragOverHandler }
                             onDragStart={ (e: React.DragEvent) => { dragStartHandler(e, index) } }
                             onDrop={ (e: React.DragEvent) => { onDropHandler(e, index) } }
-                            className="{  }"
+                            className="event-card"
                         >
-                            { index + 1 }. { event.text }
+                            <span className="event-number">{ index + 1 }</span>
+                            <span className="event-text">{ event.text }</span>
                         </div>
                     )) }
                 </div>
+                <div className="order-events-buttons">
+                    <button onClick={handleSubmit}>Submit</button>
+                </div>
             </section>
-
-            <div className="buttons">
-                <button onClick={handleSubmit}>Submit</button>
-                {/*<button onClick={onBack}>Back</button>*/}
-            </div>
         </div>
     );
 }
