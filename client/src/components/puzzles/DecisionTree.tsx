@@ -1,3 +1,12 @@
+import {useEffect, useState} from "react";
+import "../../styles/Puzzle.css"
+import "../../styles/DecisionTree.css"
+
+
+interface DecisionTreeProps {
+    onComplete: () => void,
+    rewardsTet: string
+}
 
 interface Choice {
     label: string;
@@ -9,6 +18,12 @@ interface DecisionNode {
     id: number;
     text: string;
     choices: Choice[];
+}
+
+interface UserChoiceHistory {
+    question: string;
+    chosenLabel: string;
+    feedback: string;
 }
 
 const nodes: Record<number, DecisionNode> = {
@@ -68,11 +83,94 @@ const nodes: Record<number, DecisionNode> = {
 };
 
 
-function DecisionTree() {
+function DecisionTree({ onComplete, rewardsText } : DecisionTreeProps) {
+    const [currentNodeId, setCurrentNodeId] = useState<number>(1);
+    const [feedback, setFeedback] = useState<string | null>(null);
+    const [completed, setCompleted] = useState<boolean>(false);
+    const [userChoiceHistory, setUserChoiceHistory] = useState<UserChoiceHistory[]>([]);
+
+    const currentNode = nodes[currentNodeId];
+
+
+    const handleChoice = (choice: Choice) => {
+        setFeedback(choice.feedback);
+
+        setUserChoiceHistory(prev => [
+            ...prev,
+            {
+                question: currentNode.text,
+                chosenLabel: choice.label,
+                feedback: choice.feedback,
+            }
+        ]);
+
+        if (choice.nextNodeId === null) {
+            setCompleted(true);
+            return;
+        }
+
+        // Auto-advance to the next node after a delay
+        setTimeout(() => {
+            setCurrentNodeId(choice.nextNodeId as number);
+            setFeedback(null);
+        }, 2500);
+    };
 
     return (
         <div>
+            <h1 className="puzzle-title">You're the Activist</h1>
+            <p className="puzzle-instruction">
+                Make choices as a 1970s London student discovering apartheid.
+            </p>
+            <section className="decisionTree-section">
+                <div className="user-choice-history-rendered">
+                    {
+                        userChoiceHistory.map((history, index) => (
+                            <ul>
+                                <li><strong>Question:</strong> { history.question }</li>
+                                <li><strong>Choices Made:</strong> { history.chosenLabel }</li>
+                                <li><strong>Feedback:</strong> { history.feedback }</li>
+                            </ul>
+                        ))
+                    }
+                </div>
+                <p className="decisionTree-question">{currentNode.text}</p>
 
+                {/* Show choices only when no feedback is displayed */}
+                { !feedback && (
+                    <div className="decisionTree-choices">
+                        { currentNode.choices.map((choice, index) => (
+                            <button
+                                key={index}
+                                className="decisionTree-choice-btn"
+                                onClick={() => { handleChoice(choice); }}
+                            >
+                                {choice.label}
+                            </button>
+                        ))}
+                    </div>
+                )}
+
+                {/* Show feedback after a choice is made */}
+                { feedback && !completed && (
+                    <div className="decisionTree-feedback">
+                        <p>{feedback}</p>
+                        <button className="decisionTree-continue-btn" onClick={handleContinue}>
+                            Continue
+                        </button>
+                    </div>
+                )}
+            </section>
+
+            { completed && (
+                <div className="reward-overlay">
+                    <div className="reward-popup">
+                        <h3>Shard Unlocked!</h3>
+                        <p>{ rewardsText }</p>
+                        <button className="next-button" onClick={onComplete}>CONTINUE</button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
