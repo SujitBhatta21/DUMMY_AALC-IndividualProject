@@ -1,5 +1,6 @@
 .decisionTree-section {
     max-width: 700px;
+    min-width: 360px;
     margin: 0 auto;
     padding: 2rem;
     background: #e8d4c0;
@@ -7,6 +8,8 @@
     border-radius: 16px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     margin-bottom: 3rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 /* ── History timeline ── */
@@ -20,6 +23,10 @@
     padding-bottom: 1.5rem;
 }
 
+/*
+    This line draws the vertical line from top to bottom.
+    Remember it was possible because of absolute positioning.
+ */
 .history-connector {
     position: absolute;
     left: 8px;
@@ -29,6 +36,7 @@
     background: #c9a66b;
 }
 
+/* THIS DRAWS 3 HISTORY STEPS CIRCLE */
 .history-step::before {
     content: "";
     position: absolute;
@@ -80,10 +88,11 @@
     height: 100%;
 }
 
+/* This draws decisionTree circle with pulse animation. */
 .decisionTree-current::before {
     content: "";
     position: absolute;
-    left: 0.5px;
+    left: -1px;
     top: 6px;
     width: 14px;
     height: 14px;

@@ -127,7 +127,7 @@ function DecisionTree({ onComplete, rewardsText } : DecisionTreeProps) {
         <div>
             <h1 className="puzzle-title">You're the Activist</h1>
             <p className="puzzle-instruction">
-                Make choices as a 1970s London student discovering apartheid.
+                Make choices as a 1970s London student discovering apartheid. Top section stores user last 3 choices with feedback.
             </p>
             <section className="decisionTree-section">
                 {/* History timeline */}
@@ -137,9 +137,9 @@ function DecisionTree({ onComplete, rewardsText } : DecisionTreeProps) {
                             <div key={index} className="history-step">
                                 <div className="history-connector"></div>
                                 <div className="history-content">
-                                    <p className="history-question">{history.question}</p>
-                                    <p className="history-choice">{history.chosenLabel}</p>
-                                    <p className="history-feedback">{history.feedback}</p>
+                                    <p className="history-question"><b>Question: </b> {history.question}</p>
+                                    <p className="history-choice"><b>Your choice:</b> {history.chosenLabel}</p>
+                                    <p className="history-feedback"><b>Feedback:</b> {history.feedback}</p>
                                 </div>
                             </div>
                         ))}
