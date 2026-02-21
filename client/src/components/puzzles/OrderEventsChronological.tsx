@@ -28,7 +28,7 @@ const events : Events[] = [
 
 function OrderEventsChronological ({ onComplete, rewardsText }: OrderEventsProps) {
 
-    // const shuffledEvents = shuffle([...events])
+    const [solved, setSolved] = useState<boolean>(false);
 
     const [userAnswerOrder, setUserAnswerOrder] = useState<Events[]>(
         () => shuffle([...events])
@@ -41,7 +41,7 @@ function OrderEventsChronological ({ onComplete, rewardsText }: OrderEventsProps
                 event.correctOrder === index + 1
         );
         if (isCorrect) {
-            onComplete?.();
+            setSolved(true)
         }  else {
             // Code something that highlights wrong positions...
         }
@@ -91,6 +91,15 @@ function OrderEventsChronological ({ onComplete, rewardsText }: OrderEventsProps
                 <div className="order-events-buttons">
                     <button onClick={handleSubmit}>Submit</button>
                 </div>
+                { solved &&
+                    <div className="reward-overlay">
+                        <div className="reward-popup">
+                            <h3>Shard Unlocked!</h3>
+                            <p>{ rewardsText }</p>
+                            <button className="next-button" onClick={ onComplete }>CONTINUE</button>
+                        </div>
+                    </div>
+                }
             </section>
         </div>
     );
