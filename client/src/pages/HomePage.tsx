@@ -4,8 +4,13 @@ import { Header } from "../components/Header.tsx";
 import Footer from "../components/Footer";
 import {Link} from "react-router-dom";
 import kids_puzzle_image from "../assets/Close_up_of_Hand_Cut_Jigsaw_Puzzle.jpeg"
+import { useEffect } from "react";
 
 function HomePage() {
+    useEffect(() => {
+        document.title = 'Home | AALC Interactive';
+    }, []);
+
     return (
         <div className="home-page">
             <Header />

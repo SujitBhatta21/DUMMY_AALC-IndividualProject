@@ -158,6 +158,20 @@
 }
 
 
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+    .blank-button,
+    .a-word button,
+    .fitb-buttons button {
+        transition: none;
+    }
+
+    .a-word button:hover:not(:disabled),
+    .fitb-buttons button:hover {
+        transform: none;
+    }
+}
+
 /* Responsive */
 @media (max-width: 600px) {
     .FillInTheBlank-section {

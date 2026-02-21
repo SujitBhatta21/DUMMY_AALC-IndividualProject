@@ -13,7 +13,7 @@
     margin: 0.75rem 0 1.5rem;
 }
 
-/* ── Reward popup (shared across puzzles) ── */
+/* Reward popup (shared across puzzles) */
 .reward-overlay {
     position: fixed;
     top: 0;
@@ -69,4 +69,15 @@
     background: linear-gradient(135deg, #FFA500 0%, #FF8C00 100%);
     transform: translateY(-3px);
     box-shadow: 0 6px 20px rgba(255, 165, 0, 0.5);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .reward-popup .next-button {
+        transition: none;
+    }
+
+    .reward-popup .next-button:hover {
+        transform: none;
+    }
 }

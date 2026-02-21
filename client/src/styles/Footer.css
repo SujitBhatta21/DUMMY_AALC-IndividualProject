@@ -97,6 +97,15 @@
     color: #fff;
 }
 
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+    .footer-contact a,
+    .footer-links a,
+    .footer-social a {
+        transition: none;
+    }
+}
+
 @media (max-width: 768px) {
     .footer-bottom {
         flex-direction: column;

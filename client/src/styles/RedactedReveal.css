@@ -176,6 +176,29 @@
     border-top: 1px dashed #c9a66b;
 }
 
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+    .redacted {
+        transition: none;
+    }
+
+    .redacted.shake {
+        animation: none;
+    }
+
+    .revealed-word {
+        animation: none;
+    }
+
+    .options-popup {
+        animation: none;
+    }
+
+    .option-btn {
+        transition: none;
+    }
+}
+
 /* ── Responsive ── */
 @media (max-width: 768px) {
     .redactedReveal-container {

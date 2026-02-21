@@ -1,9 +1,14 @@
 import Header from "./Header.tsx";
 import "../styles/Museum.css"
 import Footer from "./Footer.tsx";
+import { useEffect } from "react";
 
 
 function Museum() {
+    useEffect(() => {
+        document.title = 'Museum | AALC Interactive';
+    }, []);
+
     return (
         <div className="Museum-page">
             <Header />

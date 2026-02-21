@@ -24,6 +24,10 @@ function TimelinePage() {
 
     const [shards, setShards] = useState<Shard[]>([]);
 
+    useEffect(() => {
+        document.title = 'Puzzle Timeline | AALC Interactive';
+    }, []);
+
     // Fetching shards data from server.
     useEffect(() => {
         const getShards = async() => {

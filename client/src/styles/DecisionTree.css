@@ -12,7 +12,7 @@
     overflow-wrap: break-word;
 }
 
-/* ── History timeline ── */
+/* History timeline */
 .decisionTree-history {
     margin-bottom: 1.5rem;
 }
@@ -77,7 +77,7 @@
     line-height: 1.5;
 }
 
-/* ── Current active node ── */
+/* Current active node */
 .decisionTree-current {
     position: relative;
     padding-left: 2rem;
@@ -116,7 +116,7 @@
     font-weight: 500;
 }
 
-/* ── Choice buttons ── */
+/* Choice buttons */
 .decisionTree-choices {
     display: flex;
     flex-direction: column;
@@ -143,7 +143,7 @@
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* ── Feedback display ── */
+/* Feedback display */
 .decisionTree-feedback {
     background: rgba(255, 255, 255, 0.7);
     border: 2px solid #c9a66b;
@@ -164,7 +164,26 @@
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* ── Responsive ── */
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .decisionTree-current::before {
+        animation: none;
+    }
+
+    .decisionTree-choice-btn {
+        transition: none;
+    }
+
+    .decisionTree-choice-btn:hover {
+        transform: none;
+    }
+
+    .decisionTree-feedback {
+        animation: none;
+    }
+}
+
+/* Responsive */
 @media (max-width: 600px) {
     .decisionTree-section {
         margin: 0 1rem;

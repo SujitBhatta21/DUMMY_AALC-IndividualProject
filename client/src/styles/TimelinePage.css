@@ -289,6 +289,42 @@
     box-shadow: 0 8px 20px rgba(34, 139, 85, 0.5);
 }
 
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+    .shards-collected-btn,
+    .shards-collected-btn::before {
+        transition: none;
+    }
+
+    .shards-collected-btn:hover {
+        transform: none;
+    }
+
+    .timeline-track1,
+    .timeline-track2,
+    .timeline-track3 {
+        transition: none;
+    }
+
+    .timeline-track1:hover,
+    .timeline-track2:hover,
+    .timeline-track3:hover {
+        transform: none;
+    }
+
+    .tt1-shards button,
+    .tt2-shards button,
+    .tt3-shards button {
+        transition: none;
+    }
+
+    .tt1-shards button:hover,
+    .tt2-shards button:hover,
+    .tt3-shards button:hover {
+        transform: none;
+    }
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .timeline-section {

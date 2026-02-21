@@ -97,6 +97,20 @@
     box-shadow: 0 6px 20px rgba(255, 165, 0, 0.5);
 }
 
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .event-card,
+    .order-events-buttons button {
+        transition: none;
+    }
+
+    .event-card:active,
+    .event-card:hover,
+    .order-events-buttons button:hover {
+        transform: none;
+    }
+}
+
 /* Responsive */
 @media (max-width: 600px) {
     .order-events-section {
