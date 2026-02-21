@@ -62,7 +62,26 @@ const shardContent: Record<number, ReactNode> = {
             </p>
         </div>
     ),
-    4: <p>Shard 4 content</p>,
+    4: (
+        <div>
+            <p>
+                As news of apartheid spread, people outside South Africa began to take action.
+                In the UK, students, faith groups, trade unions, and political activists organised
+                protests to show solidarity.
+            </p>
+            <p>
+                Young people played a big role.
+            </p>
+            <p>
+                Student groups across the country joined campaigns such as the Barclays boycott, encouraging people
+                to close their bank accounts because Barclays invested in apartheid South Africa.
+            </p>
+            <p>
+                Leaflets, rallies, marches, boycotts, and campus marches helped spread awareness and put pressure on
+                companies and the UK government to take a stand.
+            </p>
+        </div>
+    ),
     5: <p>Shard 5 content</p>,
     6: <p>Shard 6 content</p>,
     7: <p>Shard 7 content</p>,

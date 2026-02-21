@@ -2,13 +2,14 @@ import Header from "../components/Header.tsx";
 import { useParams } from "react-router-dom";
 import {useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom"
-import FillInTheBlank from "../components/puzzles/FillInTheBlank.tsx"
 import type { Shard } from "../types.ts";
+import FillInTheBlank from "../components/puzzles/FillInTheBlank.tsx"
 import ContextView from "../components/puzzles/ContextView.tsx";
 import JigSaw from "../components/puzzles/JigSaw.tsx";
 import shardContent from "../data/shardContent.tsx";
 import RedactedReveal from "../components/puzzles/RedactedReveal.tsx";
 import OrderEventsChronological from "../components/puzzles/OrderEventsChronological.tsx";
+import DecisionTree from "../components/puzzles/DecisionTree.tsx";
 
 
 function ShardPage() {
@@ -64,7 +65,7 @@ function ShardPage() {
             { currentStep === 1 && shardData && (
                 <FillInTheBlank
                     question={shardData.fitb_question}   // NOTE::: HAVE QUESTION IN HERE
-                    answers={ shardData.fitb_answer }    // Contains wrong options as well.
+                    answers={ shardData.fitb_answer }    // Contains wrong options as well. 1st inde is right answer.
                     onCorrect={() => { setCurrentStep(currentStep + 1); }}
                     onBack={() => { setCurrentStep(currentStep - 1); }}
                 />
@@ -95,13 +96,16 @@ function ShardPage() {
                             rewardsText={ shardData.rewardsText }
                         />
                     )}
+
+                    {/* For Shard-4 Decision Tree */}
+                    { shardData.puzzleType === "DecisionTree" && (
+                        <DecisionTree
+                            onComplete={ () => { handleShardComplete(); }}
+                            rewardsText={ shardData.rewardsText }
+                        />
+                    ) }
                 </>
             }
-
-            {/*{shardData?.id === 1 ? <FillInTheBlank props={shardData.}} /> : null}*/}
-            <div className="shard-container">
-
-            </div>
 
         </div>
     );

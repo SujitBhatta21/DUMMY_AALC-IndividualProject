@@ -42,8 +42,10 @@ public class ShardController {
                             5, List.of("Afrikaans")),
                     "From Sharpeville to Soweto, uprisings revealed the courage of ordinary people — and the cruelty of the state.\n" +
                             "These events lit a spark that spread around the world.”\n",
-                    "ORDER_EVENTS_CHRONOLOGICALLY", false),
-            new Shard(4, "Shard-4: The London Leaflet Fragment", "Q4", Map.of(1, List.of("")), "Rewards Text", "FILL_IN_BLANK", false),
+                    "ORDER_EVENTS_CHRONOLOGICALLY", true),
+            new Shard(4, "Shard-4: The Activist's Choice",
+                    "Q4 ___ (testing)",
+                    Map.of(1, List.of("this, that")), "Rewards Text", "DecisionTree", true),
             new Shard(5, "Shard-5: Penton Street Office Map", "Q5", Map.of(1, List.of("")), "Rewards Text", "MULTIPLE_CHOICE", false),
             new Shard(6, "Shard-6: Bombing Puzzle", "Q6", Map.of(1, List.of("")), "Rewards Text", "MATCHING", false),
             new Shard(7, "Shard-7: The Sanctions Decision Boards", "Q7", Map.of(1, List.of("")), "Rewards Text", "FILL_IN_BLANK", false),

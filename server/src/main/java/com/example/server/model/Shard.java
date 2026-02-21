@@ -25,7 +25,7 @@ public class Shard {
     private String puzzleType;
     private Integer trackNumber;
     private boolean isUnlocked;            // If isCompleted True then isUnlocked true for shard+1.
-    private boolean isCompleted = false;
+    private boolean isCompleted = true;
 
     public Shard(Integer id, String title, String fitb_question, Map<Integer, List<String>> fitb_answer,
                  String rewardsText, String puzzleType, boolean isUnlocked) {
