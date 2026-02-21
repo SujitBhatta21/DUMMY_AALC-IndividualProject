@@ -1,3 +1,4 @@
+import "../../styles/Puzzle.css"
 import "../../styles/RedactedReveal.css"
 import {useEffect, useRef, useState} from "react";
 
@@ -124,8 +125,8 @@ function RedactedReveal({ onComplete, rewardsText }: RedactedRevealProps) {
 
     return (
         <div className="redactedReveal-section">
-            <h1>Declassify the Document</h1>
-            <p className="redactedReveal-instruction">
+            <h1 className="puzzle-title">Declassify the Document</h1>
+            <p className="puzzle-instruction">
                 Click on each redacted (blacked-out) section and choose the correct word to reveal the hidden text.
             </p>
                 <div className="redactedReveal-container">

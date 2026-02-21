@@ -1,5 +1,7 @@
+import "../../styles/Puzzle.css"
 import "../../styles/FillInTheBlank.css"
 import {useEffect, useMemo, useState} from "react";
+import { shuffle } from "../../utils"
 
 
 interface FITBlankProps {
@@ -9,19 +11,13 @@ interface FITBlankProps {
     onBack: () => void;
 }
 
-// Shuffling the word bank words.
-function shuffle<T>(array: T[]): T[] {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array
-}
-
 
 function FillInTheBlank({ question, answers, onCorrect, onBack }: FITBlankProps) {
 
     const [correctAnswer, setCorrectAnswer] = useState<string[]>([])
+    const [showSuccess, setShowSuccess] = useState(false)
+    // filledBlanks tracks which word is placed in each blank slot
+    const [filledBlanks, setFilledBlanks] = useState<Record<number, string>>({});
 
     useEffect(() => {
         const results: string[] = [];
@@ -38,15 +34,21 @@ function FillInTheBlank({ question, answers, onCorrect, onBack }: FITBlankProps)
 
     console.log("ANSWER FIRST ITEMS EXTRACTED::", correctAnswer)
 
-    // filledBlanks tracks which word is placed in each blank slot
-    const [filledBlanks, setFilledBlanks] = useState<Record<number, string>>({});
-
     const shuffledWords = useMemo(() => {
         return shuffle([...Object.values(answers).flat()]);
     }, [answers]);
 
     const textParts = question.split("___");
     const blankCount = textParts.length - 1;
+
+
+    const handlePuzzleCorrect = () => {
+        setShowSuccess(true);
+        setTimeout(() => {
+            setShowSuccess(false);
+            onCorrect(question);
+        }, 1500);
+    }
 
     const handleSubmit: () => void = () => {
         // Check if all blanks are filled and match the correct answers
@@ -57,7 +59,7 @@ function FillInTheBlank({ question, answers, onCorrect, onBack }: FITBlankProps)
 
         const isCorrect = correctAnswer.every((ans, i) => ans === userAnswers[i]);
         if (isCorrect) {
-            onCorrect(question);
+            handlePuzzleCorrect();
         } else {
             // Send wrong answers back to word bank, keep correct ones in place.
             setFilledBlanks(prev => {
@@ -72,6 +74,7 @@ function FillInTheBlank({ question, answers, onCorrect, onBack }: FITBlankProps)
         }
     };
 
+
     const handleBack = () => {
         onBack();
     }
@@ -80,6 +83,7 @@ function FillInTheBlank({ question, answers, onCorrect, onBack }: FITBlankProps)
     const handleDragStart = (e : React.DragEvent, word : string) => {
         e.dataTransfer.setData("text/plain", word);
         e.dataTransfer.setData("source", "wordbank");
+        e.dataTransfer.effectAllowed = "move"  // For dragging style when dragging a word from word bank.
     };
 
     const handleBlankDragStart = (e: React.DragEvent, blankIndex: number) => {
@@ -92,6 +96,7 @@ function FillInTheBlank({ question, answers, onCorrect, onBack }: FITBlankProps)
     };
 
     const handleDragOver = (e: React.DragEvent) => {
+        e.dataTransfer.dropEffect = "move";
         e.preventDefault();
     };
 
@@ -169,6 +174,7 @@ function FillInTheBlank({ question, answers, onCorrect, onBack }: FITBlankProps)
                                 key={`${ word }-${ String(index) }`}
                                 draggable={!isUsed}
                                 onDragStart={(e) => { handleDragStart(e, word)} }
+                                onDragEnd={() => { document.body.classList.remove("dragging")} }
                                 className={isUsed ? "used" : ""}
                                 disabled={isUsed}
                             >
@@ -183,7 +189,9 @@ function FillInTheBlank({ question, answers, onCorrect, onBack }: FITBlankProps)
 
     return (
         <div>
-            <h1 id="h1-fitb">Fill In The Blank (Drag & Drop)</h1>
+            { showSuccess && <div className="success-overlay">Correct!</div> }
+            <h1 className="puzzle-title">Fill In The Blank</h1>
+            <p className="puzzle-instruction">Drag and Drop correct answer from the word bank below</p>
             <div className="FillInTheBlank-section">
                 <div className="FillInTheBlank">
                     { renderQuestionWithBlank() }
