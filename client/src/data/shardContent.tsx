@@ -1,4 +1,5 @@
-import type {ReactNode} from "react";
+import "../App.css"
+
 
 const shardContent: Record<number, ReactNode> = {
     1: (
@@ -66,27 +67,114 @@ const shardContent: Record<number, ReactNode> = {
         <div>
             <p>
                 As news of apartheid spread, people outside South Africa began to take action.
-                In the UK, students, faith groups, trade unions, and political activists organised
-                protests to show solidarity.
+                In the UK, students, faith groups, <strong>trade unions</strong>, and political activists organised
+                protests to show <strong>solidarity</strong>.
             </p>
             <p>
                 Young people played a big role.
             </p>
             <p>
-                Student groups across the country joined campaigns such as the Barclays boycott, encouraging people
+                Student groups across the country joined campaigns such as the <strong>Barclays boycott</strong>, encouraging people
                 to close their bank accounts because Barclays invested in apartheid South Africa.
             </p>
             <p>
-                Leaflets, rallies, marches, boycotts, and campus marches helped spread awareness and put pressure on
+                Leaflets, rallies, marches, <strong>boycotts</strong>, and campus marches helped spread awareness and put pressure on
                 companies and the UK government to take a stand.
             </p>
         </div>
     ),
-    5: <p>Shard 5 content</p>,
-    6: <p>Shard 6 content</p>,
-    7: <p>Shard 7 content</p>,
-    8: <p>Shard 8 content</p>,
-    9: <p>Shard 9 content</p>,
+    5: (
+        <div>
+            <p>
+                The <strong>ANC in exile</strong> set up its London office at <strong>28 Penton Street.</strong>
+            </p>
+            <p>
+                This small building became a lifeline for the struggle:
+            </p>
+            <p>  - editing and printing newsletter </p>
+            <p>- storing secret documents</p>
+            <p>- working with Anti-Apartheid Movement to coordinate protests</p>
+            <p>- meeting supporters and supporting members of the exiled South African communities.</p>
+        </div>
+    ),
+    6: (
+        <div>
+            <p>
+                On 14th March 1982, apartheid 9 agents planted a bomb at 28 Penton Street. On that day
+                they expected ANC leader Oliver Tambo to be in the building.
+            </p>
+            <p>
+                Their aim: destroy documents, silence voices, <strong>assassinate Tambo</strong> and intimidate activists.
+            </p>
+            <p>
+                Miraculously, no one was killed.
+            </p>
+        </div>
+    ),
+    7: (
+        <div>
+            <p>
+                As the struggle against apartheid grew, people around the world called for <strong>sanctions</strong>
+                — actions that put economic and political pressure on the South African government.
+            </p>
+            <p>
+                But not all governments agreed.
+            </p>
+            <p>
+                In the UK, the government at the time did <strong>not</strong> support full sanctions against apartheid.
+                So ordinary people, community groups, <strong>trade unions</strong>, artists, and activists took the lead.
+            </p>
+            <p>
+                They organised <strong>boycotts</strong> of South African goods, refused to play or perform in South Africa,
+                boycotted visiting South African sports teams, and pushed companies to stop trading
+                with the apartheid regime.
+            </p>
+            <p>
+                These actions didn't end apartheid on their own — but they made the South African government
+                more <strong>isolated</strong> and helped show the world's growing refusal to accept <strong>injustice</strong>.
+            </p>
+        </div>
+    ),
+    8: (
+        <div>
+            <p>When you couldn't speak freely, you could still sing.</p>
+            <p>
+                Music was one of apartheid's most powerful opponents. At marches, uprisings, and community gatherings,
+                songs carried messages of hope, defiance, and solidarity that no law could silence.
+            </p>
+            <p>
+                Struggle songs like <strong><em>"Senzeni Na?"</em></strong>, <strong><em>"Siyahamba"</em></strong>,
+                and <strong><em>"Nkosi Sikelel' iAfrika"</em></strong> kept people united — some were calming,
+                some were bold, and some openly mocked the apartheid government.
+            </p>
+            <p>
+                These songs didn't stay in South Africa. Recordings spread across the world, and in the UK, choirs,
+                student groups, and artists performed their own versions. <strong><em>"Free Nelson Mandela" </em></strong>
+                became an international anthem - and a massive concert at Wembley calling for his release was
+                broadcast to millions worldwide.
+            </p>
+            <p>Music crossed borders that people couldn't. It kept the movement alive.</p>
+        </div>
+    ),
+    9: (
+        <div>
+            <p>In 1955, people from across South Africa — workers, students, and activists — came together to imagine a fair and equal country. Their ideas became the <strong>Freedom Charter</strong>.</p>
+            <p>The Charter declared principles that the apartheid government considered dangerous:</p>
+            <ul className="charter-list">
+                <li><em>"South Africa belongs to all who live in it."</em></li>
+                <li>All people should have equal rights, regardless of race.</li>
+                <li>Everyone should be free to learn, work, vote, and move freely.</li>
+                <li>The law should protect all people equally.</li>
+            </ul>
+            <p></p>
+            <p><br></br>The Charter was banned. But it couldn't be silenced.</p>
+            <p>
+                Nearly forty years later, when apartheid finally ended in the 1990s, the Freedom Charter's principles
+                helped shape South Africa's new <strong>Constitution</strong> - one of the most progressive in the world.
+                The dreams of 1955 became legal rights for everyone.
+            </p>
+        </div>
+    ),
 };
 
 export default shardContent;

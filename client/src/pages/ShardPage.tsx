@@ -38,6 +38,15 @@ function ShardPage() {
         fetchPuzzles()
     }, [id]);
 
+    useEffect(() => {
+        if (shardData) {
+            document.title = `Shard ${shardData.id} | AALC Interactive`;
+        } else {
+            document.title = 'Loading Shard | AALC Interactive';
+        }
+    }, [shardData]);
+
+
     console.log(shardData);
 
 
@@ -98,12 +107,28 @@ function ShardPage() {
                     )}
 
                     {/* For Shard-4 Decision Tree */}
-                    { shardData.puzzleType === "DecisionTree" && (
+                    { shardData.puzzleType === "DECISION_TREE" && (
                         <DecisionTree
                             onComplete={ () => { handleShardComplete(); }}
                             rewardsText={ shardData.rewardsText }
                         />
                     ) }
+
+                    {/* Foe Shard-5 */}
+                    {/*{ shardData.puzzleType === "" && (*/}
+                    {/*) }*/}
+
+                    {/* Foe Shard-7 */}
+                    {/*{ shardData.puzzleType === "DRAG_AND_CATEGORISE" && (*/}
+                    {/*) }*/}
+
+                    {/* Foe Shard-8 */}
+                    {/*{ shardData.puzzleType === "AUDIO_MATCHING_PUZZLE" && (*/}
+                    {/*) }*/}
+
+                    {/* Foe Shard-9 */}
+                    {/*{ shardData.puzzleType === "INK_DROP_REVEAL" && (*/}
+                    {/*) }*/}
                 </>
             }
 

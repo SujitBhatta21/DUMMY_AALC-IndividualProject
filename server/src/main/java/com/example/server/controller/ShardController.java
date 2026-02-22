@@ -44,15 +44,67 @@ public class ShardController {
                             "These events lit a spark that spread around the world.”\n",
                     "ORDER_EVENTS_CHRONOLOGICALLY", true),
             new Shard(4, "Shard-4: The Activist's Choice",
-                    "Q4 ___ (testing)",
-                    Map.of(1, List.of("this, that")),
-                    "You took action. So did thousands of real students across the UK. Their pressure worked - Barclays eventually pulled out of South Africa in 1986. A global movement was forming, one choice at a time",
-                    "DecisionTree", true),
-            new Shard(5, "Shard-5: Penton Street Office Map", "Q5", Map.of(1, List.of("")), "Rewards Text", "MULTIPLE_CHOICE", false),
-            new Shard(6, "Shard-6: Bombing Puzzle", "Q6", Map.of(1, List.of("")), "Rewards Text", "MATCHING", false),
-            new Shard(7, "Shard-7: The Sanctions Decision Boards", "Q7", Map.of(1, List.of("")), "Rewards Text", "FILL_IN_BLANK", false),
-            new Shard(8, "Shard-8: Music", "Q8", Map.of(1, List.of("")), "Rewards Text", "MULTIPLE_CHOICE", false),
-            new Shard(9, "Shard-9", "Q9", Map.of(1, List.of("")), "Rewards Text", "MATCHING", false)
+                    "Student groups joined the ___ boycott to put pressure on companies investing in apartheid.\n" +
+                            "Protests, marches, and boycotts were all ways of showing ___ with South Africa.",
+                    Map.of(1, List.of("Barclays, Lloyds"),
+                            2, List.of("solidarity", "opposition")),
+                    "You took action. So did thousands of real students across the UK. " +
+                            "Their pressure worked - Barclays eventually pulled out of South Africa in 1986. " +
+                            "A global movement was forming, one choice at a time",
+                    "DECISION_TREE", true),
+            new Shard(5, "Shard-5: Penton Street Office Map",
+                    "The ANC set up its London office at 28 ___ Street.\n" +
+                            "The building was used to store secret ________ and coordinate ________.",
+                    Map.of(1, List.of("Penton", "Kenton"),
+                            2, List.of("documents", "newsletters"),
+                            3, List.of("protests", "meetings")),
+                    "“The building was small, but its voice was loud. Stories, testimonies, and strategy " +
+                            "passed through its walls every day. It was a hub for communication networks.”",
+                    "?????", false),
+            new Shard(6, "Shard-6: Bombing Puzzle",
+                    "On 14th March 1982, apartheid agents planted a bomb at ___ Penton Street, hoping t" +
+                            " assassinate ANC leader ___.\n" +
+                            "Miraculously, no one was ___.",
+                    Map.of(1, List.of("28", "26"),
+                            2, List.of("Oliver Tambo", "Nelson Mandela"),
+                            3, List.of("killed", "survived")),
+                    "“The bomb shattered windows - but not the movement. The building stood. The work continued.”",
+                    "?????", false),
+            new Shard(7, "Shard-7: The Sanctions Decision Board",
+                    "People around the world called for ___ to put pressure on the South African government.\n" +
+                            "In the UK, the government ___ support full sanctions — so ordinary people took the lead.\n" +
+                            "Activists organised ___ of South African goods and sports teams.\n" +
+                            "Local councils refused to invest their pension funds in ___ South Africa.",
+                    Map.of(1, List.of("sanctions", "trade"),
+                            2, List.of("did not", "did"),
+                            3, List.of("boycotts", "freedom"),
+                            4, List.of("apartheid", "support")),
+                    "“Economic and cultural pressure sent a message: apartheid had no future.”",
+                    "DRAG_AND_CATEGORISE", false),
+            new Shard(8, "Shard-8: Songs of Resistance",
+                    "Music carried messages of ___, even when speaking freely was banned.\n" +
+                            "Struggle songs helped keep people ___.\n" +
+                            "\"Free Nelson Mandela\" became an international ___.\n" +
+                            "Music crossed ___ that people couldn't.",
+                    Map.of(1, List.of("hope", "silence", "fear"),
+                            2, List.of("united", "divided"),
+                            3, List.of("anthem", "poster")),
+                    "“These songs carried courage through communities - and across the world. They inspired " +
+                            "people to get involved in the struggle for freedom and gave strength to those who kept resisting.”",
+                    "AUDIO_MATCHING_PUZZLE", false),
+            new Shard(9, "Shard-9: The Freedom Charter Signature",
+                    "In ___, people from across South Africa came together to imagine a fair and equal country.\n" +
+                            "They called their ideas the ___ Charter.\n" +
+                            "The Charter said South Africa belongs to ___ who live in it.\n" +
+                            "When apartheid ended, the Charter's principles helped shape South Africa's new ___.",
+                    Map.of(1, List.of("1955", "1948"),
+                            2, List.of("Freedom", "Apartheid"),
+                            3, List.of("all", "some"),
+                            4, List.of("Constitution", "Declaration")),
+                    "“These words were once banned - but they survived. The Freedom Charter inspired" +
+                            " generations of activists and helped shape South Africa’s new Constitution, turning " +
+                            "hope into law.”",
+                    "INK_DROP_REVEAL", false)
     ));
 
     @GetMapping
