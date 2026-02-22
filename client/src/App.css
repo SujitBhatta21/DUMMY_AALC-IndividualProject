@@ -1,1 +1,13 @@
 /* Global App styles */
+
+.charter-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.charter-list li {
+    padding-left: 2rem;
+    border-left: 3px solid black;
+    margin-bottom: 0.75rem;
+    line-height: 1.6;
+}

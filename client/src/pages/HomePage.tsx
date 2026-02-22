@@ -32,10 +32,10 @@ function HomePage() {
                         </p>
                         <p>
                             Each shard reveals a piece of the real story of apartheid
-                            in South Africa and the people who fought against it —
+                            in South Africa and the people who fought against it -
                             right here from London's 28 Penton Street.
                         </p>
-                        <p className="age-note">Designed for learners aged 10–14</p>
+                        <p className="age-note">Designed for learners aged 10-14</p>
                     </div>
                 </div>
 

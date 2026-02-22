@@ -19,12 +19,13 @@
 }
 
 #timeline-heading-quote {
-    color: #FFD700;
+    color: black;
     padding: 1rem 2rem;
     font-style: italic;
     text-align: center;
     font-size: clamp(0.9rem, 2vw, 1.1rem);
     max-width: 600px;
+    margin-bottom: 2rem;
 }
 
 /* Shards Collection Button */

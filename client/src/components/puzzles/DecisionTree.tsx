@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import { useState } from "react";
 import "../../styles/Puzzle.css"
 import "../../styles/DecisionTree.css"
 
