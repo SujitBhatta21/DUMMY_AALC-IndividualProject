@@ -4,8 +4,8 @@ import "../../styles/DecisionTree.css"
 
 
 interface DecisionTreeProps {
-    onComplete: () => void,
-    rewardsTet: string
+    onComplete?: () => void,
+    rewardsTet?: string
 }
 
 interface Choice {

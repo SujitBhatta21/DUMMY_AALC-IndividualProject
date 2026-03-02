@@ -13,6 +13,14 @@ import java.util.Map;
 public class ShardController {
 
     private final List<Shard> shards = new ArrayList<>(List.of(
+            /*
+            ////  ** SAMPLE THING FOR ME TO TEST ON...  ** ////
+            new Shard(9, "Shard-9: The Freedom Charter Signature(testing sample)",
+                    "(sample testing) ___",
+                    Map.of(1, List.of("this", "that")),
+                    "“THIS IS the reward you get.”",
+                    "INK_DROP_REVEAL", false)
+             */
             new Shard(1, "Shard-1: The Passbook Fragment",
                     "The word “apartheid\" means ___. The National Party, a white minority political party, took power in ___ after an election in which only ___ people could vote. These laws controlled where black South Africans could live, work, and move. The ___ was one of the organisations that resisted apartheid.",
                     Map.of(1, List.of("separateness", "supremacy", "division"),

@@ -10,6 +10,7 @@ import shardContent from "../data/shardContent.tsx";
 import RedactedReveal from "../components/puzzles/RedactedReveal.tsx";
 import OrderEventsChronological from "../components/puzzles/OrderEventsChronological.tsx";
 import DecisionTree from "../components/puzzles/DecisionTree.tsx";
+import DragAndCategorise from "../components/puzzles/DragAndCategorise.tsx";
 
 
 function ShardPage() {
@@ -114,19 +115,24 @@ function ShardPage() {
                         />
                     ) }
 
-                    {/* Foe Shard-5 */}
-                    {/*{ shardData.puzzleType === "" && (*/}
+                    {/* For Shard-5 */}
+                    {/*{ shardData.puzzleType === "???" && (*/}
                     {/*) }*/}
 
-                    {/* Foe Shard-7 */}
-                    {/*{ shardData.puzzleType === "DRAG_AND_CATEGORISE" && (*/}
+                    {/* For Shard-6 */}
+                    {/*{ shardData.puzzleType === "???" && (*/}
                     {/*) }*/}
 
-                    {/* Foe Shard-8 */}
+                    {/* For Shard-7 */}
+                    { shardData.puzzleType === "DRAG_AND_CATEGORISE" && (
+                        < DragAndCategorise />
+                    )}
+
+                    {/* For Shard-8 */}
                     {/*{ shardData.puzzleType === "AUDIO_MATCHING_PUZZLE" && (*/}
                     {/*) }*/}
 
-                    {/* Foe Shard-9 */}
+                    {/* For Shard-9 */}
                     {/*{ shardData.puzzleType === "INK_DROP_REVEAL" && (*/}
                     {/*) }*/}
                 </>
