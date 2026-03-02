@@ -1,6 +1,6 @@
 import Header from "../components/Header.tsx";
 import { useParams } from "react-router-dom";
-import {useEffect, useState} from "react";
+import {useEffect, useState, useCallback, useRef } from "react";
 import { useNavigate } from "react-router-dom"
 import type { Shard } from "../types.ts";
 import FillInTheBlank from "../components/puzzles/FillInTheBlank.tsx"
@@ -11,6 +11,7 @@ import RedactedReveal from "../components/puzzles/RedactedReveal.tsx";
 import OrderEventsChronological from "../components/puzzles/OrderEventsChronological.tsx";
 import DecisionTree from "../components/puzzles/DecisionTree.tsx";
 import DragAndCategorise from "../components/puzzles/DragAndCategorise.tsx";
+import ReactCanvasConfetti from "react-canvas-confetti";
 
 
 function ShardPage() {
@@ -22,6 +23,13 @@ function ShardPage() {
 
     // To keep track of things e.g. For Shard 1: context(1) -> fill_the_blank(2) -> Jigsaw(3)
     const [currentStep, setCurrentStep] = useState(0);
+
+    const confettiRef = useRef(null);
+
+    const onConfettiInit = useCallback(({ confetti }) => {
+        confettiRef.current = confetti;
+    }, []);
+
 
     useEffect(() => {
         if  (!id) return;
@@ -53,11 +61,20 @@ function ShardPage() {
 
     // NOTE: Calls the onComplete method from @PostMapping("/{id}/complete") in ShardController.java
     function handleShardComplete() {
-        void fetch(`http://localhost:8080/api/shard/${id}/complete`, {
-            method: "POST"
-        })
-            .then(res => res.json())
-            .then(() => navigate("/storyline"));
+        // Fire confetti immediately
+        confettiRef.current?.({
+            particleCount: 150,
+            spread: 80,
+            origin: { y: 0.6 }
+        });
+
+        setTimeout(() => {
+            void fetch(`http://localhost:8080/api/shard/${id}/complete`, {
+                method: "POST"
+            })
+                .then(res => res.json())
+                .then(() => navigate("/storyline"));
+        }, 2500);
     }
 
 
@@ -138,6 +155,17 @@ function ShardPage() {
                 </>
             }
 
+            {/* This confetti is invisible until fired when handleShardComplete is called */}
+            < ReactCanvasConfetti
+                onInit={onConfettiInit}
+                style={{ position: "fixed",
+                    width: "100%",
+                    height: "100%",
+                    top: 0,
+                    left: 0,
+                    pointerEvents: "none",
+                    zIndex: 999 }}
+            />
         </div>
     );
 }
