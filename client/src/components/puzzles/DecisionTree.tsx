@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "../../styles/Puzzle.css"
 import "../../styles/DecisionTree.css"
+import RewardPopup from "./RewardPopup";
 
 
 interface DecisionTreeProps {
@@ -178,13 +179,10 @@ function DecisionTree({ onComplete, rewardsText } : DecisionTreeProps) {
             </section>
 
             { completed && (
-                <div className="reward-overlay">
-                    <div className="reward-popup">
-                        <h3>Shard Unlocked!</h3>
-                        <p>{ rewardsText }</p>
-                        <button className="next-button" onClick={onComplete}>CONTINUE</button>
-                    </div>
-                </div>
+                <RewardPopup
+                    rewardsText={rewardsText ?? ""}
+                    onComplete={onComplete ?? (() => {})}
+                />
             )}
         </div>
     );

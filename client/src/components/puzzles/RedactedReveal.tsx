@@ -1,6 +1,7 @@
 import "../../styles/Puzzle.css"
 import "../../styles/RedactedReveal.css"
 import {useEffect, useRef, useState} from "react";
+import RewardPopup from "./RewardPopup";
 
 
 interface RedactedRevealProps {
@@ -153,13 +154,7 @@ function RedactedReveal({ onComplete, rewardsText }: RedactedRevealProps) {
 
             {/* Final text overlay if the puzzle is completed,,, */}
             { solved && (
-                <div className="reward-overlay">
-                    <div className="reward-popup">
-                        <h3>Shard Unlocked!</h3>
-                        <p>{ rewardsText }</p>
-                        <button className="next-button" onClick={onComplete}>CONTINUE</button>
-                    </div>
-                </div>
+                <RewardPopup rewardsText={rewardsText} onComplete={onComplete} />
             )}
         </div>
     );

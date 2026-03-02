@@ -12,6 +12,7 @@
   "dependencies": {
     "driver.js": "^1.4.0",
     "react": "^19.2.0",
+    "react-canvas-confetti": "^2.0.7",
     "react-dom": "^19.2.0",
     "react-icons": "^5.5.0",
     "react-jigsaw-puzzle": "^1.0.5",
