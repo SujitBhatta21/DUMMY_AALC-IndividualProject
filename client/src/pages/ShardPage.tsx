@@ -127,7 +127,10 @@ function ShardPage() {
 
                     {/* For Shard-7 */}
                     { shardData.puzzleType === "DRAG_AND_CATEGORISE" && (
-                        < DragAndCategorise />
+                        <DragAndCategorise
+                            onComplete={() => { handleShardComplete(); }}
+                            rewardsText={ shardData.rewardsText }
+                        />
                     )}
 
                     {/* For Shard-8 */}
