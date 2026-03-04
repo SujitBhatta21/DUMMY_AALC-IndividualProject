@@ -1,14 +1,16 @@
 import Header from "../components/Header.tsx";
 import { useParams } from "react-router-dom";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"
-import FillInTheBlank from "../components/puzzles/FillInTheBlank.tsx"
 import type { Shard } from "../types.ts";
+import FillInTheBlank from "../components/puzzles/FillInTheBlank.tsx"
 import ContextView from "../components/puzzles/ContextView.tsx";
 import JigSaw from "../components/puzzles/JigSaw.tsx";
 import shardContent from "../data/shardContent.tsx";
 import RedactedReveal from "../components/puzzles/RedactedReveal.tsx";
 import OrderEventsChronological from "../components/puzzles/OrderEventsChronological.tsx";
+import DecisionTree from "../components/puzzles/DecisionTree.tsx";
+import DragAndCategorise from "../components/puzzles/DragAndCategorise.tsx";
 
 
 function ShardPage() {
@@ -20,6 +22,7 @@ function ShardPage() {
 
     // To keep track of things e.g. For Shard 1: context(1) -> fill_the_blank(2) -> Jigsaw(3)
     const [currentStep, setCurrentStep] = useState(0);
+
 
     useEffect(() => {
         if  (!id) return;
@@ -37,11 +40,21 @@ function ShardPage() {
         fetchPuzzles()
     }, [id]);
 
+    useEffect(() => {
+        if (shardData) {
+            document.title = `Shard ${shardData.id} | AALC Interactive`;
+        } else {
+            document.title = 'Loading Shard | AALC Interactive';
+        }
+    }, [shardData]);
+
+
     console.log(shardData);
 
 
     // NOTE: Calls the onComplete method from @PostMapping("/{id}/complete") in ShardController.java
     function handleShardComplete() {
+
         void fetch(`http://localhost:8080/api/shard/${id}/complete`, {
             method: "POST"
         })
@@ -56,7 +69,7 @@ function ShardPage() {
 
             { currentStep === 0 && shardData && (
                 <ContextView
-                    content={shardContent[shardData.id]}
+                    content={ shardContent[shardData.id] }
                     onNext={() => { setCurrentStep(currentStep + 1); }}
                 />
             )}
@@ -64,7 +77,7 @@ function ShardPage() {
             { currentStep === 1 && shardData && (
                 <FillInTheBlank
                     question={shardData.fitb_question}   // NOTE::: HAVE QUESTION IN HERE
-                    answers={ shardData.fitb_answer }    // Contains wrong options as well.
+                    answers={ shardData.fitb_answer }    // Contains wrong options as well. 1st inde is right answer.
                     onCorrect={() => { setCurrentStep(currentStep + 1); }}
                     onBack={() => { setCurrentStep(currentStep - 1); }}
                 />
@@ -95,14 +108,40 @@ function ShardPage() {
                             rewardsText={ shardData.rewardsText }
                         />
                     )}
+
+                    {/* For Shard-4 Decision Tree */}
+                    { shardData.puzzleType === "DECISION_TREE" && (
+                        <DecisionTree
+                            onComplete={ () => { handleShardComplete(); }}
+                            rewardsText={ shardData.rewardsText }
+                        />
+                    ) }
+
+                    {/* For Shard-5 */}
+                    {/*{ shardData.puzzleType === "???" && (*/}
+                    {/*) }*/}
+
+                    {/* For Shard-6 */}
+                    {/*{ shardData.puzzleType === "???" && (*/}
+                    {/*) }*/}
+
+                    {/* For Shard-7 */}
+                    { shardData.puzzleType === "DRAG_AND_CATEGORISE" && (
+                        <DragAndCategorise
+                            onComplete={() => { handleShardComplete(); }}
+                            rewardsText={ shardData.rewardsText }
+                        />
+                    )}
+
+                    {/* For Shard-8 */}
+                    {/*{ shardData.puzzleType === "AUDIO_MATCHING_PUZZLE" && (*/}
+                    {/*) }*/}
+
+                    {/* For Shard-9 */}
+                    {/*{ shardData.puzzleType === "INK_DROP_REVEAL" && (*/}
+                    {/*) }*/}
                 </>
             }
-
-            {/*{shardData?.id === 1 ? <FillInTheBlank props={shardData.}} /> : null}*/}
-            <div className="shard-container">
-
-            </div>
-
         </div>
     );
 }

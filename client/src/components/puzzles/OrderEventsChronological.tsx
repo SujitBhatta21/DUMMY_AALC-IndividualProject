@@ -2,6 +2,7 @@ import {useState} from "react";
 import { shuffle } from "../../utils.ts"
 import "../../styles/Puzzle.css"
 import "../../styles/OrderEventsChronolical.css"
+import RewardPopup from "./RewardPopup";
 
 
 interface OrderEventsProps {
@@ -91,15 +92,12 @@ function OrderEventsChronological ({ onComplete, rewardsText }: OrderEventsProps
                 <div className="order-events-buttons">
                     <button onClick={handleSubmit}>Submit</button>
                 </div>
-                { solved &&
-                    <div className="reward-overlay">
-                        <div className="reward-popup">
-                            <h3>Shard Unlocked!</h3>
-                            <p>{ rewardsText }</p>
-                            <button className="next-button" onClick={ onComplete }>CONTINUE</button>
-                        </div>
-                    </div>
-                }
+                { solved && (
+                    <RewardPopup
+                        rewardsText={rewardsText ?? ""}
+                        onComplete={onComplete ?? (() => {})}
+                    />
+                )}
             </section>
         </div>
     );

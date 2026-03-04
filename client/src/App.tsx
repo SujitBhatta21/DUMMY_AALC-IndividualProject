@@ -14,7 +14,6 @@ function App() {
                 <Route path="/" element={<HomePage />} />
                 <Route path="/storyline" element={(<TimelinePage />)} />
                 <Route path="/who-we-are" element={<WhoWeAre />} />
-                <Route path="/museum" element={<Museum />} />
                 <Route path="/settings" element={<Settings />} />
                 <Route path="/storyline/shard/:id" element={<ShardPage />}/>
             </Routes>

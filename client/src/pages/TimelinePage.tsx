@@ -20,9 +20,13 @@ async function fetchShards() : Promise<Shard[]> {
 
 
 function TimelinePage() {
-    const DEVELOPMENT_MODE = true; // I set this up so that I can test popup tour.
+    const DEVELOPMENT_MODE = false; // I set this to true to test popup tour.
 
     const [shards, setShards] = useState<Shard[]>([]);
+
+    useEffect(() => {
+        document.title = 'Puzzle Timeline | AALC Interactive';
+    }, []);
 
     // Fetching shards data from server.
     useEffect(() => {
@@ -116,15 +120,13 @@ function TimelinePage() {
         <div className="timeline-page">
             <Header/>
             <section className="timeline-section">
-                <h1>[Solve the Puzzles]</h1>
-                <p id="timeline-heading-quote">""About the puzzle button to see context.""</p>
+                <h1>Solve the Puzzles</h1>
+                <p id="timeline-heading-quote">
+                    "Read the story. Answer the clues. Solve the puzzle. Each shard unlocks a piece of history."
+                </p>
                 <button className="shards-collected-btn">SHARDS COLLECTED: { totalSolvedShards }/9</button>
                 <div className="tracks">
                     <div className="timeline-track1">
-                        {/* TESTING PROTOTYPE OF SHARD N. */}
-                        <Link to={`/storyline/shard/3`}>
-                            <button> TESTING SHARD </button>
-                        </Link>
                         <h3>Apartheid (South Africa)<br/></h3>
                         <div className="tt1-shards">
                             <Link to={`/storyline/shard/${ shards[0]?.id }`}>

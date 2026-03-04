@@ -108,6 +108,17 @@
     max-width: 600px;
 }
 
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+    .home-top-container a button {
+        transition: none;
+    }
+
+    .home-top-container a button:hover {
+        transform: none;
+    }
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .home-middle-container {

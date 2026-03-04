@@ -58,6 +58,36 @@
     box-shadow: 0 6px 20px rgba(255, 165, 0, 0.5);
 }
 
+.read-aloud-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: transparent;
+    border: 2px dashed #c9a66b;
+    border-radius: 50px;
+    min-width: 220px;
+    padding: 0.6rem 1.8rem;
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    font-weight: 600;
+    color: #8B4513;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+    margin-top: 0.5rem;
+}
+
+.read-aloud-btn:hover {
+    background: rgba(201, 166, 107, 0.15);
+    border-color: #8B4513;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(139, 69, 19, 0.2);
+}
+
+.read-aloud-btn svg {
+    font-size: 1.2em;
+}
+
+
 /* Responsive */
 @media (max-width: 768px) {
     .context-view {

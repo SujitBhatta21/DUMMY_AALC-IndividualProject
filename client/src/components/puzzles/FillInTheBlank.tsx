@@ -44,10 +44,16 @@ function FillInTheBlank({ question, answers, onCorrect, onBack }: FITBlankProps)
 
     const handlePuzzleCorrect = () => {
         setShowSuccess(true);
-        setTimeout(() => {
-            setShowSuccess(false);
-            onCorrect(question);
-        }, 1500);
+
+        // setTimeout(() => {
+        //     setShowSuccess(false);
+        //     onCorrect(question);
+        // }, 1500);
+    }
+
+    const handleContinueToNextPuzzle = () => {
+        setShowSuccess(false);
+        onCorrect(question);
     }
 
     const handleSubmit: () => void = () => {
@@ -79,7 +85,7 @@ function FillInTheBlank({ question, answers, onCorrect, onBack }: FITBlankProps)
         onBack();
     }
 
-    // --- Drag & Drop handlers ---
+    // Drag & Drop handlers
     const handleDragStart = (e : React.DragEvent, word : string) => {
         e.dataTransfer.setData("text/plain", word);
         e.dataTransfer.setData("source", "wordbank");
@@ -205,6 +211,14 @@ function FillInTheBlank({ question, answers, onCorrect, onBack }: FITBlankProps)
                     <button onClick={handleBack}>Back</button>
                 </div>
             </div>
+            { showSuccess && (
+                <div className="reward-overlay">
+                    <div className="reward-popup">
+                        <h3>Congratulations! You're ready for the next puzzle.</h3>
+                        <button className="next-button" onClick={ handleContinueToNextPuzzle }>CONTINUE</button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

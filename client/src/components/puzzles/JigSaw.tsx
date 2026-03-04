@@ -3,6 +3,7 @@ import { JigsawPuzzle } from "react-jigsaw-puzzle"
 import "react-jigsaw-puzzle/lib/jigsaw-puzzle.css";
 import "../../styles/Puzzle.css";
 import "../../styles/JigSaw.css";
+import RewardPopup from "./RewardPopup";
 
 interface JigSawProps {
     onComplete?: () => void
@@ -44,13 +45,10 @@ function JigSaw({ onComplete, rewardsText }: JigSawProps) {
                 </div>
             </div>
             { solved && (
-                <div className="reward-overlay">
-                    <div className="reward-popup">
-                        <h3>Shard Unlocked!</h3>
-                        <p>{ rewardsText }</p>
-                        <button className="next-button" onClick={onComplete}>CONTINUE</button>
-                    </div>
-                </div>
+                <RewardPopup
+                    rewardsText={rewardsText ?? ""}
+                    onComplete={onComplete ?? (() => {})}
+                />
             )}
         </div>
         // { solved &&

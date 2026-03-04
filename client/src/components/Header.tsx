@@ -43,7 +43,6 @@ function Header() {
                 <nav className='desktop-nav'>
                     <ul>
                         <li><Link to='/who-we-are'>Who We Are</Link></li>
-                        <li><Link to='/museum'>Museum</Link></li>
                         <li><Link to='/settings'>Settings/Accessibility</Link></li>
                     </ul>
                     <button className="shard-btn"><Link to='/shards'>Shard Collection</Link></button>
@@ -62,7 +61,6 @@ function Header() {
                     <nav className='sidebar-nav'>
                         <ul>
                             <li><Link to='/who-we-are' onClick={() => { setMenuOpen(false); }}>Who We Are</Link></li>
-                            <li><Link to='/museum' onClick={() => { setMenuOpen(false); }}>Museum</Link></li>
                             <li><Link to='/settings' onClick={() => { setMenuOpen(false); }}>Settings/Accessibility</Link></li>
                         </ul>
                         <button className="shard-btn"><Link to='/shard-collection' onClick={() => { setMenuOpen(false); }}>Shard Collection</Link></button>

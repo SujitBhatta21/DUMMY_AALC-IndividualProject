@@ -1,6 +1,11 @@
 import Header from "./Header.tsx";
+import { useEffect } from "react";
 
 function Settings() {
+    useEffect(() => {
+        document.title = 'Settings | AALC Interactive';
+    }, []);
+
     return (
         <div>
             <Header />

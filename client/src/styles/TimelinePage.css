@@ -19,12 +19,13 @@
 }
 
 #timeline-heading-quote {
-    color: #FFD700;
+    color: black;
     padding: 1rem 2rem;
     font-style: italic;
     text-align: center;
     font-size: clamp(0.9rem, 2vw, 1.1rem);
     max-width: 600px;
+    margin-bottom: 2rem;
 }
 
 /* Shards Collection Button */
@@ -287,6 +288,42 @@
     background: linear-gradient(135deg, #228b55 0%, #166b3f 100%);
     transform: translateY(-4px);
     box-shadow: 0 8px 20px rgba(34, 139, 85, 0.5);
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+    .shards-collected-btn,
+    .shards-collected-btn::before {
+        transition: none;
+    }
+
+    .shards-collected-btn:hover {
+        transform: none;
+    }
+
+    .timeline-track1,
+    .timeline-track2,
+    .timeline-track3 {
+        transition: none;
+    }
+
+    .timeline-track1:hover,
+    .timeline-track2:hover,
+    .timeline-track3:hover {
+        transform: none;
+    }
+
+    .tt1-shards button,
+    .tt2-shards button,
+    .tt3-shards button {
+        transition: none;
+    }
+
+    .tt1-shards button:hover,
+    .tt2-shards button:hover,
+    .tt3-shards button:hover {
+        transform: none;
+    }
 }
 
 /* Responsive Design */
