@@ -6,7 +6,7 @@ import RewardPopup from "./RewardPopup";
 
 interface DecisionTreeProps {
     onComplete?: () => void,
-    rewardsTet?: string
+    rewardsText?: string
 }
 
 interface Choice {

@@ -49,6 +49,7 @@ const BUCKETS: Bucket[] = [
     },
 ];
 
+// Converted to FlatMap cause only array is accepted by shuffle.
 const ALL_WORDS = BUCKETS.flatMap(b => b.acceptedWords);
 
 
@@ -61,7 +62,7 @@ function DragAndCategorise({ onComplete, rewardsText }: Props) {
         effects: [],
     });
 
-    const [dragging, setDragging] = useState<string | null>(null);
+    const [dragging, setDragging] = useState<string | null>(null); // Don't need this but a failsafe state.
     const [wrongBucket, setWrongBucket] = useState<string | null>(null);
     const [solved, setSolved] = useState(false);
 

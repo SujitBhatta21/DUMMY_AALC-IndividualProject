@@ -1,6 +1,6 @@
 import Header from "../components/Header.tsx";
 import { useParams } from "react-router-dom";
-import {useEffect, useState, useCallback, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"
 import type { Shard } from "../types.ts";
 import FillInTheBlank from "../components/puzzles/FillInTheBlank.tsx"
@@ -69,7 +69,7 @@ function ShardPage() {
 
             { currentStep === 0 && shardData && (
                 <ContextView
-                    content={shardContent[shardData.id]}
+                    content={ shardContent[shardData.id] }
                     onNext={() => { setCurrentStep(currentStep + 1); }}
                 />
             )}

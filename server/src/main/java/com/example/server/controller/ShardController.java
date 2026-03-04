@@ -50,7 +50,7 @@ public class ShardController {
                             5, List.of("Afrikaans")),
                     "From Sharpeville to Soweto, uprisings revealed the courage of ordinary people — and the cruelty of the state.\n" +
                             "These events lit a spark that spread around the world.”\n",
-                    "ORDER_EVENTS_CHRONOLOGICALLY", true),
+                    "ORDER_EVENTS_CHRONOLOGICALLY", false),
             new Shard(4, "Shard-4: The Activist's Choice",
                     "Student groups joined the ___ boycott to put pressure on companies investing in apartheid.\n" +
                             "Protests, marches, and boycotts were all ways of showing ___ with South Africa.",
@@ -59,7 +59,7 @@ public class ShardController {
                     "You took action. So did thousands of real students across the UK. " +
                             "Their pressure worked - Barclays eventually pulled out of South Africa in 1986. " +
                             "A global movement was forming, one choice at a time",
-                    "DECISION_TREE", true),
+                    "DECISION_TREE", false),
             new Shard(5, "Shard-5: Penton Street Office Map",
                     "The ANC set up its London office at 28 ___ Street.\n" +
                             "The building was used to store secret ________ and coordinate ________.",
@@ -68,7 +68,7 @@ public class ShardController {
                             3, List.of("protests", "meetings")),
                     "“The building was small, but its voice was loud. Stories, testimonies, and strategy " +
                             "passed through its walls every day. It was a hub for communication networks.”",
-                    "?????", false),
+                    "?????", true),
             new Shard(6, "Shard-6: Bombing Puzzle",
                     "On 14th March 1982, apartheid agents planted a bomb at ___ Penton Street, hoping t" +
                             " assassinate ANC leader ___.\n" +
@@ -77,7 +77,7 @@ public class ShardController {
                             2, List.of("Oliver Tambo", "Nelson Mandela"),
                             3, List.of("killed", "survived")),
                     "“The bomb shattered windows - but not the movement. The building stood. The work continued.”",
-                    "?????", false),
+                    "?????", true),
             new Shard(7, "Shard-7: The Sanctions Decision Board",
                     "People around the world called for ___ to put pressure on the South African government.\n" +
                             "In the UK, the government ___ support full sanctions — so ordinary people took the lead.\n" +
@@ -88,7 +88,7 @@ public class ShardController {
                             3, List.of("boycotts", "freedom"),
                             4, List.of("apartheid", "support")),
                     "“Economic and cultural pressure sent a message: apartheid had no future.”",
-                    "DRAG_AND_CATEGORISE", false),
+                    "DRAG_AND_CATEGORISE", true),
             new Shard(8, "Shard-8: Songs of Resistance",
                     "Music carried messages of ___, even when speaking freely was banned.\n" +
                             "Struggle songs helped keep people ___.\n" +
