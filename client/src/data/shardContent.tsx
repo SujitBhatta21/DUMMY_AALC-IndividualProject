@@ -7,7 +7,7 @@ const shardContent: Record<number, ReactNode> = {
         <div>
             <p>
                 Apartheid is a system of racial segregation and control.
-                The word apartheid means <strong>'separateness'</strong>. 
+                The word apartheid means <strong>'separateness'</strong>.
             </p>
             <p>
                 In the 17th Century, Dutch settlers arrived in South Africa,
