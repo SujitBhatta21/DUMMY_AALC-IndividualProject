@@ -195,7 +195,6 @@ function FillInTheBlank({ question, answers, onCorrect, onBack }: FITBlankProps)
 
     return (
         <div>
-            { showSuccess && <div className="success-overlay">Correct!</div> }
             <h1 className="puzzle-title">Fill In The Blank</h1>
             <p className="puzzle-instruction">Drag and Drop correct answer from the word bank below</p>
             <div className="FillInTheBlank-section">

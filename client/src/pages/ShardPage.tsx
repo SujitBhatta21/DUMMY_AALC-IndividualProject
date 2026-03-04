@@ -11,6 +11,7 @@ import RedactedReveal from "../components/puzzles/RedactedReveal.tsx";
 import OrderEventsChronological from "../components/puzzles/OrderEventsChronological.tsx";
 import DecisionTree from "../components/puzzles/DecisionTree.tsx";
 import DragAndCategorise from "../components/puzzles/DragAndCategorise.tsx";
+import CommunicationNetwork from "../components/puzzles/CommunicationNetwork.tsx";
 
 
 function ShardPage() {
@@ -118,8 +119,12 @@ function ShardPage() {
                     ) }
 
                     {/* For Shard-5 */}
-                    {/*{ shardData.puzzleType === "???" && (*/}
-                    {/*) }*/}
+                    { shardData.puzzleType === "COMMUNICATION_NETWORK" && (
+                        <CommunicationNetwork
+                            onComplete={() => { handleShardComplete(); }}
+                            rewardsText={ shardData.rewardsText }
+                        />
+                    )}
 
                     {/* For Shard-6 */}
                     {/*{ shardData.puzzleType === "???" && (*/}

@@ -62,13 +62,13 @@ public class ShardController {
                     "DECISION_TREE", false),
             new Shard(5, "Shard-5: Penton Street Office Map",
                     "The ANC set up its London office at 28 ___ Street.\n" +
-                            "The building was used to store secret ________ and coordinate ________.",
+                            "The building was used to store secret ___ and coordinate ___.",
                     Map.of(1, List.of("Penton", "Kenton"),
                             2, List.of("documents", "newsletters"),
                             3, List.of("protests", "meetings")),
                     "“The building was small, but its voice was loud. Stories, testimonies, and strategy " +
                             "passed through its walls every day. It was a hub for communication networks.”",
-                    "?????", true),
+                    "COMMUNICATION_NETWORK", true),
             new Shard(6, "Shard-6: Bombing Puzzle",
                     "On 14th March 1982, apartheid agents planted a bomb at ___ Penton Street, hoping t" +
                             " assassinate ANC leader ___.\n" +
