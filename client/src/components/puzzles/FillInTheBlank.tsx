@@ -206,8 +206,8 @@ function FillInTheBlank({ question, answers, onCorrect, onBack }: FITBlankProps)
                     { renderRandomWordBank() }
                 </div>
                 <div className="fitb-buttons">
-                    <button onClick={handleSubmit}>Submit</button>
                     <button onClick={handleBack}>Back</button>
+                    <button onClick={handleSubmit}>Submit</button>
                 </div>
             </div>
             { showSuccess && (

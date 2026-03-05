@@ -77,7 +77,7 @@ public class ShardController {
                             2, List.of("Oliver Tambo", "Nelson Mandela"),
                             3, List.of("killed", "survived")),
                     "“The bomb shattered windows - but not the movement. The building stood. The work continued.”",
-                    "?????", true),
+                    "CONNECT_MATCHING", true),
             new Shard(7, "Shard-7: The Sanctions Decision Board",
                     "People around the world called for ___ to put pressure on the South African government.\n" +
                             "In the UK, the government ___ support full sanctions — so ordinary people took the lead.\n" +

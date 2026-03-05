@@ -37,7 +37,14 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.context-view .next-btn {
+
+.buttons-container {
+    display: flex;
+    gap: 2rem;
+    padding-top: 0.5rem;
+}
+
+.context-view .next-btn, .back-btn {
     background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
     border: none;
     border-radius: 50px;
@@ -52,7 +59,7 @@
     margin-top: 0.5rem;
 }
 
-.context-view .next-btn:hover {
+.context-view .next-btn:hover, .back-btn:hover {
     background: linear-gradient(135deg, #FFA500 0%, #FF8C00 100%);
     transform: translateY(-3px);
     box-shadow: 0 6px 20px rgba(255, 165, 0, 0.5);
@@ -103,7 +110,7 @@
         border-radius: 15px;
     }
 
-    .context-view .next-btn {
+    .context-view .back-btn .next-btn {
         padding: 0.7rem 2rem;
         width: 100%;
     }

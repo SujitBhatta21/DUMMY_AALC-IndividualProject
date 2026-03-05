@@ -1,7 +1,7 @@
 import Header from "../components/Header.tsx";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Link } from "react-router-dom"
 import type { Shard } from "../types.ts";
 import FillInTheBlank from "../components/puzzles/FillInTheBlank.tsx"
 import ContextView from "../components/puzzles/ContextView.tsx";
@@ -12,6 +12,7 @@ import OrderEventsChronological from "../components/puzzles/OrderEventsChronolog
 import DecisionTree from "../components/puzzles/DecisionTree.tsx";
 import DragAndCategorise from "../components/puzzles/DragAndCategorise.tsx";
 import CommunicationNetwork from "../components/puzzles/CommunicationNetwork.tsx";
+import ConnectMatching from "../components/puzzles/ConnectMatching.tsx";
 
 
 function ShardPage() {
@@ -72,6 +73,7 @@ function ShardPage() {
                 <ContextView
                     content={ shardContent[shardData.id] }
                     onNext={() => { setCurrentStep(currentStep + 1); }}
+                    onBack={() => navigate("/storyline") }
                 />
             )}
 
@@ -127,8 +129,12 @@ function ShardPage() {
                     )}
 
                     {/* For Shard-6 */}
-                    {/*{ shardData.puzzleType === "???" && (*/}
-                    {/*) }*/}
+                    { shardData.puzzleType === "CONNECT_MATCHING" && (
+                        <ConnectMatching
+                            onComplete={ () => { handleShardComplete(); }}
+                            rewardsText={ shardData.rewardsText }
+                        />
+                    ) }
 
                     {/* For Shard-7 */}
                     { shardData.puzzleType === "DRAG_AND_CATEGORISE" && (
