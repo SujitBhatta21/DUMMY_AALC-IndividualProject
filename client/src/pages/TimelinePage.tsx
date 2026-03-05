@@ -5,6 +5,7 @@ import {useEffect, useState} from "react";
 import { driver } from 'driver.js';
 import 'driver.js/dist/driver.css';
 import type { Shard } from "../types.ts";
+import { AiTwotoneLock, AiTwotoneUnlock } from "react-icons/ai"; // Using these icons for lock and unlock...
 
 
 async function fetchShards() : Promise<Shard[]> {
@@ -20,7 +21,7 @@ async function fetchShards() : Promise<Shard[]> {
 
 
 function TimelinePage() {
-    const DEVELOPMENT_MODE = false; // I set this to true to test popup tour.
+    const DEVELOPMENT_MODE = true; // I set this to true to test popup tour.
 
     const [shards, setShards] = useState<Shard[]>([]);
 

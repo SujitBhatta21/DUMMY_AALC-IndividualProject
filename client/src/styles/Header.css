@@ -17,7 +17,7 @@ body.menu-open {
     justify-content: space-between;
     flex-direction: row;
     min-height: 50px;
-    background-color: #426B1F;
+    background-color: #0D6B3A;
     color: white;
     padding: 10px 20px;
     gap: 15px;
@@ -97,7 +97,7 @@ body.menu-open {
 
 .shard-btn {
     padding: 10px 20px;
-    background-color: #426B1F;
+    background-color: #0D6B3A;
     color: white;
     border: none;
     border-radius: 4px;
@@ -107,7 +107,7 @@ body.menu-open {
 }
 
 .shard-btn:hover {
-    background-color: #35561a;
+    background-color: #0EA04E;
 }
 
 .shard-btn a {

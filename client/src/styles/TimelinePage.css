@@ -13,9 +13,11 @@
 .timeline-section h1 {
     text-align: center;
     padding: 1.5rem 2rem;
-    margin-bottom: 0.5rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
     font-size: clamp(1.5rem, 4vw, 2.5rem);
-    border-bottom: 3px solid #FFD700;
+    border-bottom: 5px dotted #FFD700;
+    letter-spacing: -0.025em;
 }
 
 #timeline-heading-quote {
@@ -30,7 +32,7 @@
 
 /* Shards Collection Button */
 .shards-collected-btn {
-    background: linear-gradient(135deg, #426B1F 0%, #5a8f2a 100%);
+    background: linear-gradient(135deg, #0D6B3A 0%, #0EA04E 100%);
     color: white;
     padding: 1rem 2rem;
     margin-bottom: 2rem;
@@ -70,10 +72,10 @@
 .tracks {
     display: flex;
     flex-direction: column;
-    background: linear-gradient(180deg, #666666 0%, #888888 50%, #666666 100%);
-    border: 2px solid #FFD700;
+    background: linear-gradient(180deg, black 0%, #2a2a2a 50%, #2d2d2d 100%);
+    border: 2px solid #0D6B3A;
     padding: 1.5rem;
-    border-radius: 20px;
+    border-radius: 1%;
     width: 90%;
     max-width: 900px;
     gap: 1.5rem;
@@ -108,11 +110,11 @@
 /* TRACK 1 - Apartheid (South Africa) - Warm Earth Tones */
 .timeline-track1 {
     background: linear-gradient(135deg, #f5e6d3 0%, #e8d4c0 100%);
-    border: 2px solid #c9a66b;
+    border: 2px solid #0D6B3A;
 }
 
 .timeline-track1 h3 {
-    background: #8B4513;
+    background: #0D6B3A;
     color: white;
 }
 
@@ -211,11 +213,11 @@
 /* TRACK 2 - UK Actions - Cool Blue Tones */
 .timeline-track2 {
     background: linear-gradient(135deg, #e3eef9 0%, #cde0f2 100%);
-    border: 2px solid #5b8cb8;
+    border: 2px solid #0EA04E;
 }
 
 .timeline-track2 h3 {
-    background: #1e3a5f;
+    background: #0EA04E;
     color: white;
 }
 
@@ -252,12 +254,12 @@
 /* TRACK 3 - Global Solidarity - Green/Teal Tones */
 .timeline-track3 {
     background: linear-gradient(135deg, #e0f2e9 0%, #c8e6d8 100%);
-    border: 2px solid #4a9f7e;
+    border: 2px solid #52D47A;
 }
 
 .timeline-track3 h3 {
-    background: #1a5f4a;
-    color: white;
+    background: #52D47A;
+    color: #0a2a18;
 }
 
 .tt3-shards {
