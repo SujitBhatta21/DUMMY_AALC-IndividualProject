@@ -1,0 +1,162 @@
+/* ConnectMatching puzzle */
+
+.connect-matching {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 1.5rem 4rem;
+}
+
+/* Arena: two columns with SVG overlay sitting between them */
+.cm-arena {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 3rem;
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 1rem 0;
+}
+
+/* SVG fills the arena so lines span both columns */
+.cm-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: visible;
+}
+
+.cm-line {
+    stroke: #FFD700;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    opacity: 0.85;
+    animation: cmLineIn 0.3s ease;
+}
+
+@keyframes cmLineIn {
+    from { opacity: 0; stroke-dashoffset: 120; stroke-dasharray: 120; }
+    to   { opacity: 0.85; stroke-dashoffset: 0; stroke-dasharray: 120; }
+}
+
+/* Columns */
+.cm-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    flex: 1;
+    z-index: 1;
+}
+
+.cm-card {
+    padding: 0.85rem 1.1rem;
+    border: 2px solid #c9a66b;
+    border-radius: 10px;
+    background: #1a1209;
+    color: #e8d4c0;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: left;
+    line-height: 1.4;
+    user-select: none;
+}
+
+
+/* Left cards: prompt text aligned right so it points toward the gap */
+.cm-card--left {
+    text-align: right;
+}
+
+/* Right cards: answer text aligned left */
+.cm-card--right {
+    text-align: left;
+}
+
+/* Selected left card */
+.cm-card--selected {
+    border-color: #fff;
+    background: #2a1f08;
+    box-shadow: 0 0 18px rgba(255, 215, 0, 0.6);
+    transform: scale(1.04);
+}
+
+/* Right card pulses when a left card is selected and this card is available */
+.cm-card--targetable {
+    border-color: #FFD700;
+    background: #231a08;
+    animation: cmPulse 1.4s ease-in-out infinite;
+}
+
+@keyframes cmPulse {
+    0%, 100% { box-shadow: 0 0 0 0   rgba(255, 215, 0, 0.45); }
+    50%       { box-shadow: 0 0 0 10px rgba(255, 215, 0, 0);    }
+}
+
+/* Correctly connected card */
+.cm-card--connected {
+    border-color: #4caf50;
+    background: #0a1a0a;
+    color: #a5d6a7;
+    cursor: default;
+    animation: cmConnectIn 0.3s ease;
+}
+
+@keyframes cmConnectIn {
+    from { opacity: 0.4; transform: scale(0.96); }
+    to   { opacity: 1;   transform: scale(1);    }
+}
+
+/* Wrong answer: red shake */
+.cm-card--wrong {
+    animation: cmWrongShake 0.5s ease;
+    border-color: #e53e3e !important;
+    background: #2d0a0a !important;
+    color: #fc8181 !important;
+}
+
+@keyframes cmWrongShake {
+    0%, 100% { transform: translateX(0); }
+    20%      { transform: translateX(-6px); }
+    40%      { transform: translateX(6px); }
+    60%      { transform: translateX(-4px); }
+    80%      { transform: translateX(4px); }
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    .cm-arena {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .cm-svg {
+        display: none;
+    }
+
+    .cm-card--left,
+    .cm-card--right {
+        text-align: center;
+    }
+}
+
+/* Reduced motion: For WAG 2.1 compliance */
+@media (prefers-reduced-motion: reduce) {
+    .cm-card {
+        transition: none;
+    }
+    .cm-card--targetable {
+        animation: none;
+    }
+    .cm-card--wrong {
+        animation: none;
+    }
+    .cm-card--connected {
+        animation: none;
+    }
+    .cm-line {
+        animation: none;
+    }
+}
