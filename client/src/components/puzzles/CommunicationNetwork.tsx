@@ -62,7 +62,7 @@ function CommunicationNetwork({ onComplete, rewardsText }: Props) {
 
     function handleNodeClick(nodeId: string) {
         if (!selected || placed[nodeId] !== null) return;
-        const node = NODES.find(n => n.id === nodeId)!;
+        const node: NetworkNode = NODES.find(n => n.id === nodeId)!;
         if (node.message === selected) {
             const updated = { ...placed, [nodeId]: selected };
             setPlaced(updated);
@@ -70,16 +70,16 @@ function CommunicationNetwork({ onComplete, rewardsText }: Props) {
             if (Object.values(updated).every(v => v !== null)) setSolved(true);
         } else {
             setWrongNode(nodeId);
-            setTimeout(() => setWrongNode(null), 600);
+            setTimeout(() => { setWrongNode(null) }, 600);
         }
     }
 
     function nodeClass(nodeId: string) {
         return [
             "cn-node",
-            wrongNode === nodeId                      ? "cn-node--wrong"      : "",
-            selected && placed[nodeId] === null        ? "cn-node--targetable" : "",
-            placed[nodeId] !== null                   ? "cn-node--filled"     : "",
+            wrongNode === nodeId                ? "cn-node--wrong"      : "",
+            selected && placed[nodeId] === null ? "cn-node--targetable" : "",
+            placed[nodeId] !== null             ? "cn-node--filled"     : "",
         ].join(" ");
     }
 
@@ -96,7 +96,7 @@ function CommunicationNetwork({ onComplete, rewardsText }: Props) {
                     <button
                         key={msg}
                         className={`cn-message ${selected === msg ? "cn-message--selected" : ""}`}
-                        onClick={() => setSelected(selected === msg ? null : msg)}
+                        onClick={() => { setSelected(selected === msg ? null : msg)} }
                     >
                         {msg}
                     </button>
@@ -113,7 +113,7 @@ function CommunicationNetwork({ onComplete, rewardsText }: Props) {
                         <button
                             key={node.id}
                             className={nodeClass(node.id)}
-                            onClick={() => handleNodeClick(node.id)}
+                            onClick={() => { handleNodeClick(node.id)} }
                         >
                             <span className="cn-node-label">{node.label}</span>
                             <span className="cn-node-sub">{node.sublabel}</span>
@@ -134,7 +134,7 @@ function CommunicationNetwork({ onComplete, rewardsText }: Props) {
                         <button
                             key={node.id}
                             className={nodeClass(node.id)}
-                            onClick={() => handleNodeClick(node.id)}
+                            onClick={() => { handleNodeClick(node.id)} }
                         >
                             <span className="cn-node-label">{node.label}</span>
                             <span className="cn-node-sub">{node.sublabel}</span>

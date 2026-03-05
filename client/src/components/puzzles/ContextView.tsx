@@ -17,7 +17,7 @@ function ContextView({ content, onNext } : { content: ReactNode, onNext: () => v
 
         if ('speechSynthesis' in window) {
             const utterance = new SpeechSynthesisUtterance(textToRead);
-            utterance.onend = () => setIsReading(false);
+            utterance.onend = () => { setIsReading(false) };
             window.speechSynthesis.speak(utterance);
         } else {
             alert("Browser does not support text-to-speech.");
