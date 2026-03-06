@@ -13,6 +13,7 @@ import DecisionTree from "../components/puzzles/DecisionTree.tsx";
 import DragAndCategorise from "../components/puzzles/DragAndCategorise.tsx";
 import CommunicationNetwork from "../components/puzzles/CommunicationNetwork.tsx";
 import ConnectMatching from "../components/puzzles/ConnectMatching.tsx";
+import InkDropReveal from "../components/puzzles/InkDropReveal.tsx";
 
 
 function ShardPage() {
@@ -149,8 +150,12 @@ function ShardPage() {
                     {/*) }*/}
 
                     {/* For Shard-9 */}
-                    {/*{ shardData.puzzleType === "INK_DROP_REVEAL" && (*/}
-                    {/*) }*/}
+                    { shardData.puzzleType === "INK_DROP_REVEAL" && (
+                        <InkDropReveal
+                            onComplete={() => { handleShardComplete(); }}
+                            rewardsText={ shardData.rewardsText }
+                        />
+                    ) }
                 </>
             }
         </div>
