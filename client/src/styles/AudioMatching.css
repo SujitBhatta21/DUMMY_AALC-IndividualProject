@@ -1,0 +1,165 @@
+/* Music cards grid. Key for */
+.music-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    margin: 1.5rem 0;
+    padding: 2rem;
+}
+
+/* Individual music card */
+.music-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(201, 166, 107, 0.08);
+    border: 1px solid #c9a66b55;
+    border-radius: 14px;
+    padding: 1.25rem 1rem;
+    transition: border-color 0.2s, background 0.2s;
+    cursor: default;
+}
+
+.music-card.playing {
+    background: rgba(201, 166, 107, 0.18);
+    border-color: #c9a66b;
+    box-shadow: 0 0 12px rgba(201, 166, 107, 0.3);
+}
+
+
+
+.music-card-title {
+    color: #e0c98a;
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 0;
+    text-align: center;
+    letter-spacing: 0.5px;
+}
+
+.music-card-origin {
+    color: #aaa;
+    font-size: 0.78rem;
+    font-style: italic;
+    margin: 0;
+    text-align: center;
+}
+
+.music-card-btn {
+    margin-top: 0.5rem;
+    background: transparent;
+    border: 1px solid #c9a66b;
+    border-radius: 20px;
+    color: #c9a66b;
+    padding: 0.35rem 1rem;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.music-card-btn:hover {
+    background: #c9a66b;
+    color: #1a1a1a;
+}
+
+/* Draggable cursor on music cards */
+.music-card[draggable="true"] {
+    cursor: grab;
+}
+
+.music-card[draggable="true"]:active {
+    cursor: grabbing;
+    opacity: 0.6;
+}
+
+/* All-placed message */
+.am-all-placed {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: #c9a66b;
+    font-style: italic;
+}
+
+/* Bucket row */
+.bucket-container {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    margin: 1rem 2rem 2rem;
+}
+
+/* Individual bucket */
+.am-bucket {
+    flex: 1;
+    min-height: 160px;
+    border: 2px dashed #c9a66b55;
+    border-radius: 14px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    transition: border-color 0.2s, background 0.2s;
+    background: rgba(201, 166, 107, 0.04);
+}
+
+.am-bucket:hover {
+    border-color: #c9a66b99;
+    background: rgba(201, 166, 107, 0.08);
+}
+
+.am-bucket--wrong {
+    border-color: #e05555;
+    background: rgba(224, 85, 85, 0.08);
+    animation: shake 0.3s ease;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25%       { transform: translateX(-6px); }
+    75%       { transform: translateX(6px); }
+}
+
+.am-bucket-label {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #c9a66b;
+    letter-spacing: 2px;
+    margin: 0;
+}
+
+/* Placed song cards inside bucket */
+.am-bucket-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    width: 100%;
+}
+
+.am-placed-card {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(201, 166, 107, 0.12);
+    border: 1px solid #c9a66b55;
+    border-radius: 8px;
+    padding: 0.4rem 0.75rem;
+    color: #e0c98a;
+    font-size: 0.85rem;
+}
+
+.am-placed-title {
+    font-weight: 500;
+}
+
+/* Responsive: 2 columns on smaller screens */
+@media (max-width: 640px) {
+    .music-cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .bucket-container {
+        flex-direction: column;
+    }
+}

@@ -13,20 +13,12 @@ import java.util.Map;
 public class ShardController {
 
     private final List<Shard> shards = new ArrayList<>(List.of(
-            /*
-            ////  ** SAMPLE THING FOR ME TO TEST ON...  ** ////
-            new Shard(9, "Shard-9: The Freedom Charter Signature(testing sample)",
-                    "(sample testing) ___",
-                    Map.of(1, List.of("this", "that")),
-                    "“THIS IS the reward you get.”",
-                    "INK_DROP_REVEAL", false)
-             */
             new Shard(1, "Shard-1: The Passbook Fragment",
                     "The word “apartheid\" means ___. The National Party, a white minority political party, took power in ___ after an election in which only ___ people could vote. These laws controlled where black South Africans could live, work, and move. The ___ was one of the organisations that resisted apartheid.",
-                    Map.of(1, List.of("separateness", "supremacy", "division"),
-                            2, List.of("1948", "1938", "1952"),
+                    Map.of(1, List.of("separateness", "supremacy"),
+                            2, List.of("1948", "1938"),
                             3, List.of("white", "wealthy", "male"),
-                            4, List.of("ANC (African National Congress)", "NAP (National African Party)", "APC (African People's Congress)", "SAC (South African Council)")),
+                            4, List.of("ANC (African National Congress)", "APC (African People's Congress)")),
                     "In 1952, Black South Africans were required to carry passbooks" +
                     " controlling where they could live, work, or travel. These laws turned daily life into a constant threat."
                     , "JIGSAW", true),
@@ -34,7 +26,7 @@ public class ShardController {
                     " The ___ Act meant anyone who spoke out could be sentenced to prison on ___." +
                             " ___ by black workers were illegal.",
                     Map.of(1, List.of("Terrorism", "Elections"),
-                            2, List.of("Robben Island", "Johannesburg", "Protests"),
+                            2, List.of("Robben Island", "Johannesburg"),
                             3, List.of("Strikes", "Freedom", "Treason")),
                     "The government aimed to silence resistance with Imprisonment and bannings " +
                             "– but South Africans continued to organise underground and to smuggle people " +
@@ -68,7 +60,7 @@ public class ShardController {
                             3, List.of("protests", "meetings")),
                     "“The building was small, but its voice was loud. Stories, testimonies, and strategy " +
                             "passed through its walls every day. It was a hub for communication networks.”",
-                    "COMMUNICATION_NETWORK", true),
+                    "COMMUNICATION_NETWORK", false),
             new Shard(6, "Shard-6: Bombing Puzzle",
                     "On 14th March 1982, apartheid agents planted a bomb at ___ Penton Street, hoping t" +
                             " assassinate ANC leader ___.\n" +
@@ -77,7 +69,7 @@ public class ShardController {
                             2, List.of("Oliver Tambo", "Nelson Mandela"),
                             3, List.of("killed", "survived")),
                     "“The bomb shattered windows - but not the movement. The building stood. The work continued.”",
-                    "CONNECT_MATCHING", true),
+                    "CONNECT_MATCHING", false),
             new Shard(7, "Shard-7: The Sanctions Decision Board",
                     "People around the world called for ___ to put pressure on the South African government.\n" +
                             "In the UK, the government ___ support full sanctions — so ordinary people took the lead.\n" +
@@ -88,7 +80,7 @@ public class ShardController {
                             3, List.of("boycotts", "freedom"),
                             4, List.of("apartheid", "support")),
                     "“Economic and cultural pressure sent a message: apartheid had no future.”",
-                    "DRAG_AND_CATEGORISE", true),
+                    "DRAG_AND_CATEGORISE", false),
             new Shard(8, "Shard-8: Songs of Resistance",
                     "Music carried messages of ___, even when speaking freely was banned.\n" +
                             "Struggle songs helped keep people ___.\n" +

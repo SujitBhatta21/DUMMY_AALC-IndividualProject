@@ -1,7 +1,7 @@
 import Header from "../components/Header.tsx";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useNavigate, Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import type { Shard } from "../types.ts";
 import FillInTheBlank from "../components/puzzles/FillInTheBlank.tsx"
 import ContextView from "../components/puzzles/ContextView.tsx";
@@ -14,6 +14,7 @@ import DragAndCategorise from "../components/puzzles/DragAndCategorise.tsx";
 import CommunicationNetwork from "../components/puzzles/CommunicationNetwork.tsx";
 import ConnectMatching from "../components/puzzles/ConnectMatching.tsx";
 import InkDropReveal from "../components/puzzles/InkDropReveal.tsx";
+import AudioMatching from "../components/puzzles/AudioMatching.tsx";
 
 
 function ShardPage() {
@@ -129,7 +130,7 @@ function ShardPage() {
                         />
                     )}
 
-                    {/* For Shard-6 */}
+                    {/* For Shard-6 (This still needs work!!!) */}
                     { shardData.puzzleType === "CONNECT_MATCHING" && (
                         <ConnectMatching
                             onComplete={ () => { handleShardComplete(); }}
@@ -146,8 +147,12 @@ function ShardPage() {
                     )}
 
                     {/* For Shard-8 */}
-                    {/*{ shardData.puzzleType === "AUDIO_MATCHING_PUZZLE" && (*/}
-                    {/*) }*/}
+                    { shardData.puzzleType === "AUDIO_MATCHING_PUZZLE" && (
+                        <AudioMatching
+                            onComplete={() => { handleShardComplete(); }}
+                            rewardsText={shardData.rewardsText}
+                        />
+                    ) }
 
                     {/* For Shard-9 */}
                     { shardData.puzzleType === "INK_DROP_REVEAL" && (

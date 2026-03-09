@@ -92,13 +92,8 @@
     cursor: pointer;
     border-color: #FFD700;
     background: #231a08;
-    animation: cnPulse 1.4s ease-in-out infinite;
 }
 
-@keyframes cnPulse {
-    0%, 100% { box-shadow: 0 0 0 0   rgba(255, 215, 0, 0.45); }
-    50%       { box-shadow: 0 0 0 10px rgba(255, 215, 0, 0);    }
-}
 
 /* Wrong node: red flash + shake */
 .cn-node--wrong {
