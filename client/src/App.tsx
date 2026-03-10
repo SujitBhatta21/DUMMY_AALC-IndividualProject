@@ -4,6 +4,7 @@ import TimelinePage from "./pages/TimelinePage.tsx";
 import WhoWeAre from "./components/WhoWeAre.tsx";
 import Settings from "./components/Settings.tsx";
 import ShardPage from "./pages/ShardPage.tsx";
+import LoginPage from "./pages/LoginPage.tsx";
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
                 <Route path="/who-we-are" element={<WhoWeAre />} />
                 <Route path="/settings" element={<Settings />} />
                 <Route path="/storyline/shard/:id" element={<ShardPage />}/>
+                <Route path="/accounts/login" element={<LoginPage />} />
             </Routes>
         </Router>
     )
