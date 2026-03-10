@@ -169,7 +169,6 @@
 .shard-btn.shard-locked:hover {
     transform: none !important;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3) !important;
-    background: linear-gradient(135deg, #6b6b6b 0%, #4a4a4a 100%) !important;
 }
 
 /* Completed Shard Styles */

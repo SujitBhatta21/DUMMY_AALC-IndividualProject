@@ -106,6 +106,9 @@ function TimelinePage() {
         return (shards[index - 1]?.completed ?? false);
     }
 
+    // BugFix: This way index of shard is not visible if the shard is locked.
+    const getShardLabel = (index: number) => isShardAccessible(index) ? shards[index]?.id : "";
+
     // Helper function to get the appropriate CSS class for a shard button
     const getShardButtonClass = (index: number): string => {
         const isAccessible = isShardAccessible(index);
@@ -131,7 +134,7 @@ function TimelinePage() {
                         <h3>Apartheid (South Africa)<br/></h3>
                         <div className="tt1-shards">
                             <Link to={`/storyline/shard/${ shards[0]?.id }`}>
-                                <button className={getShardButtonClass(0)}>{ shards[0]?.id }</button>
+                                <button className={getShardButtonClass(0)}>{ getShardLabel(0) }</button>
                             </Link>
 
                             <Link
@@ -142,7 +145,7 @@ function TimelinePage() {
                                     }
                                 }}
                             >
-                                <button className={getShardButtonClass(1)}>{ shards[1]?.id }</button>
+                                <button className={getShardButtonClass(1)}>{ getShardLabel(1) }</button>
                             </Link>
 
                             <Link
@@ -153,7 +156,7 @@ function TimelinePage() {
                                     }
                                 }}
                             >
-                                <button className={getShardButtonClass(2)}>{ shards[2]?.id }</button>
+                                <button className={getShardButtonClass(2)}>{ getShardLabel(2) }</button>
                             </Link>
                         </div>
                     </div>
@@ -168,7 +171,7 @@ function TimelinePage() {
                                     }
                                 }}
                             >
-                                <button className={getShardButtonClass(3)}>{ shards[3]?.id }</button>
+                                <button className={getShardButtonClass(3)}>{ getShardLabel(3) }</button>
                             </Link>
 
                             <Link
@@ -179,7 +182,7 @@ function TimelinePage() {
                                     }
                                 }}
                             >
-                                <button className={getShardButtonClass(4)}>{ shards[4]?.id }</button>
+                                <button className={getShardButtonClass(4)}>{ getShardLabel(4) }</button>
                             </Link>
 
                             <Link
@@ -190,7 +193,7 @@ function TimelinePage() {
                                     }
                                 }}
                             >
-                                <button className={getShardButtonClass(5)}>{ shards[5]?.id }</button>
+                                <button className={getShardButtonClass(5)}>{ getShardLabel(5) }</button>
                             </Link>
                         </div>
                     </div>
@@ -205,7 +208,7 @@ function TimelinePage() {
                                     }
                                 }}
                             >
-                                <button className={getShardButtonClass(6)}>{ shards[6]?.id }</button>
+                                <button className={getShardButtonClass(6)}>{ getShardLabel(6) }</button>
                             </Link>
 
                             <Link
@@ -216,7 +219,7 @@ function TimelinePage() {
                                     }
                                 }}
                             >
-                                <button className={getShardButtonClass(7)}>{ shards[7]?.id }</button>
+                                <button className={ getShardButtonClass(7)}>{ getShardLabel(7) }</button>
                             </Link>
 
                             <Link
@@ -227,7 +230,7 @@ function TimelinePage() {
                                     }
                                 }}
                             >
-                                <button className={getShardButtonClass(8)}>{ shards[8]?.id }</button>
+                                <button className={getShardButtonClass(8)}>{ getShardLabel(8) }</button>
                             </Link>
                         </div>
                     </div>
