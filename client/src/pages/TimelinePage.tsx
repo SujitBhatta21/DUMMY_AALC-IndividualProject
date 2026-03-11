@@ -9,7 +9,7 @@ import { AiTwotoneLock, AiTwotoneUnlock } from "react-icons/ai"; // Using these 
 
 
 async function fetchShards() : Promise<Shard[]> {
-    const response = await fetch("http://localhost:8080/api/shard");
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/shard`);
 
     if (!response.ok) {
         throw new Error(response.statusText);

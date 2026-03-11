@@ -33,7 +33,7 @@ function ShardPage() {
 
         const fetchPuzzles = async() => {
             try {
-                const res : Response = await fetch(`http://localhost:8080/api/shard/${id}`);
+                const res : Response = await fetch(`${import.meta.env.VITE_API_URL}/api/shard/${id}`);
                 const data: Shard = await res.json() as Shard; // await deconstructs return type Promise<Shard>.
                 setShardData(data);
             }
@@ -59,7 +59,7 @@ function ShardPage() {
     // NOTE: Calls the onComplete method from @PostMapping("/{id}/complete") in ShardController.java
     function handleShardComplete() {
 
-        void fetch(`http://localhost:8080/api/shard/${id}/complete`, {
+        void fetch(`${import.meta.env.VITE_API_URL}/api/shard/${id}/complete`, {
             method: "POST"
         })
             .then(res => res.json())

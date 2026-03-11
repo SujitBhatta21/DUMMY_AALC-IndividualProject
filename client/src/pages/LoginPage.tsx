@@ -16,7 +16,7 @@ function LoginPage() {
 
     const fetchRandomUsername = async () => {
         try {
-            const res: Response = await fetch("http://localhost:8080/api/accounts/generate_username");
+            const res: Response = await fetch(`${import.meta.env.VITE_API_URL}/api/accounts/generate_username`);
             const data: string = await res.text();
             setUsername(data);
         } catch (err) {
@@ -34,7 +34,7 @@ function LoginPage() {
         setError("");
 
         try {
-            const res = await fetch("http://localhost:8080/api/accounts/register", {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/accounts/register`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ username, password }),
@@ -57,7 +57,7 @@ function LoginPage() {
         setError("");
 
         try {
-            const res = await fetch("http://localhost:8080/api/accounts/login", {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/accounts/login`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ username, password }),
