@@ -123,12 +123,18 @@
 .login-footer-links {
     margin-top: 1.5rem;
     font-size: 0.9rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
 }
 
+
 .login-footer-links a {
-    color: #0D6B3A;
+    color: black;
     text-decoration: none;
+    cursor: pointer;
 }
+
 
 .login-footer-links a:hover {
     text-decoration: underline;

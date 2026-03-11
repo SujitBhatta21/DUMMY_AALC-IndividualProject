@@ -42,7 +42,18 @@ public class UserService {
         return username;
     }
 
-    public void saveToDatabase(User user) {
-        userRepository.save(user);
+    public User register(User user) {
+        if (userRepository.existsByUsername(user.getUsername())) {
+            throw new IllegalArgumentException("Username already taken.");
+        }
+        return userRepository.save(user);
+    }
+
+    public User login(String username, String password) {
+        User user = userRepository.findByUsernameAndPassword(username, password);
+        if (user == null) {
+            throw new IllegalArgumentException("Invalid username or password.");
+        }
+        return user;
     }
 }

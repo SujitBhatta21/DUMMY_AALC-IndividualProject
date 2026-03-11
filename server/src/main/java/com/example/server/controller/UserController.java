@@ -1,6 +1,5 @@
 package com.example.server.controller;
 
-
 import com.example.server.model.User;
 import com.example.server.service.UserService;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +12,7 @@ public class UserController {
 
     private final UserService userService;
 
-    public UserController(UserService userService ) {
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 
@@ -24,8 +23,21 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<User> register(@RequestBody User user) {
-        user.setUsername(userService.getRandomUsername());
-        userService.saveToDatabase(user);
-        return ResponseEntity.ok(user);
+        try {
+            User saved = userService.register(user);
+            return ResponseEntity.ok(saved);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<User> login(@RequestBody User user) {
+        try {
+            User found = userService.login(user.getUsername(), user.getPassword());
+            return ResponseEntity.ok(found);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(401).build();
+        }
     }
 }
