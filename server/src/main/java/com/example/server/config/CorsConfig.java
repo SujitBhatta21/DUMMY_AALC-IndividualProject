@@ -16,7 +16,11 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/api/**")      // Applying CORS to all /api/* endpoints
-                        .allowedOrigins("http://localhost:5173")
+                        .allowedOrigins(
+                                "http://localhost:5173",
+                                "https://aalc-individual-project-4yqw1ukxq-sujitbhatta21s-projects.vercel.app",
+                                "https://aalc-individual-project.vercel.app"
+                        )
                         .allowedMethods("GET", "POST", "PUT", "DELETE")
                         .allowedHeaders("*")
                         .allowCredentials(true)
