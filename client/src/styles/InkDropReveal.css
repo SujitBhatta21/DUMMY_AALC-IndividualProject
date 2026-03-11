@@ -1,0 +1,114 @@
+/* InkDropReveal puzzle */
+
+.inkdrop-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1.5rem 4rem;
+}
+
+/* Scratch area — document + canvas stacked */
+.inkdrop-scratch-area {
+    position: relative;
+    max-width: 720px;
+    margin: 0 auto;
+    border-radius: 8px;
+    overflow: hidden; /* clips canvas corners to match document */
+}
+
+/* Black canvas overlay */
+.inkdrop-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    cursor: cell;
+    z-index: 2;
+    display: block;
+}
+
+/* Document (aged paper) */
+.inkdrop-document {
+    padding: 2rem 2.5rem;
+    background: linear-gradient(135deg, #f5e6d3, #ece0d0);
+    border: 2px solid #c9a66b;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+    font-family: "Georgia", "Times New Roman", serif;
+    color: #2c2c2c;
+    line-height: 1.85;
+}
+
+/* Document header */
+.inkdrop-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #c9a66b;
+}
+
+.inkdrop-stamp {
+    display: inline-block;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #b22222;
+    border: 3px solid #b22222;
+    padding: 0.2rem 1rem;
+    letter-spacing: 4px;
+    transform: rotate(-2deg);
+    margin-bottom: 0.5rem;
+}
+
+.inkdrop-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin: 0.5rem 0 0.25rem;
+}
+
+.inkdrop-date {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+/* Body text */
+.inkdrop-body {
+    font-size: 1.05rem;
+    line-height: 2;
+}
+
+.inkdrop-body p {
+    margin-bottom: 1.2rem;
+}
+
+/* Disclaimer */
+.inkdrop-disclaimer {
+    font-size: 0.8rem;
+    color: #888;
+    font-style: italic;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px dashed #c9a66b;
+}
+
+.solved-continue-btn {
+    display: block;
+    margin: 1.5rem auto 0;
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+    border: solid black 2px;
+    border-radius: 50px;
+    padding: 0.8rem 2.5rem;
+    font-size: clamp(0.95rem, 2vw, 1.1rem);
+    font-weight: bold;
+    color: #2c2c2c;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(255, 165, 0, 0.4);
+    transition: all 0.3s ease;
+    letter-spacing: 1px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .inkdrop-document {
+        padding: 1.5rem 1.25rem;
+    }
+}

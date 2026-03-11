@@ -11,6 +11,10 @@ import RedactedReveal from "../components/puzzles/RedactedReveal.tsx";
 import OrderEventsChronological from "../components/puzzles/OrderEventsChronological.tsx";
 import DecisionTree from "../components/puzzles/DecisionTree.tsx";
 import DragAndCategorise from "../components/puzzles/DragAndCategorise.tsx";
+import CommunicationNetwork from "../components/puzzles/CommunicationNetwork.tsx";
+import ConnectMatching from "../components/puzzles/ConnectMatching.tsx";
+import InkDropReveal from "../components/puzzles/InkDropReveal.tsx";
+import AudioMatching from "../components/puzzles/AudioMatching.tsx";
 
 
 function ShardPage() {
@@ -29,7 +33,7 @@ function ShardPage() {
 
         const fetchPuzzles = async() => {
             try {
-                const res : Response = await fetch(`http://localhost:8080/api/shard/${id}`);
+                const res : Response = await fetch(`${import.meta.env.VITE_API_URL}/api/shard/${id}`);
                 const data: Shard = await res.json() as Shard; // await deconstructs return type Promise<Shard>.
                 setShardData(data);
             }
@@ -55,7 +59,7 @@ function ShardPage() {
     // NOTE: Calls the onComplete method from @PostMapping("/{id}/complete") in ShardController.java
     function handleShardComplete() {
 
-        void fetch(`http://localhost:8080/api/shard/${id}/complete`, {
+        void fetch(`${import.meta.env.VITE_API_URL}/api/shard/${id}/complete`, {
             method: "POST"
         })
             .then(res => res.json())
@@ -71,13 +75,14 @@ function ShardPage() {
                 <ContextView
                     content={ shardContent[shardData.id] }
                     onNext={() => { setCurrentStep(currentStep + 1); }}
+                    onBack={() => navigate("/storyline") }
                 />
             )}
 
             { currentStep === 1 && shardData && (
                 <FillInTheBlank
                     question={shardData.fitb_question}   // NOTE::: HAVE QUESTION IN HERE
-                    answers={ shardData.fitb_answer }    // Contains wrong options as well. 1st inde is right answer.
+                    answers={ shardData.fitb_answer }    // Contains wrong options as well. 1st is the is right answer.
                     onCorrect={() => { setCurrentStep(currentStep + 1); }}
                     onBack={() => { setCurrentStep(currentStep - 1); }}
                 />
@@ -118,12 +123,20 @@ function ShardPage() {
                     ) }
 
                     {/* For Shard-5 */}
-                    {/*{ shardData.puzzleType === "???" && (*/}
-                    {/*) }*/}
+                    { shardData.puzzleType === "COMMUNICATION_NETWORK" && (
+                        <CommunicationNetwork
+                            onComplete={() => { handleShardComplete(); }}
+                            rewardsText={ shardData.rewardsText }
+                        />
+                    )}
 
-                    {/* For Shard-6 */}
-                    {/*{ shardData.puzzleType === "???" && (*/}
-                    {/*) }*/}
+                    {/* For Shard-6 (This still needs work!!!) */}
+                    { shardData.puzzleType === "CONNECT_MATCHING" && (
+                        <ConnectMatching
+                            onComplete={ () => { handleShardComplete(); }}
+                            rewardsText={ shardData.rewardsText }
+                        />
+                    ) }
 
                     {/* For Shard-7 */}
                     { shardData.puzzleType === "DRAG_AND_CATEGORISE" && (
@@ -134,12 +147,20 @@ function ShardPage() {
                     )}
 
                     {/* For Shard-8 */}
-                    {/*{ shardData.puzzleType === "AUDIO_MATCHING_PUZZLE" && (*/}
-                    {/*) }*/}
+                    { shardData.puzzleType === "AUDIO_MATCHING_PUZZLE" && (
+                        <AudioMatching
+                            onComplete={() => { handleShardComplete(); }}
+                            rewardsText={shardData.rewardsText}
+                        />
+                    ) }
 
                     {/* For Shard-9 */}
-                    {/*{ shardData.puzzleType === "INK_DROP_REVEAL" && (*/}
-                    {/*) }*/}
+                    { shardData.puzzleType === "INK_DROP_REVEAL" && (
+                        <InkDropReveal
+                            onComplete={() => { handleShardComplete(); }}
+                            rewardsText={ shardData.rewardsText }
+                        />
+                    ) }
                 </>
             }
         </div>

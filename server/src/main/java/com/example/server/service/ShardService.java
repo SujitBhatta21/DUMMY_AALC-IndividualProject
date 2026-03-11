@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import org.springframework.data.domain.Sort;
 
 @Service
 public class ShardService {
@@ -16,7 +17,8 @@ public class ShardService {
     }
 
     public List<Shard> getShards() {
-        return shardRepository.findAll();
+        // BugFix: without sort there was no guranteed order of shard in postgres.
+        return shardRepository.findAll(Sort.by("id"));
     }
 
     public Optional<Shard> getShardById(Integer id) {

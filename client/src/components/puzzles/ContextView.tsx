@@ -1,10 +1,16 @@
-import { type ReactNode, useState } from "react";
+import { type ReactNode, useState} from "react";
 import '../../styles/ContextView.css';
 import reactToString from 'react-to-string';
 import { MdVolumeUp, MdVolumeOff } from "react-icons/md"
 
 
-function ContextView({ content, onNext } : { content: ReactNode, onNext: () => void }) {
+interface Props {
+    content: ReactNode;
+    onNext: () => void;
+    onBack: () => void;
+}
+
+function ContextView({ content, onNext, onBack } : Props) {
 
     const [isReading, setIsReading] = useState(false);
 
@@ -17,7 +23,7 @@ function ContextView({ content, onNext } : { content: ReactNode, onNext: () => v
 
         if ('speechSynthesis' in window) {
             const utterance = new SpeechSynthesisUtterance(textToRead);
-            utterance.onend = () => setIsReading(false);
+            utterance.onend = () => { setIsReading(false) };
             window.speechSynthesis.speak(utterance);
         } else {
             alert("Browser does not support text-to-speech.");
@@ -39,8 +45,15 @@ function ContextView({ content, onNext } : { content: ReactNode, onNext: () => v
                 { isReading ? "Stop Reading" : "Read Context Aloud!!!" }
             </button>
 
-            {/* Clicking Next also pauses the screen context reading. */}
-            <button className="next-btn" onClick={() => { window.speechSynthesis.cancel(); onNext(); }}>Next</button>
+            <div className="buttons-container">
+                {/* Clicking Next also pauses the screen context reading. */}
+                <button className="back-btn"
+                        onClick={() => {
+                            window.speechSynthesis.cancel();
+                            onBack();
+                        }}>Back</button>
+                <button className="next-btn" onClick={() => { window.speechSynthesis.cancel(); onNext() } }>Next</button>
+            </div>
         </div>
     )
 }

@@ -112,14 +112,19 @@ function WhoWeAre(){
                         <h1>ADDRESS</h1>
                         <p>28 Penton Street, London, N1 9PS</p>
                         <h1>OPENING HOURS</h1>
-                        <p>Currently Under Construction</p>
+                        <p>
+                            Currently Under Construction <br/>
+                            <strong style={{ color: "red" }}>(COMING SOON)</strong>
+                        </p>
                         {/*<ul>*/}
                         {/*    <li>Monday-Friday (....)</li>*/}
                         {/*    <li>Saturday (....)</li>*/}
                         {/*    <li>Sunday Closed</li>*/}
                         {/*</ul>*/}
-                        <h1>CONTACT</h1>
-                        <h2>(+44) ...</h2>
+                        <h1>STAY UPDATED</h1>
+                        <p>
+                            To receive these quarterly newsletters straight to your email <a href="https://antiapartheidlegacy.us14.list-manage.com/subscribe?u=bd9efb6b5967f189e68d84fb7&id=43d69edcea">subscribe here</a>:
+                        </p>
 
                     </div>
                 </div>

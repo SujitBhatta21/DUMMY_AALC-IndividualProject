@@ -17,7 +17,7 @@ body.menu-open {
     justify-content: space-between;
     flex-direction: row;
     min-height: 50px;
-    background-color: #426B1F;
+    background-color: #0D6B3A;
     color: white;
     padding: 10px 20px;
     gap: 15px;
@@ -61,6 +61,7 @@ body.menu-open {
     gap: 30px;
     margin: 10px;
     padding: 0;
+    transform: translate(-10%);
     list-style: none;
 }
 
@@ -95,9 +96,9 @@ body.menu-open {
     width: 100%;
 }
 
-.shard-btn {
+.nav-btn {
     padding: 10px 20px;
-    background-color: #426B1F;
+    background-color: #0D6B3A;
     color: white;
     border: none;
     border-radius: 4px;
@@ -106,14 +107,22 @@ body.menu-open {
     transition: background-color 0.3s;
 }
 
-.shard-btn:hover {
-    background-color: #35561a;
+.nav-btn:hover {
+    background-color: #0EA04E;
 }
 
-.shard-btn a {
+.nav-btn a {
     color: white;
     text-decoration: none;
 }
+
+
+.user-icon {
+    color: white;
+    font-size: 1.5rem;
+    display: block;
+}
+
 
 /* Hamburger menu styles */
 .hamburger {
@@ -174,7 +183,7 @@ body.menu-open {
     right: 0;
     width: 300px;
     height: 100vh;
-    background-color: #426B1F;
+    background-color: #0D6B3A;
     z-index: 999;
     transform: translateX(100%);
     transition: transform 0.3s ease-in-out;
@@ -244,23 +253,46 @@ body.menu-open {
     background-color: rgba(255, 255, 255, 0.1);
 }
 
-.sidebar-nav .shard-btn {
+.sidebar-nav .nav-btn {
     width: 100%;
     margin-top: 20px;
     background-color: white;
-    color: #426B1F;
+    color: black;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 1rem;
 }
 
-.sidebar-nav .shard-btn:hover {
+.sidebar-nav .nav-btn .user-icon {
+    color: black;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.sidebar-nav .nav-btn a {
+    color: black;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.sidebar-nav .nav-btn:hover {
     background-color: #f0f0f0;
 }
 
+.logout-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background-color: red;
+}
 
 /* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
     .desktop-nav ul li a,
     .desktop-nav ul li::after,
-    .shard-btn,
+    .nav-btn,
     .hamburger span,
     .sidebar-backdrop,
     .sidebar,

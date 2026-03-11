@@ -2,7 +2,7 @@
 .who-we-are-hero {
     text-align: center;
     padding: 3rem 2rem 2rem;
-    background-color: #f5f5f0;
+    background-color: white;
 }
 
 .who-we-are-hero h1 {
@@ -22,7 +22,7 @@
 /* Green Box - About Section */
 .green-box-container {
     display: flex;
-    background-color: #426B1F;
+    background-color: #0D6B3A;
     padding: 4rem 3rem;
     gap: 3rem;
     align-items: center;
@@ -115,17 +115,27 @@
 }
 
 .offer-card {
-    background-color: #426B1F;
+    background-color: #0D6B3A;
     color: white;
     border-radius: 12px;
     padding: 2rem 1.5rem;
     width: 280px;
     text-align: center;
-    transition: transform 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.offer-card:nth-child(3n+2) {
+    background-color: #0EA04E;
+}
+
+.offer-card:nth-child(3n) {
+    background-color: #52D47A;
+    color: black;
 }
 
 .offer-card:hover {
     transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgb(13, 107, 58);
 }
 
 .offer-card h3 {
@@ -171,7 +181,10 @@
 }
 
 .museum-contents {
+    display: flex;
+    flex-direction: column;
     max-width: 400px;
+    padding: 2rem;
 }
 
 .museum-contents h1 {
@@ -179,7 +192,7 @@
     margin-top: 0;
     margin-bottom: 0.75rem;
     color: #333;
-    border-bottom: 3px solid #426B1F; /* Add your accent color */
+    border-bottom: 3px solid #0D6B3A;
     padding-bottom: 0.5rem;
 }
 
@@ -210,14 +223,14 @@
     content: "•";
     position: absolute;
     left: 0;
-    color: #426B1F; /* Your accent color */
+    color: #0D6B3A;
     font-size: 1.5rem;
 }
 
 .museum-contents h2 {
     font-size: 1.2rem;
     margin: 0;
-    color: #426B1F; /* Your accent color */
+    color: #0D6B3A;
 }
 
 /* Responsive design for museum */

@@ -16,16 +16,20 @@ public class Shard {
     @Id
     private Integer id;
     private String title;
+
+    @Column(columnDefinition = "TEXT")
     private String fitb_question;
 
     @Convert(converter = FitbAnswerConverter.class)
     @Column(columnDefinition = "TEXT")
     private Map<Integer, List<String>> fitb_answer;
+    @Column(columnDefinition = "TEXT")
     private String rewardsText;             // Confusion on types...
     private String puzzleType;
     private Integer trackNumber;
     private boolean isUnlocked;            // If isCompleted True then isUnlocked true for shard+1.
-    private boolean isCompleted = true;
+    private boolean isCompleted = false;
+
 
     public Shard(Integer id, String title, String fitb_question, Map<Integer, List<String>> fitb_answer,
                  String rewardsText, String puzzleType, boolean isUnlocked) {

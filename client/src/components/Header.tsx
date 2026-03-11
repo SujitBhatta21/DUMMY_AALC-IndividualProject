@@ -3,9 +3,12 @@ import '../styles/Header.css';
 import logo from '../assets/logo/Logo pack AAL 2-12.png'
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { FaUserCircle } from "react-icons/fa"
+
 
 function Header() {
     const [menuOpen, setMenuOpen] = useState(false);
+    const loggedInUser = localStorage.getItem("username");
 
     // Lock body scroll when menu is open
     useEffect(() => {
@@ -45,7 +48,11 @@ function Header() {
                         <li><Link to='/who-we-are'>Who We Are</Link></li>
                         <li><Link to='/settings'>Settings/Accessibility</Link></li>
                     </ul>
-                    <button className="shard-btn"><Link to='/shards'>Shard Collection</Link></button>
+                    { loggedInUser ?
+                        <button className="nav-btn" title={loggedInUser}><FaUserCircle className="user-icon"/></button> :
+                        <button className="nav-btn"><Link to='/accounts/login'>Sign In</Link></button>
+                    }
+
                 </nav>
             </section>
 
@@ -63,7 +70,13 @@ function Header() {
                             <li><Link to='/who-we-are' onClick={() => { setMenuOpen(false); }}>Who We Are</Link></li>
                             <li><Link to='/settings' onClick={() => { setMenuOpen(false); }}>Settings/Accessibility</Link></li>
                         </ul>
-                        <button className="shard-btn"><Link to='/shard-collection' onClick={() => { setMenuOpen(false); }}>Shard Collection</Link></button>
+                        <button className="nav-btn">
+                            <FaUserCircle className="user-icon"/>
+                            <p onClick={() => { setMenuOpen(false); }}> { loggedInUser } </p>
+                        </button>
+                        <button className="">Change Password</button>
+                        <button className="logout-btn"><Link to='/'  />Logout</button>
+                        {/*onClick={ handleLogoutOperation }*/}
                     </nav>
                 </div>
             </div>

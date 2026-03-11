@@ -195,7 +195,6 @@ function FillInTheBlank({ question, answers, onCorrect, onBack }: FITBlankProps)
 
     return (
         <div>
-            { showSuccess && <div className="success-overlay">Correct!</div> }
             <h1 className="puzzle-title">Fill In The Blank</h1>
             <p className="puzzle-instruction">Drag and Drop correct answer from the word bank below</p>
             <div className="FillInTheBlank-section">
@@ -207,8 +206,8 @@ function FillInTheBlank({ question, answers, onCorrect, onBack }: FITBlankProps)
                     { renderRandomWordBank() }
                 </div>
                 <div className="fitb-buttons">
-                    <button onClick={handleSubmit}>Submit</button>
                     <button onClick={handleBack}>Back</button>
+                    <button onClick={handleSubmit}>Submit</button>
                 </div>
             </div>
             { showSuccess && (
