@@ -3,9 +3,12 @@ import '../styles/Header.css';
 import logo from '../assets/logo/Logo pack AAL 2-12.png'
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { FaUserCircle } from "react-icons/fa"
+
 
 function Header() {
     const [menuOpen, setMenuOpen] = useState(false);
+    const loggedInUser = localStorage.getItem("username");
 
     // Lock body scroll when menu is open
     useEffect(() => {
@@ -45,7 +48,11 @@ function Header() {
                         <li><Link to='/who-we-are'>Who We Are</Link></li>
                         <li><Link to='/settings'>Settings/Accessibility</Link></li>
                     </ul>
-                    <button className="shard-btn"><Link to='/accounts/login'>Sign In</Link></button>
+                    { loggedInUser ?
+                        <button className="shard-btn" title={loggedInUser}><FaUserCircle className="user-icon"/></button> :
+                        <button className="shard-btn"><Link to='/accounts/login'>Sign In</Link></button>
+                    }
+
                 </nav>
             </section>
 

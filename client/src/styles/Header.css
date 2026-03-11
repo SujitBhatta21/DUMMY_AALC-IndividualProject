@@ -115,6 +115,14 @@ body.menu-open {
     text-decoration: none;
 }
 
+
+.user-icon {
+    color: white;
+    font-size: 1.5rem;
+    display: block;
+}
+
+
 /* Hamburger menu styles */
 .hamburger {
     display: none;

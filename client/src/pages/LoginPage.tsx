@@ -5,12 +5,13 @@ import Footer from "../components/Footer";
 import "../styles/LoginPage.css";
 import { FaRegEye, FaRegEyeSlash, FaRandom } from "react-icons/fa";
 
+
 function LoginPage() {
-    const [isRegisterMode, setIsRegisterMode] = useState(false);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const [showPassword, setShowPassword] = useState(false);
+    const [isRegisterMode, setIsRegisterMode] = useState(false);
     const navigate = useNavigate();
 
     const fetchRandomUsername = async () => {
@@ -96,7 +97,7 @@ function LoginPage() {
                                     type="text"
                                     placeholder="Enter your username"
                                     value={username}
-                                    onChange={(e) => setUsername(e.target.value)}
+                                    onChange={(e) => { setUsername(e.target.value)} }
                                     disabled={isRegisterMode}
                                     required
                                 />
@@ -114,12 +115,12 @@ function LoginPage() {
                                     type={showPassword ? "text" : "password"}
                                     placeholder="Enter your password"
                                     value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
+                                    onChange={(e) => { setPassword(e.target.value)} }
                                     required
                                 />
                                 {showPassword
-                                    ? <FaRegEye title="Hide Password" onClick={() => setShowPassword(false)} />
-                                    : <FaRegEyeSlash title="Show Password" onClick={() => setShowPassword(true)} />
+                                    ? <FaRegEye title="Hide Password" onClick={() => { setShowPassword(false)} } />
+                                    : <FaRegEyeSlash title="Show Password" onClick={() => { setShowPassword(true)} } />
                                 }
                             </div>
                         </div>
