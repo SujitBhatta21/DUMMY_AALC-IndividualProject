@@ -1,9 +1,10 @@
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Header } from "../components/Header.tsx";
 import Footer from "../components/Footer";
 import "../styles/LoginPage.css";
-import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { FaRegEye, FaRegEyeSlash, FaRandom } from "react-icons/fa";
+
 
 function LoginPage() {
     const [username, setUsername] = useState("");
@@ -11,6 +12,27 @@ function LoginPage() {
     const [error, setError] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
+
+
+    const fetchRandomUsername = async() => {
+        try {
+            const res : Response = await fetch(`http://localhost:8080/api/accounts/generate_username`);
+            const data: string = await res.text(); // await deconstructs return type Promise<Shard>.
+            setUsername(data);
+        }
+        catch (err) {
+            console.log("Failed to fetch random username", err);
+        }
+    }
+
+    const handleUsernameReroll = () => {
+        fetchRandomUsername();
+    }
+
+    useEffect(() => {
+        fetchRandomUsername();
+    }, []);
+
 
     const handleSubmit = (e: React.FormEvent)=> {
         e.preventDefault();
@@ -43,10 +65,13 @@ function LoginPage() {
                                 id="username"
                                 type="text"
                                 placeholder="Enter your username"
-                                value={username}
+                                value={ username }
                                 onChange={(e) => { setUsername(e.target.value)} }
-                                required
+                                disabled
                             />
+                            {
+                                <FaRandom onClick={ handleUsernameReroll } />
+                            }
                         </div>
 
                         <div className="login-field">
