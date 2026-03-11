@@ -111,6 +111,26 @@
     }
 }
 
+.event-locked {
+    background: #e8f5e9;
+    border: 2px solid #4caf50;
+    cursor: not-allowed;
+    opacity: 0.85;
+}
+
+.event-locked .event-number {
+    background: linear-gradient(135deg, #66bb6a 0%, #43a047 100%);
+    color: #fff;
+}
+
+.event-locked:hover,
+.event-locked:active {
+    transform: none;
+    box-shadow: none;
+    border-color: #4caf50;
+    background: #e8f5e9;
+}
+
 /* Responsive */
 @media (max-width: 600px) {
     .order-events-section {

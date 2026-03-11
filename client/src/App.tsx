@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import HomePage from "./pages/HomePage.tsx";
 import TimelinePage from "./pages/TimelinePage.tsx";
-import WhoWeAre from "./components/WhoWeAre.tsx";
-import Settings from "./components/Settings.tsx";
+import WhoWeAre from "./pages/WhoWeAre.tsx";
+import Settings from "./pages/Settings.tsx";
 import ShardPage from "./pages/ShardPage.tsx";
 import LoginPage from "./pages/LoginPage.tsx";
 

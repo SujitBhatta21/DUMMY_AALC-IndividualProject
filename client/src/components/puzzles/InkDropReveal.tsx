@@ -12,7 +12,7 @@ interface Props {
 
 const BRUSH_RADIUS     = 50;
 const CHECK_EVERY      = 40;    // check completion every N erase calls
-const REVEAL_THRESHOLD = 0.95;  // 95% of black cleared = solved
+const REVEAL_THRESHOLD = 0.80;  // 80% of black cleared = solved
 
 
 function inkdropReveal({ onComplete, rewardsText }: Props) {

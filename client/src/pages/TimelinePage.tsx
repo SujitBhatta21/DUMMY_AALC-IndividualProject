@@ -101,6 +101,7 @@ function TimelinePage() {
     const totalSolvedShards = shards.filter(s => s.completed).length
 
     const isShardAccessible = (index : number) : boolean => {
+        if (DEVELOPMENT_MODE) return true;
         if (index === 0) return true;
         return (shards[index - 1]?.completed ?? false);
     }

@@ -1,5 +1,5 @@
-import Header from "./Header.tsx";
-import Footer from "./Footer.tsx";
+import Header from "../components/Header.tsx";
+import Footer from "../components/Footer.tsx";
 import logo from "../assets/logo/Logo pack AAL 2-01.png"
 import "../styles/WhoWeAre.css"
 import { useEffect } from "react";

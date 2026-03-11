@@ -55,7 +55,7 @@ public class DataSeeder implements CommandLineRunner {
                 new Shard(4, "Shard-4: The Activist's Choice",
                         "Student groups joined the ___ boycott to put pressure on companies investing in apartheid.\n" +
                                 "Protests, marches, and boycotts were all ways of showing ___ with South Africa.",
-                        Map.of(1, List.of("Barclays, Lloyds"),
+                        Map.of(1, List.of("Barclays", "Lloyds"),
                                 2, List.of("solidarity", "opposition")),
                         "You took action. So did thousands of real students across the UK. " +
                                 "Their pressure worked - Barclays eventually pulled out of South Africa in 1986. " +

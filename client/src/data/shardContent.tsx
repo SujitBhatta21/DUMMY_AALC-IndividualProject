@@ -53,11 +53,11 @@ const shardContent: Record<number, ReactNode> = {
         <div>
             <p>
                 Apartheid sparked growing resistance — especially among young people.
-                In <strong>1960</strong>, police opened fire on peaceful protesters
+                In <strong>March, 1960</strong>, police opened fire on peaceful protesters
                 in <strong>Sharpeville</strong>, killing 69 people, including women and children.
             </p>
             <p>
-                In <strong>1976</strong>, students in <strong>Soweto</strong> rose up
+                In <strong>June, 1976</strong>, students in <strong>Soweto</strong> rose up
                 against forced Afrikaans-language instruction. Police responded with
                 bullets. These moments shook the world when images taken by
                 photographers on the ground were shared internationally.
@@ -92,16 +92,16 @@ const shardContent: Record<number, ReactNode> = {
             <p>
                 This small building became a lifeline for the struggle:
             </p>
-            <p>  - editing and printing newsletter </p>
+            <p>  - editing and printing newsletters </p>
             <p>- storing secret documents</p>
             <p>- working with Anti-Apartheid Movement to coordinate protests</p>
-            <p>- meeting supporters and supporting members of the exiled South African communities.</p>
+            <p>- meeting supporters and supporting members of the exiled Southern African communities.</p>
         </div>
     ),
     6: (
         <div>
             <p>
-                On 14th March 1982, apartheid 9 agents planted a bomb at 28 Penton Street. On that day
+                On 14th March 1982, 9 apartheid agents planted a bomb at 28 Penton Street. On that day
                 they expected ANC leader Oliver Tambo to be in the building.
             </p>
             <p>

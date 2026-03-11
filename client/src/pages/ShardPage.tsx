@@ -67,102 +67,128 @@ function ShardPage() {
     }
 
 
+    const isShard9 = shardData?.id === 9;
+
     return (
         <div className="shard-page">
             <Header />
 
-            { currentStep === 0 && shardData && (
-                <ContextView
-                    content={ shardContent[shardData.id] }
-                    onNext={() => { setCurrentStep(currentStep + 1); }}
-                    onBack={() => navigate("/storyline") }
-                />
-            )}
-
-            { currentStep === 1 && shardData && (
-                <FillInTheBlank
-                    question={shardData.fitb_question}   // NOTE::: HAVE QUESTION IN HERE
-                    answers={ shardData.fitb_answer }    // Contains wrong options as well. 1st is the is right answer.
-                    onCorrect={() => { setCurrentStep(currentStep + 1); }}
-                    onBack={() => { setCurrentStep(currentStep - 1); }}
-                />
-            )}
-
-            { currentStep === 2 && shardData &&
+            {/* Shard-9 custom sequence: InkDropReveal → ContextView → FillInTheBlank */}
+            { isShard9 && shardData && (
                 <>
-                    {/* For Shard-1 jigsaw. */}
-                    { shardData.puzzleType === "JIGSAW" && (
-                        <JigSaw
-                            onComplete={() => { handleShardComplete(); }}
-                            rewardsText={ shardData.rewardsText }
-                        />
-                    )}
-
-                    {/* For Shard-2 Redacted Reveal */}
-                    { shardData.puzzleType === "REDACTED_REVEAL" && (
-                        <RedactedReveal
-                            onComplete={() => { handleShardComplete(); }}
-                            rewardsText={ shardData.rewardsText }
-                        />
-                    )}
-
-                    {/* For Shard-3 Redacted Reveal */}
-                    { shardData.puzzleType === "ORDER_EVENTS_CHRONOLOGICALLY" && (
-                        <OrderEventsChronological
-                            onComplete={() => { handleShardComplete(); }}
-                            rewardsText={ shardData.rewardsText }
-                        />
-                    )}
-
-                    {/* For Shard-4 Decision Tree */}
-                    { shardData.puzzleType === "DECISION_TREE" && (
-                        <DecisionTree
-                            onComplete={ () => { handleShardComplete(); }}
-                            rewardsText={ shardData.rewardsText }
-                        />
-                    ) }
-
-                    {/* For Shard-5 */}
-                    { shardData.puzzleType === "COMMUNICATION_NETWORK" && (
-                        <CommunicationNetwork
-                            onComplete={() => { handleShardComplete(); }}
-                            rewardsText={ shardData.rewardsText }
-                        />
-                    )}
-
-                    {/* For Shard-6 (This still needs work!!!) */}
-                    { shardData.puzzleType === "CONNECT_MATCHING" && (
-                        <ConnectMatching
-                            onComplete={ () => { handleShardComplete(); }}
-                            rewardsText={ shardData.rewardsText }
-                        />
-                    ) }
-
-                    {/* For Shard-7 */}
-                    { shardData.puzzleType === "DRAG_AND_CATEGORISE" && (
-                        <DragAndCategorise
-                            onComplete={() => { handleShardComplete(); }}
-                            rewardsText={ shardData.rewardsText }
-                        />
-                    )}
-
-                    {/* For Shard-8 */}
-                    { shardData.puzzleType === "AUDIO_MATCHING_PUZZLE" && (
-                        <AudioMatching
-                            onComplete={() => { handleShardComplete(); }}
-                            rewardsText={shardData.rewardsText}
-                        />
-                    ) }
-
-                    {/* For Shard-9 */}
-                    { shardData.puzzleType === "INK_DROP_REVEAL" && (
+                    { currentStep === 0 && (
                         <InkDropReveal
-                            onComplete={() => { handleShardComplete(); }}
+                            onComplete={() => { setCurrentStep(1); }}
                             rewardsText={ shardData.rewardsText }
                         />
-                    ) }
+                    )}
+                    { currentStep === 1 && (
+                        <ContextView
+                            content={ shardContent[shardData.id] }
+                            onNext={() => { setCurrentStep(2); }}
+                            onBack={() => { setCurrentStep(0); }}
+                        />
+                    )}
+                    { currentStep === 2 && (
+                        <FillInTheBlank
+                            question={shardData.fitb_question}
+                            answers={ shardData.fitb_answer }
+                            onCorrect={() => { handleShardComplete(); }}
+                            onBack={() => { setCurrentStep(1); }}
+                        />
+                    )}
                 </>
-            }
+            )}
+
+            {/* Default sequence for all other shards: ContextView → FillInTheBlank → Puzzle */}
+            { !isShard9 && (
+                <>
+                    { currentStep === 0 && shardData && (
+                        <ContextView
+                            content={ shardContent[shardData.id] }
+                            onNext={() => { setCurrentStep(currentStep + 1); }}
+                            onBack={() => navigate("/storyline") }
+                        />
+                    )}
+
+                    { currentStep === 1 && shardData && (
+                        <FillInTheBlank
+                            question={shardData.fitb_question}   // NOTE::: HAVE QUESTION IN HERE
+                            answers={ shardData.fitb_answer }    // Contains wrong options as well. 1st is the is right answer.
+                            onCorrect={() => { setCurrentStep(currentStep + 1); }}
+                            onBack={() => { setCurrentStep(currentStep - 1); }}
+                        />
+                    )}
+
+                    { currentStep === 2 && shardData &&
+                        <>
+                            {/* For Shard-1 jigsaw. */}
+                            { shardData.puzzleType === "JIGSAW" && (
+                                <JigSaw
+                                    onComplete={() => { handleShardComplete(); }}
+                                    rewardsText={ shardData.rewardsText }
+                                />
+                            )}
+
+                            {/* For Shard-2 Redacted Reveal */}
+                            { shardData.puzzleType === "REDACTED_REVEAL" && (
+                                <RedactedReveal
+                                    onComplete={() => { handleShardComplete(); }}
+                                    rewardsText={ shardData.rewardsText }
+                                />
+                            )}
+
+                            {/* For Shard-3 Redacted Reveal */}
+                            { shardData.puzzleType === "ORDER_EVENTS_CHRONOLOGICALLY" && (
+                                <OrderEventsChronological
+                                    onComplete={() => { handleShardComplete(); }}
+                                    rewardsText={ shardData.rewardsText }
+                                />
+                            )}
+
+                            {/* For Shard-4 Decision Tree */}
+                            { shardData.puzzleType === "DECISION_TREE" && (
+                                <DecisionTree
+                                    onComplete={ () => { handleShardComplete(); }}
+                                    rewardsText={ shardData.rewardsText }
+                                />
+                            ) }
+
+                            {/* For Shard-5 */}
+                            { shardData.puzzleType === "COMMUNICATION_NETWORK" && (
+                                <CommunicationNetwork
+                                    onComplete={() => { handleShardComplete(); }}
+                                    rewardsText={ shardData.rewardsText }
+                                />
+                            )}
+
+                            {/* For Shard-6 (This still needs work!!!) */}
+                            { shardData.puzzleType === "CONNECT_MATCHING" && (
+                                <ConnectMatching
+                                    onComplete={ () => { handleShardComplete(); }}
+                                    rewardsText={ shardData.rewardsText }
+                                />
+                            ) }
+
+                            {/* For Shard-7 */}
+                            { shardData.puzzleType === "DRAG_AND_CATEGORISE" && (
+                                <DragAndCategorise
+                                    onComplete={() => { handleShardComplete(); }}
+                                    rewardsText={ shardData.rewardsText }
+                                />
+                            )}
+
+                            {/* For Shard-8 */}
+                            { shardData.puzzleType === "AUDIO_MATCHING_PUZZLE" && (
+                                <AudioMatching
+                                    onComplete={() => { handleShardComplete(); }}
+                                    rewardsText={shardData.rewardsText}
+                                />
+                            ) }
+                        </>
+                    }
+                </>
+            )}
         </div>
     );
 }
