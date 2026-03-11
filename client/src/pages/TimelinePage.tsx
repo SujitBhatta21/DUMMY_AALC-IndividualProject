@@ -5,7 +5,6 @@ import {useEffect, useState} from "react";
 import { driver } from 'driver.js';
 import 'driver.js/dist/driver.css';
 import type { Shard } from "../types.ts";
-import { AiTwotoneLock, AiTwotoneUnlock } from "react-icons/ai"; // Using these icons for lock and unlock...
 
 
 async function fetchShards() : Promise<Shard[]> {
