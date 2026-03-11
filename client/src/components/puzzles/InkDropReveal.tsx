@@ -1,6 +1,6 @@
 // Shard-9 Puzzle
 import "../../styles/Puzzle.css";
-import "../../styles/inkdropReveal.css";
+import "../../styles/InkDropReveal.css";
 import RewardPopup from "./RewardPopup";
 import { useEffect, useRef, useCallback, useState } from "react";
 
