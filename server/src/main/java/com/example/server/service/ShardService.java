@@ -25,26 +25,4 @@ public class ShardService {
         return shardRepository.findById(id);
     }
 
-    public Shard completeShard(Integer shardId) {
-        Shard shard = shardRepository.findById(shardId)
-                .orElseThrow(() -> new IllegalArgumentException("Shard not found: " + shardId));
-
-        if (!shard.isUnlocked()) {
-            throw new IllegalStateException("Shard " + shardId + " is still locked.");
-        }
-
-        shard.setCompleted(true);
-        shardRepository.save(shard);
-
-        // Unlock the next shard
-        if (shardId < 9) {
-            Optional<Shard> nextShard = shardRepository.findById(shardId + 1);
-            nextShard.ifPresent(next -> {
-                next.setUnlocked(true);
-                shardRepository.save(next);
-            });
-        }
-
-        return shard;
-    }
 }

@@ -20,9 +20,10 @@ public class SecurityConfig {
             .cors(cors -> cors.configure(http))  // use CorsConfig bean
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
-                    .requestMatchers("login", "register")
-                    .permitAll()        // allow all endpoints for now
-                    .anyRequest().authenticated()
+                    .anyRequest().permitAll()   // permitALL for testing sake.
+//                    .requestMatchers("login", "register")
+//                    .permitAll()        // allow all endpoints for now
+//                    .anyRequest().authenticated()
             );
         return http.build();
     }

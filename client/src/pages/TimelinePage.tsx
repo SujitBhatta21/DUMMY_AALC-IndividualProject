@@ -23,6 +23,7 @@ function TimelinePage() {
     const DEVELOPMENT_MODE = true; // I set this to true to test popup tour.
 
     const [shards, setShards] = useState<Shard[]>([]);
+    const [completedShardIds, setCompletedShardIds] = useState<Set<number>>(new Set());
 
     useEffect(() => {
         document.title = 'Puzzle Timeline | AALC Interactive';
@@ -39,6 +40,23 @@ function TimelinePage() {
             }
         }
         getShards();
+    }, []);
+
+    // Fetch user's completed shards.
+    useEffect(() => {
+        const userId = localStorage.getItem("userId");
+        if (!userId) return;
+
+        const getProgress = async () => {
+            try {
+                const res = await fetch(`${import.meta.env.VITE_API_URL}/api/progress/${userId}`);
+                const data = await res.json() as { shard: { id: number } }[];
+                setCompletedShardIds(new Set(data.map(p => p.shard.id)));
+            } catch (err) {
+                console.error("Failed to load user progress", err);
+            }
+        };
+        getProgress();
     }, []);
 
 
@@ -98,12 +116,13 @@ function TimelinePage() {
         }
     }, []);
 
-    const totalSolvedShards = shards.filter(s => s.completed).length
+    const totalSolvedShards = completedShardIds.size;
 
     const isShardAccessible = (index : number) : boolean => {
         if (DEVELOPMENT_MODE) return true;
         if (index === 0) return true;
-        return (shards[index - 1]?.completed ?? false);
+        const prevShardId = shards[index - 1]?.id;
+        return prevShardId !== undefined && completedShardIds.has(prevShardId);
     }
 
     // BugFix: This way index of shard is not visible if the shard is locked.
@@ -112,7 +131,7 @@ function TimelinePage() {
     // Helper function to get the appropriate CSS class for a shard button
     const getShardButtonClass = (index: number): string => {
         const isAccessible = isShardAccessible(index);
-        const isCompleted = shards[index]?.completed ?? false;
+        const isCompleted = (shards[index]?.id !== undefined) && completedShardIds.has(shards[index].id);
 
         let className = 'shard-btn';
         if (!isAccessible) className += ' shard-locked';

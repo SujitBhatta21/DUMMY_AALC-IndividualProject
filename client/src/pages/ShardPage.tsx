@@ -56,13 +56,15 @@ function ShardPage() {
     console.log(shardData);
 
 
-    // NOTE: Calls the onComplete method from @PostMapping("/{id}/complete") in ShardController.java
     function handleShardComplete() {
+        const userId = localStorage.getItem("userId");
+        if (!userId) return;
 
-        void fetch(`${import.meta.env.VITE_API_URL}/api/shard/${id}/complete`, {
-            method: "POST"
+        void fetch(`${import.meta.env.VITE_API_URL}/api/progress/complete`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ userId: Number(userId), shardId: Number(id) }) // Foreign key for UserShardProgress db table
         })
-            .then(res => res.json())
             .then(() => navigate("/storyline"));
     }
 

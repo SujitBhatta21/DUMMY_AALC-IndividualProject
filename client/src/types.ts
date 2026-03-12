@@ -6,6 +6,4 @@ export interface Shard {
     rewardsText: string;
     puzzleType: string;
     trackNumber: number;
-    unlocked: boolean;
-    completed: boolean;
 }

@@ -45,7 +45,9 @@ function LoginPage() {
                 return;
             }
 
-            localStorage.setItem("username", username);
+            const data = await res.json() as { userId: number; username: string };
+            localStorage.setItem("username", data.username);
+            localStorage.setItem("userId", String(data.userId));
             navigate("/");
         } catch (err) {
             setError("Something went wrong. Please try again.");
@@ -63,12 +65,14 @@ function LoginPage() {
                 body: JSON.stringify({ username, password }),
             });
 
-            if (res.status === 401) {
+            if (!res.ok) {
                 setError("Invalid username or password.");
                 return;
             }
 
-            localStorage.setItem("username", username);
+            const data = await res.json() as { userId: number; username: string };
+            localStorage.setItem("username", data.username);
+            localStorage.setItem("userId", String(data.userId));
             navigate("/");
         } catch (err) {
             setError("Something went wrong. Please try again.");

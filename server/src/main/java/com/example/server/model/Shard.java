@@ -27,10 +27,6 @@ public class Shard {
     private String rewardsText;             // Confusion on types...
     private String puzzleType;
     private Integer trackNumber;
-    private boolean isUnlocked;            // If isCompleted True then isUnlocked true for shard+1.
-    private boolean isCompleted = false;
-
-
     public Shard(Integer id, String title, String fitb_question, Map<Integer, List<String>> fitb_answer,
                  String rewardsText, String puzzleType, boolean isUnlocked) {
         this.id = id;
@@ -39,7 +35,6 @@ public class Shard {
         this.fitb_answer = fitb_answer;
         this.rewardsText = rewardsText;
         this.puzzleType = puzzleType;
-        this.isUnlocked = isUnlocked;
         this.setTrackNumber(this.id);
     }
 
@@ -101,21 +96,6 @@ public class Shard {
         return trackNumber;
     }
 
-    public boolean isCompleted() {
-        return isCompleted;
-    }
-
-    public void setCompleted(boolean completed) {
-        isCompleted = completed;
-    }
-
-    public boolean isUnlocked() {
-        return isUnlocked;
-    }
-
-    public void setUnlocked(boolean unlocked) {
-        isUnlocked = unlocked;
-    }
 
 
     public String getFitb_question() {

@@ -29,15 +29,4 @@ public class ShardController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping("/{id}/complete")
-    public ResponseEntity<Shard> completeShard(@PathVariable Integer id) {
-        try {
-            Shard shard = shardService.completeShard(id);
-            return ResponseEntity.ok(shard);
-        } catch (IllegalStateException e) {
-            return ResponseEntity.badRequest().build();
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.notFound().build();
-        }
-    }
 }
