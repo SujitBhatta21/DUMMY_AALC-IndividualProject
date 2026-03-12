@@ -25,6 +25,5 @@ public class UserShardProgress {
         this.id = id;
         this.shard = shard;
         this.user = user;
-
     }
 }

@@ -2,13 +2,18 @@ package com.example.server.service;
 
 import com.example.server.model.User;
 import com.example.server.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Random;
 
 @Service
 public class UserService {
+    @Autowired
     public final UserRepository userRepository;
+
+    private final PasswordEncoder passwordEncoder;
 
     String[] adjectives = {
             "Blazing", "Cosmic", "Shadow", "Neon", "Turbo",
@@ -23,9 +28,9 @@ public class UserService {
             "Knight", "Comet", "Blaze", "Titan", "Raven"
     };
 
-
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public String getRandomUsername() {
@@ -42,18 +47,35 @@ public class UserService {
         return username;
     }
 
+    public void validatePassword(String password) {
+        if (password == null || password.length() < 8) {
+            throw new IllegalArgumentException("Password must be at least 8 characters.");
+        }
+        if (!password.matches(".*[A-Z].*")) {
+            throw new IllegalArgumentException("Password must contain at least one uppercase letter");
+        }
+        if (!password.matches(".*[0-9].*")) {
+            throw new IllegalArgumentException("Password must contain at least one number");
+        }
+    }
+
     public User register(User user) {
         if (userRepository.existsByUsername(user.getUsername())) {
             throw new IllegalArgumentException("Username already taken.");
         }
+        validatePassword(user.getPassword());
+        user.setPassword(passwordEncoder.encode(user.getPassword())); // Hashing using encoder.
+        System.out.println("REGISTERED SUCCESSFULLY");
         return userRepository.save(user);
     }
 
+    // Method to call when user clicks on Login button.
     public User login(String username, String password) {
-        User user = userRepository.findByUsernameAndPassword(username, password);
-        if (user == null) {
+        User user = userRepository.findByUsername(username);
+        if (user == null || !passwordEncoder.matches(password, user.getPassword())) {
             throw new IllegalArgumentException("Invalid username or password.");
         }
+        System.out.println("LOGIN SUCCESS");
         return user;
     }
 }
