@@ -123,7 +123,7 @@ function WhoWeAre(){
                         <p>28 Penton Street, London, N1 9PS</p>
                         <h1>OPENING HOURS</h1>
                         <p>
-                            Currently Under Construction <br/>
+                            Museum Currently Under Construction <br/>
                             <strong style={{ color: "red" }}>(COMING SOON)</strong>
                         </p>
                         {/*<ul>*/}
