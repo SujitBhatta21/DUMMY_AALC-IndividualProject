@@ -2,13 +2,14 @@
 import '../styles/Header.css';
 import logo from '../assets/logo/Logo pack AAL 2-12.png'
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaUserCircle } from "react-icons/fa"
 
 
 function Header() {
     const [menuOpen, setMenuOpen] = useState(false);
     const loggedInUser = localStorage.getItem("username");
+    const navigate = useNavigate();
 
     // Lock body scroll when menu is open
     useEffect(() => {
@@ -19,6 +20,13 @@ function Header() {
         }
         return () => { document.body.classList.remove('menu-open'); };
     }, [menuOpen]);
+
+    const handleLogoutOperation = () => {
+        localStorage.removeItem("username");
+        setMenuOpen(false);
+        navigate("/");
+    }
+
 
     return (
         <>
@@ -70,13 +78,21 @@ function Header() {
                             <li><Link to='/who-we-are' onClick={() => { setMenuOpen(false); }}>Who We Are</Link></li>
                             <li><Link to='/settings' onClick={() => { setMenuOpen(false); }}>Settings/Accessibility</Link></li>
                         </ul>
-                        <button className="nav-btn">
-                            <FaUserCircle className="user-icon"/>
-                            <p onClick={() => { setMenuOpen(false); }}> { loggedInUser } </p>
-                        </button>
-                        <button className="">Change Password</button>
-                        <button className="logout-btn"><Link to='/'  />Logout</button>
-                        {/*onClick={ handleLogoutOperation }*/}
+
+                        {!loggedInUser &&
+                            <button className="nav-btn" onClick={() => { setMenuOpen(false); }}><Link to='/accounts/login'>Sign In</Link></button>
+                        }
+                        {loggedInUser &&
+                            <>
+                                <button className="nav-btn">
+                                    <FaUserCircle className="user-icon"/>
+                                    <p onClick={() => { setMenuOpen(false); }}> { loggedInUser } </p>
+                                </button>
+                                <button className="">Change Password</button>
+                                <button className="logout-btn" onClick={ handleLogoutOperation }><Link to='/'  />Logout</button>
+                            </>
+                        }
+
                     </nav>
                 </div>
             </div>

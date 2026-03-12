@@ -10,12 +10,17 @@ function WhoWeAre(){
         document.title = 'Who We Are | AALC Interactive';
     }, []);
 
-    const cmlLink = "https://antiapartheidlegacy.org.uk/heritage-arts-culture/history/the-anti-apartheid-centre-of-memory-and-learning/";
+    const clientWebsiteLink = "https://antiapartheidlegacy.org.uk/heritage-arts-culture/history/the-anti-apartheid-centre-of-memory-and-learning/";
+    const clientWebsiteBlog = "https://antiapartheidlegacy.org.uk/blog/";
 
-    function handleOnClick() {
-        window.location.href = cmlLink;
+    const handleOnClickVisit = () => {
+        window.location.href = clientWebsiteLink;
     }
-    
+
+    const handleOnClickBlog = () => {
+        window.location.href = clientWebsiteBlog;
+    }
+
     return(
         <div className="who-we-are-page">
             <Header />
@@ -30,7 +35,7 @@ function WhoWeAre(){
             <section className="green-box-container">
                 <div className="img-readmore-section">
                     <img src={ logo } alt="AALC Logo" />
-                    <button onClick={ handleOnClick }>Visit Our Website</button>
+                    <button onClick={ handleOnClickVisit }>Visit Our Website</button>
                 </div>
                 <div className="text-container">
                     <p>
@@ -93,6 +98,11 @@ function WhoWeAre(){
                         <p>Find our contact information and ways to get involved in our work (e.g. volunteering, collaborations or partnerships)</p>
                     </div>
                 </div>
+            </section>
+
+            <section className="read-our-blog-section">
+                <p>Read out latest news and blogs</p>
+                <button onClick={ handleOnClickBlog }>Our blog</button>
             </section>
 
             <section className="museum-container">

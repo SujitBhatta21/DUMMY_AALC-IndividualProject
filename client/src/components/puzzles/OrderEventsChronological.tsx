@@ -72,8 +72,8 @@ function OrderEventsChronological ({ onComplete, rewardsText }: OrderEventsProps
 
         if (draggingIndex === droppingIndex) return;
 
-        setUserAnswerOrder(prev => {
-            const updated = [...prev];
+        setUserAnswerOrder((prev: Events[]) => {
+            const updated: Events[] = [...prev];
 
             [updated[draggingIndex], updated[droppingIndex]] = [updated[droppingIndex], updated[draggingIndex]];
             return updated;
@@ -106,7 +106,7 @@ function OrderEventsChronological ({ onComplete, rewardsText }: OrderEventsProps
                 { solved && (
                     <RewardPopup
                         rewardsText={rewardsText ?? ""}
-                        onComplete={onComplete ?? (() => {})}
+                        onComplete={onComplete ?? (() => { void 0 })} // Void 0 for safe anonymous/empty function
                     />
                 )}
             </section>

@@ -130,6 +130,12 @@ function LoginPage() {
                         </button>
                     </form>
 
+                    {isRegisterMode && (
+                        <p className="privacy-note">
+                            We don't collect your name, email, or any personal information. Your username is randomly generated - we never know who you are.
+                        </p>
+                    )}
+
 
                     <div className="login-footer-links">
                         <a  className="mode-change-link" onClick={() => { setIsRegisterMode(!isRegisterMode); setError(""); setPassword(""); }}>
