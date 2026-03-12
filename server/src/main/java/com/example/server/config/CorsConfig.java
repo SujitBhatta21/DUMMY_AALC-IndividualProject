@@ -10,7 +10,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class CorsConfig {
-    @Value("${ALLOWED_ORIGINS:http://localhost:5173}")
+    // Adding client's website link as well to avoid CORS error when plugged in on client's site.
+    @Value("${ALLOWED_ORIGINS:http://localhost:5173,https://antiapartheidlegacy.org.uk}")
     private String allowedOrigins;
 
     @Bean
