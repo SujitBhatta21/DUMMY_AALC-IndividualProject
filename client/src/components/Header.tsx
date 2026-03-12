@@ -8,6 +8,7 @@ import { FaUserCircle } from "react-icons/fa"
 
 function Header() {
     const [menuOpen, setMenuOpen] = useState(false);
+    const [dropdownOpen, setDropdownOpen] = useState(false);
     const loggedInUser = localStorage.getItem("username");
     const navigate = useNavigate();
 
@@ -57,7 +58,20 @@ function Header() {
                         <li><Link to='/settings'>Settings/Accessibility</Link></li>
                     </ul>
                     { loggedInUser ?
-                        <button className="nav-btn" title={loggedInUser}><FaUserCircle className="user-icon"/></button> :
+                        <div className="user-dropdown-wrapper">
+                            <button className="nav-btn" onClick={() => setDropdownOpen(!dropdownOpen)}>
+                                <FaUserCircle className="user-icon"/>
+                            </button>
+                            {dropdownOpen && (
+                                <>
+                                    <div className="dropdown-backdrop" onClick={() => setDropdownOpen(false)} />
+                                    <div className="user-dropdown">
+                                        <span className="dropdown-username">{loggedInUser}</span>
+                                        <button className="dropdown-logout" onClick={handleLogoutOperation}>Logout</button>
+                                    </div>
+                                </>
+                            )}
+                        </div> :
                         <button className="nav-btn"><Link to='/accounts/login'>Sign In</Link></button>
                     }
 

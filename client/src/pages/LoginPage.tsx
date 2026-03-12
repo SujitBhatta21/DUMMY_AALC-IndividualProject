@@ -41,7 +41,7 @@ function LoginPage() {
             });
 
             if (!res.ok) {
-                setError("Username already taken. Please reroll.");
+                setError(await res.text());
                 return;
             }
 
