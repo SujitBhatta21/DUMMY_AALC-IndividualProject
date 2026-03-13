@@ -5,10 +5,11 @@ import {useEffect, useState} from "react";
 import { driver } from 'driver.js';
 import 'driver.js/dist/driver.css';
 import type { Shard } from "../types.ts";
+import { apiFetch } from "../utils.ts";
 
 
 async function fetchShards() : Promise<Shard[]> {
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/shard`);
+    const response = await apiFetch("/api/shard");
 
     if (!response.ok) {
         throw new Error(response.statusText);
@@ -49,7 +50,7 @@ function TimelinePage() {
 
         const getProgress = async () => {
             try {
-                const res = await fetch(`${import.meta.env.VITE_API_URL}/api/progress/${userId}`);
+                const res = await apiFetch(`/api/progress/${userId}`);
                 const data = await res.json() as { shard: { id: number } }[];
                 setCompletedShardIds(new Set(data.map(p => p.shard.id)));
             } catch (err) {

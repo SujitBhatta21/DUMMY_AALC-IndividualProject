@@ -2,15 +2,16 @@ package com.example.server.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import com.example.server.service.JwtService;
-import org.springframework.security.config.Customizer;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import com.example.server.service.JwtService;
 
 @Configuration
 @EnableWebSecurity
@@ -30,9 +31,10 @@ public class SecurityConfig {
             .sessionManagement(session ->
                 session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // no server session — token IS the session
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("POST", "/api/accounts/login").permitAll()
-                .requestMatchers("POST", "/api/accounts/register").permitAll()
-                .requestMatchers("GET",  "/api/accounts/generate_username").permitAll()
+                // Spring Security 7 requires HttpMethod enum, not plain strings
+                .requestMatchers(HttpMethod.POST, "/api/accounts/login").permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/accounts/register").permitAll()
+                .requestMatchers(HttpMethod.GET,  "/api/accounts/generate_username").permitAll()
                 .anyRequest().authenticated()       // everything else needs a valid token
             )
             // Run the filter BEFORE Spring's own auth filter so the token is validated first

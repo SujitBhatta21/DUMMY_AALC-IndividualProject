@@ -41,7 +41,7 @@ public class UserController {
             User found = userService.login(user.getUsername(), user.getPassword());
             // Generate token containing username + role, valid for 24h
             String token = jwtService.generateToken(found.getUsername(), found.getRole());
-            return ResponseEntity.ok(new LoginResponse(token, found.getUsername(), found.getRole().name()));
+            return ResponseEntity.ok(new LoginResponse(token, found.getUserId(), found.getUsername(), found.getRole().name()));
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

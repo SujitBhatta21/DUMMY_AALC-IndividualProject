@@ -23,7 +23,10 @@ function Header() {
     }, [menuOpen]);
 
     const handleLogoutOperation = () => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("userId")
         localStorage.removeItem("username");
+        localStorage.removeItem("role");
         setMenuOpen(false);
         navigate("/");
     }

@@ -1,4 +1,5 @@
 import Header from "../components/Header.tsx";
+import { apiFetch } from "../utils.ts";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"
@@ -33,7 +34,7 @@ function ShardPage() {
 
         const fetchPuzzles = async() => {
             try {
-                const res : Response = await fetch(`${import.meta.env.VITE_API_URL}/api/shard/${id}`);
+                const res : Response = await apiFetch(`/api/shard/${id}`);
                 const data: Shard = await res.json() as Shard; // await deconstructs return type Promise<Shard>.
                 setShardData(data);
             }
@@ -60,7 +61,7 @@ function ShardPage() {
         const userId = localStorage.getItem("userId");
         if (!userId) return;
 
-        void fetch(`${import.meta.env.VITE_API_URL}/api/progress/complete`, {
+        void apiFetch("/api/progress/complete", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ userId: Number(userId), shardId: Number(id) }) // Foreign key for UserShardProgress db table

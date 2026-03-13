@@ -45,10 +45,9 @@ function LoginPage() {
                 return;
             }
 
-            const data = await res.json() as { userId: number; username: string };
-            localStorage.setItem("username", data.username);
-            localStorage.setItem("userId", String(data.userId));
-            navigate("/");
+            // Register returns a success message — switch to login so user can sign in
+            setIsRegisterMode(false);
+            setPassword("");
         } catch (err) {
             setError("Something went wrong. Please try again.");
         }
@@ -70,9 +69,12 @@ function LoginPage() {
                 return;
             }
 
-            const data = await res.json() as { userId: number; username: string };
-            localStorage.setItem("username", data.username);
+            // Store token + identity — token is sent automatically by apiFetch on every request
+            const data = await res.json() as { token: string; userId: number; username: string; role: string };
+            localStorage.setItem("token", data.token);
             localStorage.setItem("userId", String(data.userId));
+            localStorage.setItem("username", data.username);
+            localStorage.setItem("role", data.role);
             navigate("/");
         } catch (err) {
             setError("Something went wrong. Please try again.");

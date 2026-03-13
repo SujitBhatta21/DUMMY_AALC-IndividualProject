@@ -11,10 +11,19 @@ function HomePage() {
         document.title = 'Home | AALC Interactive';
     }, []);
 
-    return (
-        <div className="home-page">
-            <Header />
+    const user_role: string | null = localStorage.getItem("role"); // stores ENUM: ADMIN or USER.
 
+
+    const renderAdminPage = () => {
+        return (
+            <div>
+                <p>Admin homepage...</p>
+            </div>
+        );
+    }
+
+    const renderUserNormalPage = () => {
+        return (
             <section className="home-section">
                 <div className="home-top-container">
                     <h1>"Rebuild the Story, Piece together the struggle"</h1>
@@ -49,9 +58,17 @@ function HomePage() {
                     </p>
                 </div>
             </section>
+        );
+    }
+
+    return (
+        <main className="home-page">
+            <Header />
+
+            { user_role === "ADMIN" ? renderAdminPage() : renderUserNormalPage() }
 
             <Footer />
-        </div>
+        </main>
     )
 }
 
