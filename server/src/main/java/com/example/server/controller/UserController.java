@@ -1,6 +1,8 @@
 package com.example.server.controller;
 
+import com.example.server.model.LoginResponse;
 import com.example.server.model.User;
+import com.example.server.service.JwtService;
 import com.example.server.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,9 +13,11 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     private final UserService userService;
+    private final JwtService jwtService;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, JwtService jwtService) {
         this.userService = userService;
+        this.jwtService = jwtService;
     }
 
     @GetMapping("/generate_username")
@@ -24,10 +28,10 @@ public class UserController {
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody User user) {
         try {
-            User saved = userService.register(user);
-            return ResponseEntity.ok(saved);
+            userService.register(user);
+            return ResponseEntity.ok("Registration successful.");
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(e.getMessage()); // Error response message to frontend.
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
@@ -35,7 +39,9 @@ public class UserController {
     public ResponseEntity<?> login(@RequestBody User user) {
         try {
             User found = userService.login(user.getUsername(), user.getPassword());
-            return ResponseEntity.ok(found);
+            // Generate token containing username + role, valid for 24h
+            String token = jwtService.generateToken(found.getUsername(), found.getRole());
+            return ResponseEntity.ok(new LoginResponse(token, found.getUsername(), found.getRole().name()));
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

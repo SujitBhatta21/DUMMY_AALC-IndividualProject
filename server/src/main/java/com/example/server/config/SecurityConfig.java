@@ -1,4 +1,3 @@
-/* Research help from: https://www.youtube.com/watch?v=dFzvVoS-sRE Tulesco Youtube channel */
 package com.example.server.config;
 
 import org.springframework.context.annotation.Bean;
@@ -8,23 +7,37 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-
+import com.example.server.service.JwtService;
+import org.springframework.security.config.Customizer;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
+    private final JwtService jwtService;
+
+    public SecurityConfig(JwtService jwtService) {
+        this.jwtService = jwtService;
+    }
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            .cors(cors -> cors.configure(http))  // use CorsConfig bean
+            .cors(Customizer.withDefaults())        // picks up the WebMvcConfigurer CORS bean from CorsConfig
             .csrf(csrf -> csrf.disable())
+            .sessionManagement(session ->
+                session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // no server session — token IS the session
             .authorizeHttpRequests(auth -> auth
-                    .anyRequest().permitAll()   // permitALL for testing sake.
-//                    .requestMatchers("login", "register")
-//                    .permitAll()        // allow all endpoints for now
-//                    .anyRequest().authenticated()
-            );
+                .requestMatchers("POST", "/api/accounts/login").permitAll()
+                .requestMatchers("POST", "/api/accounts/register").permitAll()
+                .requestMatchers("GET",  "/api/accounts/generate_username").permitAll()
+                .anyRequest().authenticated()       // everything else needs a valid token
+            )
+            // Run the filter BEFORE Spring's own auth filter so the token is validated first
+            .addFilterBefore(new JwtAuthFilter(jwtService), UsernamePasswordAuthenticationFilter.class);
+
         return http.build();
     }
 
