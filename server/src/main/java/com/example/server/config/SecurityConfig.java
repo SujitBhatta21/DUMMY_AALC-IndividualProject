@@ -35,6 +35,7 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.POST, "/api/accounts/login").permitAll()
                 .requestMatchers(HttpMethod.POST, "/api/accounts/register").permitAll()
                 .requestMatchers(HttpMethod.GET,  "/api/accounts/generate_username").permitAll()
+                .requestMatchers(HttpMethod.GET,  "/api/accounts/admin/**").hasRole("ADMIN")  // Only admin can ask admin apiFetch.
                 .anyRequest().authenticated()       // everything else needs a valid token
             )
             // Run the filter BEFORE Spring's own auth filter so the token is validated first

@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 import {Link} from "react-router-dom";
 import kids_puzzle_image from "../assets/Close_up_of_Hand_Cut_Jigsaw_Puzzle.jpeg"
 import { useEffect } from "react";
+import AdminPage from "./AdminPage.tsx";
 
 function HomePage() {
     useEffect(() => {
@@ -15,11 +16,7 @@ function HomePage() {
 
 
     const renderAdminPage = () => {
-        return (
-            <div>
-                <p>Admin homepage...</p>
-            </div>
-        );
+        return <AdminPage />;
     }
 
     const renderUserNormalPage = () => {

@@ -33,6 +33,12 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
+
+    /*
+    * STATS FOR ADMIN METHODS (Refactored/Moved to StatsService which is controlled by AdminController)
+    */
+
+
     public String getRandomUsername() {
         Random random = new Random();
         String random_adj = adjectives[random.nextInt(adjectives.length)];

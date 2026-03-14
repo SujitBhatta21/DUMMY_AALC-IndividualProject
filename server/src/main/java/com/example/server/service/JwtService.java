@@ -48,6 +48,11 @@ public class JwtService {
         return parseClaims(token).getSubject();
     }
 
+    // Pulls the role out of a valid token (used in JwtAuthFilter to set authorities)
+    public String extractRole(String token) {
+        return parseClaims(token).get("role", String.class);
+    }
+
     // Returns false if the signature is wrong, token is expired.
     public boolean isTokenValid(String token) {
         try {

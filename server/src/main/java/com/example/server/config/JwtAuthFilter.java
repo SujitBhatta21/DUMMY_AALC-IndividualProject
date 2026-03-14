@@ -9,8 +9,10 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
 import java.io.IOException;
-import java.util.Collections;
+import java.util.List;
 
 // OncePerRequestFilter guarantees this runs exactly once per request (not twice for forwards/includes)
 public class JwtAuthFilter extends OncePerRequestFilter {
@@ -39,10 +41,11 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
         if (jwtService.isTokenValid(token)) {
             String username = jwtService.extractUsername(token);
-            // Tell Spring Security this request belongs to an authenticated user
-            // credentials = null because we already verified via the token signature
+            String role = jwtService.extractRole(token); // e.g. "ADMIN" or "USER"
+            // hasRole("ADMIN") checks for authority "ROLE_ADMIN", so we must prefix it
+            var authorities = List.of(new SimpleGrantedAuthority("ROLE_" + role));
             UsernamePasswordAuthenticationToken auth =
-                    new UsernamePasswordAuthenticationToken(username, null, Collections.emptyList());
+                    new UsernamePasswordAuthenticationToken(username, null, authorities);
             SecurityContextHolder.getContext().setAuthentication(auth);
         }
 

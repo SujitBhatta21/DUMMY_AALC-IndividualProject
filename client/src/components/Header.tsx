@@ -57,6 +57,7 @@ function Header() {
                 {/* Desktop Navigation */}
                 <nav className='desktop-nav'>
                     <ul>
+                        <li><Link to="/">Home</Link></li>
                         <li><Link to='/who-we-are'>Who We Are</Link></li>
                         <li><Link to='/settings'>Settings/Accessibility</Link></li>
                     </ul>
@@ -92,6 +93,7 @@ function Header() {
                 >
                     <nav className='sidebar-nav'>
                         <ul>
+                            <li><Link to="/" onClick={() => { setMenuOpen(false); }}>Home</Link></li>
                             <li><Link to='/who-we-are' onClick={() => { setMenuOpen(false); }}>Who We Are</Link></li>
                             <li><Link to='/settings' onClick={() => { setMenuOpen(false); }}>Settings/Accessibility</Link></li>
                         </ul>
