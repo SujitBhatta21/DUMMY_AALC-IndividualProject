@@ -22,4 +22,19 @@ public class AdminController {
     public ResponseEntity<Long> getTotalUsers() {
         return ResponseEntity.ok(statsService.getTotalUsers());
     }
+
+    @GetMapping("/active_today")
+    public ResponseEntity<Long> getActiveTodayUsers() {
+        return ResponseEntity.ok(statsService.getActiveTodayUsers());
+    }
+
+    @GetMapping("/shards_completed")
+    public ResponseEntity<Long> getShardsCompleted() {
+        return ResponseEntity.ok(statsService.getTotalShardsCompleted());
+    }
+
+    @GetMapping("/total_all_puzzle_solved")
+    public ResponseEntity<Long> getTotalAllPuzzleSolved() {
+        return ResponseEntity.ok(statsService.getTotalAllPuzzlesSolved());
+    }
 }

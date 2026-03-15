@@ -18,20 +18,33 @@ const NAVIGATION_OPTIONS: { id: Panel; label: string; icon: JSX.Element }[] = [
 // Dashboard on the left which is styled horizontal.
 function DashboardPanel() {
     const [totalUsers, setTotalUsers] = useState<number | null>(null);
+    const [totalActiveToday, setTotalActiveToday] = useState<number | null>(null);
+    const [totalShardsCompleted, setTotalShardsCompleted] = useState<number | null>(null);
+    const [totalAllPSolved, setTotalAllPSolved] = useState<number | null>(null);
 
     useEffect(() => {
         async function fetchStats() {
-            const res = await apiFetch("/api/accounts/admin/total_users");
-            if (res.ok) setTotalUsers(await res.json());
+            const [tUsersRes, tActiveTodayRes, tShardsCompletedRes, tAllPSolved] = await Promise.all([
+                apiFetch("/api/accounts/admin/total_users"),
+                apiFetch("/api/accounts/admin/active_today"),
+                apiFetch("/api/accounts/admin/shards_completed"),
+                apiFetch("/api/accounts/admin/total_all_puzzle_solved")
+            ])
+
+            if (tUsersRes.ok) setTotalUsers(await tUsersRes.json());
+            if (tActiveTodayRes.ok) setTotalActiveToday(await tActiveTodayRes.json());
+            if (tShardsCompletedRes.ok) setTotalShardsCompleted(await tShardsCompletedRes.json());
+            if (tAllPSolved.ok) setTotalAllPSolved(await tAllPSolved.json());
         }
+
         fetchStats();
     }, []);
 
     const stats = [
-        { label: "Total Users",      value: totalUsers !== null ? String(totalUsers) : "—", delta: "" },
-        { label: "Active Today",     value: "—", delta: "" },
-        { label: "Shards Completed", value: "—", delta: "" },
-        { label: "Puzzles Solved",   value: "—", delta: "" },
+        { label: "Total Users",      value: totalUsers !== null ? String(totalUsers) : "-", delta: "" },
+        { label: "Active Today",     value: totalActiveToday != null ? String(totalActiveToday) : "-", delta: "" },
+        { label: "Shards Completed", value: totalShardsCompleted !== null ? String(totalShardsCompleted) : "-", delta: "" },
+        { label: "Puzzles Solved",   value: totalAllPSolved !== null ? String(totalAllPSolved) : "-", delta: "" },
     ];
 
     const recentActivity = [
@@ -126,7 +139,7 @@ function AdminPage() {
         switch (activePanel) {
             case "dashboard": return <DashboardPanel />;
             case "users":     return <PlaceholderPanel title="Users" />;
-            case "reports":   return <PlaceholderPanel title="Reports & Analytics" />;
+            case "reports":   return <PlaceholderPanel title="Reports & Issues" />;
         }
     };
 

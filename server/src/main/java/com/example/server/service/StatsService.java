@@ -1,9 +1,13 @@
 package com.example.server.service;
 
+import com.example.server.model.Role;
 import com.example.server.repository.ShardRepository;
 import com.example.server.repository.UserRepository;
 import com.example.server.repository.UserShardProgressRepository;
 import org.springframework.stereotype.Service;
+
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 
 @Service
 public class StatsService {
@@ -29,14 +33,25 @@ public class StatsService {
         return userRepository.count();
     }
 
-    public void getActiveTodayUsers() {
-        System.out.println("getActiveTodayUsers fetched successfully.");
+    public Long getTotalAdminUsers() {
+        return userRepository.countByRole(Role.ADMIN);
     }
 
-    public void getTotalShardsCompleted() {
+    public Long getTotalNormalUsers() {
+        return userRepository.countByRole(Role.USER);
     }
 
-    public void getTotalPuzzlesSolved() {
+    public Long getActiveTodayUsers() {
+        Instant cutoff = Instant.now().minus(24, ChronoUnit.HOURS);
+        return userRepository.countByLastActiveAtGreaterThan(cutoff);
+    }
 
+    public Long getTotalShardsCompleted() {
+        return userShardProgressRepository.countByIsCompletedTrue();
+    }
+
+    public Long getTotalAllPuzzlesSolved() {
+        long totalShards = shardRepository.count();
+        return userShardProgressRepository.countUsersWhoCompletedAll(totalShards);
     }
 }
