@@ -148,6 +148,7 @@ function UserPanel() {
                 <input
                     type="text"
                     placeholder="Search by username..."
+                    aria-label="Search by username"
                     value={searchTermUsername}
                     onChange={e => setSearchTermUsername(e.target.value)}
                     className="user-filter-input"
@@ -156,6 +157,7 @@ function UserPanel() {
                     value={roleFilter}
                     onChange={e => setRoleFilter(e.target.value)}
                     className="user-filter-select"
+                    aria-label="Filter by role"
                 >
                     <option value="ALL">All Roles</option>
                     <option value="ADMIN">Admin</option>

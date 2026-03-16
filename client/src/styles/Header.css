@@ -113,6 +113,11 @@ body.menu-open {
     background-color: #0EA04E;
 }
 
+.nav-btn:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: 2px;
+}
+
 .nav-btn a {
     color: white;
     text-decoration: none;
@@ -179,6 +184,11 @@ body.menu-open {
     background-color: #fdf0f0;
 }
 
+.dropdown-report:focus-visible {
+    outline: 2px solid #0D6B3A;
+    outline-offset: -2px;
+}
+
 .dropdown-logout {
     background: none;
     border: none;
@@ -193,6 +203,17 @@ body.menu-open {
 
 .dropdown-logout:hover {
     background-color: #fdf0f0;
+}
+
+.dropdown-logout:focus-visible {
+    outline: 2px solid #c0392b;
+    outline-offset: -2px;
+}
+
+.hamburger:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: 2px;
+    border-radius: 4px;
 }
 
 /* Hamburger menu styles */

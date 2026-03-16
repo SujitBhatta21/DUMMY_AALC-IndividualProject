@@ -63,13 +63,18 @@ function Header() {
                         <li><Link to='/settings'>Settings/Accessibility</Link></li>
                     </ul>
                     { loggedInUser ?
-                        <div className="user-dropdown-wrapper">
-                            <button className="nav-btn" onClick={() => { setDropdownOpen(!dropdownOpen)} }>
+                        <div className="user-dropdown-wrapper" onKeyDown={(e) => { if (e.key === 'Escape') setDropdownOpen(false); }}>
+                            <button
+                                className="nav-btn"
+                                aria-label={`User menu for ${loggedInUser}`}
+                                aria-expanded={dropdownOpen}
+                                onClick={() => { setDropdownOpen(!dropdownOpen); }}
+                            >
                                 <FaUserCircle className="user-icon"/>
                             </button>
                             {dropdownOpen && (
                                 <>
-                                    <div className="dropdown-backdrop" onClick={() => { setDropdownOpen(false)} } />
+                                    <div className="dropdown-backdrop" aria-hidden="true" onClick={() => { setDropdownOpen(false); }} />
                                     <div className="user-dropdown">
                                         <span className="dropdown-username">{loggedInUser}</span>
                                         { localStorage.getItem("role") === "USER" &&

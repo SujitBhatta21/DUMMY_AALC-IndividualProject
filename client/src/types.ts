@@ -35,3 +35,8 @@ export interface IReport {
     status: "OPEN" | "IN_REVIEW" | "RESOLVED";
 }
 
+
+// SIZEMAP  export to be used globally within Settings and App.jsx.
+export const SIZE_MAP: Record<string, string> = { Small: '10px', Medium: '16px', Large: '32px' };
+
+

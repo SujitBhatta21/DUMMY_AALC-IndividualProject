@@ -110,7 +110,9 @@ function LoginPage() {
                                     required
                                 />
                                 {isRegisterMode && (
-                                    <FaRandom title="Reroll username" onClick={fetchRandomUsername} />
+                                    <button type="button" className="icon-btn" aria-label="Reroll username" onClick={fetchRandomUsername}>
+                                        <FaRandom />
+                                    </button>
                                 )}
                             </div>
                         </div>
@@ -126,10 +128,14 @@ function LoginPage() {
                                     onChange={(e) => { setPassword(e.target.value)} }
                                     required
                                 />
-                                {showPassword
-                                    ? <FaRegEye title="Hide Password" onClick={() => { setShowPassword(false)} } />
-                                    : <FaRegEyeSlash title="Show Password" onClick={() => { setShowPassword(true)} } />
-                                }
+                                <button
+                                    type="button"
+                                    className="icon-btn"
+                                    aria-label={showPassword ? "Hide password" : "Show password"}
+                                    onClick={() => { setShowPassword(!showPassword); }}
+                                >
+                                    {showPassword ? <FaRegEye /> : <FaRegEyeSlash />}
+                                </button>
                             </div>
                         </div>
 
@@ -146,9 +152,9 @@ function LoginPage() {
 
 
                     <div className="login-footer-links">
-                        <a  className="mode-change-link" onClick={() => { setIsRegisterMode(!isRegisterMode); setError(""); setPassword(""); }}>
+                        <button type="button" className="mode-change-link" onClick={() => { setIsRegisterMode(!isRegisterMode); setError(""); setPassword(""); }}>
                             {isRegisterMode ? "Already have an account? Login" : "No account? Register here"}
-                        </a>
+                        </button>
 
                         <Link to="/">Back to Home</Link>
                     </div>

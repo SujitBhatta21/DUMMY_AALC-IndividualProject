@@ -16,6 +16,7 @@ import CommunicationNetwork from "../components/puzzles/CommunicationNetwork.tsx
 import ConnectMatching from "../components/puzzles/ConnectMatching.tsx";
 import InkDropReveal from "../components/puzzles/InkDropReveal.tsx";
 import AudioMatching from "../components/puzzles/AudioMatching.tsx";
+import RewardPopup from "../components/puzzles/RewardPopup.tsx";
 
 
 function ShardPage() {
@@ -71,6 +72,7 @@ function ShardPage() {
 
 
     const isShard9 = shardData?.id === 9;
+    const [showShard9Reward, setShowShard9Reward] = useState(false);
 
     return (
         <div className="shard-page">
@@ -83,6 +85,7 @@ function ShardPage() {
                         <InkDropReveal
                             onComplete={() => { setCurrentStep(1); }}
                             rewardsText={ shardData.rewardsText }
+                            showReward={false}
                         />
                     )}
                     { currentStep === 1 && (
@@ -96,8 +99,14 @@ function ShardPage() {
                         <FillInTheBlank
                             question={shardData.fitb_question}
                             answers={ shardData.fitb_answer }
-                            onCorrect={() => { handleShardComplete(); }}
+                            onCorrect={() => { setShowShard9Reward(true); }}
                             onBack={() => { setCurrentStep(1); }}
+                        />
+                    )}
+                    { showShard9Reward && (
+                        <RewardPopup
+                            rewardsText={ shardData.rewardsText }
+                            onComplete={ handleShardComplete }
                         />
                     )}
                 </>

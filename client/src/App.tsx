@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom"
 import HomePage from "./pages/HomePage.tsx";
 import TimelinePage from "./pages/TimelinePage.tsx";
@@ -5,6 +6,7 @@ import WhoWeAre from "./pages/WhoWeAre.tsx";
 import Settings from "./pages/Settings.tsx";
 import ShardPage from "./pages/ShardPage.tsx";
 import LoginPage from "./pages/LoginPage.tsx";
+import { SIZE_MAP } from "./types.ts";
 
 // Wraps any route that requires a logged-in user.
 // If no token in localStorage, redirects to /accounts/login.
@@ -15,6 +17,11 @@ function ProtectedRoute({ element }: { element: React.ReactElement }) {
 }
 
 function App() {
+    useEffect(() => {
+        const size = localStorage.getItem('aalc-text-size');
+        if (size && SIZE_MAP[size]) document.body.style.fontSize = SIZE_MAP[size];
+    }, []);
+
     return (
         <Router>
             <Routes>

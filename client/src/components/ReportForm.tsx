@@ -77,13 +77,15 @@ function ReportForm({ onClose }: ReportFormProps) {
                         {error && <p className="report-error">{error}</p>}
                         <form className="report-form" onSubmit={handleSubmit}>
                             <div className="report-field">
-                                <label>Username</label>
+                                <label htmlFor="report-username">Username</label>
                                 <input
+                                    id="report-username"
                                     disabled
-                                    value={localStorage.getItem("username")}
+                                    value={localStorage.getItem("username") ?? ""}
                                 />
-                                <label>Title</label>
+                                <label htmlFor="report-title">Title</label>
                                 <input
+                                    id="report-title"
                                     type="text"
                                     value={formData.title}
                                     onChange={(e) => { setFormData({ ...formData, title: e.target.value }); }}
@@ -92,8 +94,9 @@ function ReportForm({ onClose }: ReportFormProps) {
                             </div>
 
                             <div className="report-field">
-                                <label>Description</label>
+                                <label htmlFor="report-description">Description</label>
                                 <textarea
+                                    id="report-description"
                                     value={formData.description}
                                     onChange={(e) => { setFormData({ ...formData, description: e.target.value }); }}
                                 />

@@ -1,0 +1,93 @@
+.settings-page {
+    max-width: 600px;
+    margin: 3rem auto;
+    padding: 2rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.settings-page h1 {
+    margin-bottom: 0.5rem;
+}
+
+.settings-section {
+    background: #e8f5ee;
+    border: 2px solid #0D6B3A;
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+.settings-section h2 {
+    font-size: 1rem;
+    color: #0D6B3A;
+    margin-bottom: 1rem;
+}
+
+.settings-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.settings-row label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #2c2c2c;
+    min-width: 60px;
+}
+
+.settings-row select {
+    flex: 1;
+    padding: 0.5rem 0.75rem;
+    border: 2px solid #0D6B3A;
+    border-radius: 8px;
+    background: white;
+    font-size: 0.9rem;
+    color: #2c2c2c;
+    cursor: pointer;
+}
+
+.settings-row select:focus {
+    outline: none;
+    border-color: #0a4f2b;
+}
+
+.settings-saved {
+    font-size: 0.85rem;
+    color: green;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.btn-group {
+    display: flex;
+    border: 2px solid #0D6B3A;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.btn-group-item {
+    flex: 1;
+    padding: 0.5rem 1rem;
+    border: none;
+    background: white;
+    color: #0D6B3A;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.btn-group-item + .btn-group-item {
+    border-left: 2px solid #0D6B3A;
+}
+
+.btn-group-item.active {
+    background: #0D6B3A;
+    color: white;
+}
+
+.btn-group-item:hover:not(.active) {
+    background: #e8f5ee;
+}
