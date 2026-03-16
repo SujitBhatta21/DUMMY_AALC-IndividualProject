@@ -20,4 +20,6 @@ public interface UserShardProgressRepository extends JpaRepository<UserShardProg
       """)
 
     Long countUsersWhoCompletedAll(@Param("totalShards") long totalShards);
+
+    Long countByShardIdAndIsCompletedTrue(Integer shardId);
 }

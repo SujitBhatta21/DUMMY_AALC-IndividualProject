@@ -1,6 +1,7 @@
 package com.example.server.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -29,6 +30,8 @@ public class User {
     private Role role = Role.USER;
 
     private String username;
+
+    @JsonIgnoreProperties({"password"}) // Making sure password is not fetched in frontend.
     private String password;
 
     @Column(nullable = true)

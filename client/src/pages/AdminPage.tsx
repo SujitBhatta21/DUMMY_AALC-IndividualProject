@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/AdminPage.css";
 import { FiGrid, FiUsers, FiBarChart2 } from "react-icons/fi";
 import {apiFetch} from "../utils.ts";
-import type { IReport } from "../types.ts";
+import type { IReport, IUser } from "../types.ts";
 
 
 type Panel = "dashboard" | "users" | "reports";
@@ -10,10 +10,13 @@ type Panel = "dashboard" | "users" | "reports";
 const NAVIGATION_OPTIONS: { id: Panel; label: string; icon: JSX.Element }[] = [
     { id: "dashboard", label: "Dashboard",  icon: <FiGrid /> },
     { id: "users",     label: "Users",       icon: <FiUsers /> },
-    { id: "reports",   label: "Reports",     icon: <FiBarChart2 /> },
+    { id: "reports",   label: "Report / Issue",     icon: <FiBarChart2 /> },
 ];
 
-
+interface IShardProgressCompletionRate {
+    title: string; // Shard title.
+    percentage: number;
+}
 
 
 // Dashboard on the left which is styled horizontal.
@@ -23,29 +26,41 @@ function DashboardPanel() {
     const [totalShardsCompleted, setTotalShardsCompleted] = useState<number | null>(null);
     const [totalAllPSolved, setTotalAllPSolved] = useState<number | null>(null);
 
+    const [shardCompletionRate, setShardCompletionRate] = useState<IShardProgressCompletionRate[]>([]);
+
     useEffect(() => {
         async function fetchStats() {
-            const [tUsersRes, tActiveTodayRes, tShardsCompletedRes, tAllPSolved] = await Promise.all([
+            const [
+                tUsersRes, tActiveTodayRes, tShardsCompletedRes, tAllPSolved, tCompletionRate
+            ] = await Promise.all([
                 apiFetch("/api/accounts/admin/total_users"),
                 apiFetch("/api/accounts/admin/active_today"),
                 apiFetch("/api/accounts/admin/shards_completed"),
-                apiFetch("/api/accounts/admin/total_all_puzzle_solved")
+                apiFetch("/api/accounts/admin/total_all_puzzle_solved"),
+                apiFetch("/api/accounts/admin/shard_completion_rate")
             ])
 
             if (tUsersRes.ok) setTotalUsers(await tUsersRes.json());
             if (tActiveTodayRes.ok) setTotalActiveToday(await tActiveTodayRes.json());
             if (tShardsCompletedRes.ok) setTotalShardsCompleted(await tShardsCompletedRes.json());
             if (tAllPSolved.ok) setTotalAllPSolved(await tAllPSolved.json());
+            if (tCompletionRate.ok) setShardCompletionRate(await tCompletionRate.json());
+
+            console.log("Shard Completion Rate: ", shardCompletionRate);
         }
 
         fetchStats();
     }, []);
 
+    useEffect(() => {
+        console.log("Shard Completion Rate: ", shardCompletionRate);
+    }, [shardCompletionRate]);
+
     const stats = [
         { label: "Total Users",      value: totalUsers !== null ? String(totalUsers) : "-", delta: "" },
         { label: "Active Today",     value: totalActiveToday != null ? String(totalActiveToday) : "-", delta: "" },
         { label: "Shards Completed", value: totalShardsCompleted !== null ? String(totalShardsCompleted) : "-", delta: "" },
-        { label: "Puzzles Solved",   value: totalAllPSolved !== null ? String(totalAllPSolved) : "-", delta: "" },
+        { label: "All Puzzles Solved",   value: totalAllPSolved !== null ? String(totalAllPSolved) : "-", delta: "" },
     ];
 
     const recentActivity = [
@@ -56,12 +71,6 @@ function DashboardPanel() {
         { text: "Shard #1 completed by user", time: "32 min ago" },
     ];
 
-    const shardProgress = [
-        { label: "Shard 1 — Introduction", percentage: 80 },
-        { label: "Shard 2 — The March", percentage: 55 },
-        { label: "Shard 3 — Resistance", percentage: 40 },
-        { label: "Shard 4 — Freedom", percentage: 20 },
-    ];
 
     return (
         <>
@@ -95,10 +104,10 @@ function DashboardPanel() {
                 <div className="admin-panel">
                     <h3 className="admin-section-title">Shard Completion Rate</h3>
                     <div className="progress-list">
-                        {shardProgress.map(s => (
-                            <div className="progress-row" key={s.label}>
+                        {shardCompletionRate.map(s => (
+                            <div className="progress-row" key={s.title}>
                                 <div className="progress-row-header">
-                                    <span>{s.label}</span>
+                                    <span>{s.title}</span>
                                     <span>{s.percentage}%</span>
                                 </div>
                                 <div className="progress-bar-track">
@@ -113,37 +122,82 @@ function DashboardPanel() {
     );
 }
 
-function PlaceholderPanel({ title }: { title: string }) {
+function UserPanel() {
+    const [users, setUsers] = useState<IUser[]>([]);
+    const [searchTermUsername, setSearchTermUsername] = useState("");
+    const [roleFilter, setRoleFilter] = useState("ALL");
+
+    useEffect(() => {
+        async function fetchUsers() {
+            const res = await apiFetch("/api/accounts/admin/users");
+            if (res.ok) setUsers(await res.json());
+        }
+        fetchUsers();
+    }, []);
+
+    const filteredUsers = users
+        .filter(u => u.username.toLowerCase().includes(searchTermUsername.toLowerCase()))
+        .filter(u => roleFilter === "ALL" || u.role === roleFilter);
+
     return (
         <section>
-            <h1>{title}</h1>
-            <p className="admin-subtitle">This section is under construction.</p>
-            <div className="admin-panel" style={{ marginTop: "1rem" }}>
-                <p style={{ color: "#888", textAlign: "center", padding: "3rem 0" }}>
-                    Content coming soon...
-                </p>
+            <h1>Users</h1>
+            <p className="admin-subtitle">All registered users on the platform</p>
+
+            <div className="user-filter-bar">
+                <input
+                    type="text"
+                    placeholder="Search by username..."
+                    value={searchTermUsername}
+                    onChange={e => setSearchTermUsername(e.target.value)}
+                    className="user-filter-input"
+                />
+                <select
+                    value={roleFilter}
+                    onChange={e => setRoleFilter(e.target.value)}
+                    className="user-filter-select"
+                >
+                    <option value="ALL">All Roles</option>
+                    <option value="ADMIN">Admin</option>
+                    <option value="USER">User</option>
+                </select>
+            </div>
+
+            <div className="panel-list">
+                {filteredUsers.length === 0 && (
+                    <p className="empty-state">No users found.</p>
+                )}
+                {filteredUsers.map(user => (
+                    <div className="info-card" key={user.userId}>
+                        <div className="card-header">
+                            <span className="card-title">{user.username}</span>
+                            <span className={`badge ${user.role === "ADMIN" ? "badge-admin" : "badge-user"}`}>
+                                {user.role}
+                            </span>
+                        </div>
+                        <p className="card-meta">ID: {user.userId}</p>
+                        <p className="card-meta">
+                            Last active: {user.lastActiveAt
+                                ? new Date(user.lastActiveAt).toLocaleString()
+                                : "Never"}
+                        </p>
+                    </div>
+                ))}
             </div>
         </section>
     );
 }
 
-function ReportsPanel() {
-    const [reports, setReports] = useState<IReport[]>([]);
+interface ReportsPanelProps {
+    reports: IReport[];
+    setReports: React.Dispatch<React.SetStateAction<IReport[]>>;
+}
+
+function ReportsPanel({ reports, setReports }: ReportsPanelProps) {
     const [postError, setPostError] = useState<string>("");
-
-    useEffect(() => {
-        async function fetchReports() {
-            const res = await apiFetch("/api/accounts/admin/reports");
-            if (res.ok) setReports(await res.json());
-        }
-        fetchReports();
-    }, []);
-
-    console.log(reports)
 
     const handleStatusChange = async (id: number, newStatus: IReport["status"]) => {
         // TODO: PATCH /api/accounts/admin/reports/{id}/status
-
         try {
             const res = await apiFetch(`/api/accounts/admin/reports/${id}/status`, {
                 method: "PATCH",
@@ -167,25 +221,23 @@ function ReportsPanel() {
         <section>
             <h1>Reports & Issues</h1>
             <p className="admin-subtitle">Submitted reports from users</p>
-            <div style={{ display: "flex", flexDirection: "column", gap: "1rem", marginTop: "1rem" }}>
+            <div className="panel-list">
                 {reports.length === 0 && (
-                    <p style={{ color: "#888", textAlign: "center", padding: "3rem 0" }}>No reports found.</p>
+                    <p className="empty-state">No reports found.</p>
                 )}
                 {reports.map(report => (
-                    <div className="admin-panel" key={report.id}>
-                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                            <span style={{ fontWeight: "bold", fontSize: "1rem" }}>{report.title}</span>
-                            <span style={{ fontSize: "0.8rem", color: "#888" }}>
+                    <div className="info-card" key={report.id}>
+                        <div className="card-header">
+                            <span className="card-title">{report.title}</span>
+                            <span className="card-date">
                                 {new Date(report.createdAt).toLocaleDateString()}
                                 {` (${new Date(report.createdAt).toLocaleTimeString()})`}
                             </span>
                         </div>
-                        <p style={{ margin: "0.4rem 0 0", fontSize: "0.85rem", color: "#555" }}>
-                            By: {report.user.username}
-                        </p>
-                        <p style={{ margin: "0.5rem 0 0", fontSize: "0.9rem" }}>{report.description}</p>
-                        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginTop: "0.75rem" }}>
-                            <span style={{ fontSize: "0.85rem" }}>Status:</span>
+                        <p className="card-meta">By: {report.user.username}</p>
+                        <p className="card-description">{report.description}</p>
+                        <div className="card-footer">
+                            <span className="card-footer-label">Status:</span>
                             <select
                                 value={report.status}
                                 onChange={(e) => { handleStatusChange(report.id, e.target.value as IReport["status"])} }
@@ -206,16 +258,24 @@ function ReportsPanel() {
 // Main AdminPage function
 function AdminPage() {
     const [activePanel, setActivePanel] = useState<Panel>("dashboard");
+    const [reports, setReports] = useState<IReport[]>([]);
 
     useEffect(() => {
         document.title = "Admin | AALC Interactive";
+        async function fetchReports() {
+            const res = await apiFetch("/api/accounts/admin/reports");
+            if (res.ok) setReports(await res.json());
+        }
+        fetchReports();
     }, []);
+
+    const openReportsCount = reports.filter(r => r.status === "OPEN").length;
 
     const renderPanel = () => {
         switch (activePanel) {
             case "dashboard": return <DashboardPanel />;
-            case "users":     return <PlaceholderPanel title="Users" />;
-            case "reports":   return <ReportsPanel />;
+            case "users":     return <UserPanel />;
+            case "reports":   return <ReportsPanel reports={reports} setReports={setReports} />;
         }
     };
 
@@ -235,6 +295,9 @@ function AdminPage() {
                         >
                             {item.icon}
                             {item.label}
+                            {item.id === "reports" && openReportsCount > 0 && (
+                                <span className="notification-badge">{openReportsCount}</span>
+                            )}
                         </button>
                     ))}
                 </nav>

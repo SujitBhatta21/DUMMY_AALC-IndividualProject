@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Random;
 
 @Service
@@ -37,7 +38,6 @@ public class UserService {
     /*
     * STATS FOR ADMIN METHODS (Refactored/Moved to StatsService which is controlled by AdminController)
     */
-
 
     public String getRandomUsername() {
         Random random = new Random();
@@ -83,5 +83,11 @@ public class UserService {
         }
         System.out.println("LOGIN SUCCESS");
         return user;
+    }
+
+
+    // Method to get all the users from repository.
+    public List<User> getUser() {
+        return userRepository.findAll();
     }
 }

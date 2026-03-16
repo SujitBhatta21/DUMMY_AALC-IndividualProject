@@ -5,6 +5,7 @@ import com.example.server.model.ReportStatus;
 import com.example.server.repository.ReportRepository;
 import com.example.server.service.JwtService;
 import com.example.server.service.StatsService;
+import com.example.server.service.UserService;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,15 +18,23 @@ import java.util.List;
 public class AdminController {
 
     private final StatsService statsService;
+    private final UserService userService;
     private final JwtService jwtService;
     private final ReportRepository reportRepository;
 
-    public AdminController(StatsService statsService, JwtService jwtService, ReportRepository reportRepository) {
+    public AdminController(
+            StatsService statsService,
+            UserService userService,
+            JwtService jwtService,
+            ReportRepository reportRepository
+    ) {
         this.statsService = statsService;
+        this.userService = userService;
         this.jwtService = jwtService;
         this.reportRepository = reportRepository;
     }
 
+    // Dashboard Panel API fetches.
     @GetMapping("/total_users")
     public ResponseEntity<Long> getTotalUsers() {
         return ResponseEntity.ok(statsService.getTotalUsers());
@@ -46,6 +55,20 @@ public class AdminController {
         return ResponseEntity.ok(statsService.getTotalAllPuzzlesSolved());
     }
 
+    @GetMapping("shard_completion_rate")
+    public ResponseEntity<List<StatsService.ShardProgress>> getShardCompletionRate() {
+        return ResponseEntity.ok(statsService.getAdminShardCompletionRate());
+    }
+
+
+    // USERPANEL API Fetches...
+    @GetMapping("/users")
+    public ResponseEntity<?>  getAllUsers() {
+        return ResponseEntity.ok(userService.getUser());
+    }
+
+
+    // REPORTS PANEL API Fetches.
     @GetMapping("/reports")
     public ResponseEntity<List<Report>> getReports() {
         List<Report> reports = reportRepository.findAll(Sort.by(Sort.Direction.DESC, "createdAt"));
