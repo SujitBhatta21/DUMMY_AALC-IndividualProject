@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
-
 import "../styles/AdminPage.css";
-import {
-    FiGrid, FiUsers, FiBarChart2
-} from "react-icons/fi";
+import { FiGrid, FiUsers, FiBarChart2 } from "react-icons/fi";
 import {apiFetch} from "../utils.ts";
+import type { IReport } from "../types.ts";
+
 
 type Panel = "dashboard" | "users" | "reports";
 
@@ -13,6 +12,8 @@ const NAVIGATION_OPTIONS: { id: Panel; label: string; icon: JSX.Element }[] = [
     { id: "users",     label: "Users",       icon: <FiUsers /> },
     { id: "reports",   label: "Reports",     icon: <FiBarChart2 /> },
 ];
+
+
 
 
 // Dashboard on the left which is styled horizontal.
@@ -126,6 +127,81 @@ function PlaceholderPanel({ title }: { title: string }) {
     );
 }
 
+function ReportsPanel() {
+    const [reports, setReports] = useState<IReport[]>([]);
+    const [postError, setPostError] = useState<string>("");
+
+    useEffect(() => {
+        async function fetchReports() {
+            const res = await apiFetch("/api/accounts/admin/reports");
+            if (res.ok) setReports(await res.json());
+        }
+        fetchReports();
+    }, []);
+
+    console.log(reports)
+
+    const handleStatusChange = async (id: number, newStatus: IReport["status"]) => {
+        // TODO: PATCH /api/accounts/admin/reports/{id}/status
+
+        try {
+            const res = await apiFetch(`/api/accounts/admin/reports/${id}/status`, {
+                method: "PATCH",
+                body: JSON.stringify(newStatus),
+            });
+
+            if (!res.ok) {
+                setPostError(await res.text());
+                return;
+            }
+
+        } catch (e) {
+            console.error("Error: ", e);
+        }
+
+        // Changing the jsx for state status.
+        setReports(prev => prev.map(r => r.id === id ? { ...r, status: newStatus } : r));
+    };
+
+    return (
+        <section>
+            <h1>Reports & Issues</h1>
+            <p className="admin-subtitle">Submitted reports from users</p>
+            <div style={{ display: "flex", flexDirection: "column", gap: "1rem", marginTop: "1rem" }}>
+                {reports.length === 0 && (
+                    <p style={{ color: "#888", textAlign: "center", padding: "3rem 0" }}>No reports found.</p>
+                )}
+                {reports.map(report => (
+                    <div className="admin-panel" key={report.id}>
+                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                            <span style={{ fontWeight: "bold", fontSize: "1rem" }}>{report.title}</span>
+                            <span style={{ fontSize: "0.8rem", color: "#888" }}>
+                                {new Date(report.createdAt).toLocaleDateString()}
+                                {` (${new Date(report.createdAt).toLocaleTimeString()})`}
+                            </span>
+                        </div>
+                        <p style={{ margin: "0.4rem 0 0", fontSize: "0.85rem", color: "#555" }}>
+                            By: {report.user.username}
+                        </p>
+                        <p style={{ margin: "0.5rem 0 0", fontSize: "0.9rem" }}>{report.description}</p>
+                        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginTop: "0.75rem" }}>
+                            <span style={{ fontSize: "0.85rem" }}>Status:</span>
+                            <select
+                                value={report.status}
+                                onChange={(e) => { handleStatusChange(report.id, e.target.value as IReport["status"])} }
+                            >
+                                <option value="OPEN">Open</option>
+                                <option value="IN_REVIEW">In Review</option>
+                                <option value="RESOLVED">Resolved</option>
+                            </select>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </section>
+    );
+}
+
 
 // Main AdminPage function
 function AdminPage() {
@@ -139,7 +215,7 @@ function AdminPage() {
         switch (activePanel) {
             case "dashboard": return <DashboardPanel />;
             case "users":     return <PlaceholderPanel title="Users" />;
-            case "reports":   return <PlaceholderPanel title="Reports & Issues" />;
+            case "reports":   return <ReportsPanel />;
         }
     };
 

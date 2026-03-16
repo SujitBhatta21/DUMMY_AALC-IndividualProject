@@ -1,0 +1,143 @@
+.report-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: all;
+}
+
+.report-card {
+    position: relative;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+    padding: 2.5rem 2rem;
+    width: 100%;
+    max-width: 480px;
+}
+
+.report-close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.1rem;
+    color: #555;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    transition: color 0.2s ease, background 0.2s ease;
+}
+
+.report-close-btn:hover {
+    color: #c0392b;
+    background: #fdecea;
+}
+
+.report-card h1 {
+    font-size: clamp(1.4rem, 4vw, 1.8rem);
+    color: #0D6B3A;
+    margin-bottom: 1.75rem;
+    text-align: center;
+}
+
+.report-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.report-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.report-field label {
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.report-field input,
+.report-field textarea {
+    padding: 0.75rem 1rem;
+    border: 1.5px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.2s ease;
+}
+
+.report-field input:focus,
+.report-field textarea:focus {
+    outline: none;
+    border-color: #0D6B3A;
+}
+
+.report-field textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.report-field-error {
+    font-size: 0.85rem;
+    color: #c0392b;
+}
+
+.report-error {
+    background: #fdecea;
+    color: #c0392b;
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.report-btn {
+    padding: 0.85rem;
+    border: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    background: linear-gradient(135deg, #0D6B3A 0%, #0EA04E 100%);
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(66, 107, 31, 0.4);
+    transition: all 0.3s ease;
+    margin-top: 0.5rem;
+}
+
+.report-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(66, 107, 31, 0.5);
+}
+
+.report-success {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #0D6B3A;
+    font-weight: bold;
+    padding: 1rem 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .report-btn {
+        transition: none;
+    }
+    .report-btn:hover {
+        transform: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .report-card {
+        padding: 2rem 1.25rem;
+        margin: 0 1rem;
+    }
+}

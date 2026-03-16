@@ -7,3 +7,14 @@ export interface Shard {
     puzzleType: string;
     trackNumber: number;
 }
+
+
+// This interface for Report table.
+export interface IReport {
+    id: number;
+    user: { userId: number; username: string };
+    title: string;
+    description: string;
+    createdAt: string;
+    status: "OPEN" | "IN_REVIEW" | "RESOLVED";
+}

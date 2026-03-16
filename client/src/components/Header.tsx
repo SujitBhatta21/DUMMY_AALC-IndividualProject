@@ -2,15 +2,16 @@
 import '../styles/Header.css';
 import logo from '../assets/logo/Logo pack AAL 2-12.png'
 import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import { FaUserCircle } from "react-icons/fa"
+import ReportForm from './ReportForm.tsx';
 
 
 function Header() {
     const [menuOpen, setMenuOpen] = useState(false);
     const [dropdownOpen, setDropdownOpen] = useState(false);
+    const [reportFormOpen, setReportFormOpen] = useState(false);
     const loggedInUser = localStorage.getItem("username");
-    const navigate = useNavigate();
 
     // Lock body scroll when menu is open
     useEffect(() => {
@@ -28,7 +29,7 @@ function Header() {
         localStorage.removeItem("username");
         localStorage.removeItem("role");
         setMenuOpen(false);
-        navigate("/");
+        window.location.href = "/";
     }
 
 
@@ -63,24 +64,30 @@ function Header() {
                     </ul>
                     { loggedInUser ?
                         <div className="user-dropdown-wrapper">
-                            <button className="nav-btn" onClick={() => setDropdownOpen(!dropdownOpen)}>
+                            <button className="nav-btn" onClick={() => { setDropdownOpen(!dropdownOpen)} }>
                                 <FaUserCircle className="user-icon"/>
                             </button>
                             {dropdownOpen && (
                                 <>
-                                    <div className="dropdown-backdrop" onClick={() => setDropdownOpen(false)} />
+                                    <div className="dropdown-backdrop" onClick={() => { setDropdownOpen(false)} } />
                                     <div className="user-dropdown">
                                         <span className="dropdown-username">{loggedInUser}</span>
+                                        { localStorage.getItem("role") === "USER" &&
+                                            <button className="dropdown-report"
+                                                    onClick={() => { setDropdownOpen(false); setReportFormOpen(true); }}>Report Issue</button>
+                                        }
                                         <button className="dropdown-logout" onClick={handleLogoutOperation}>Logout</button>
                                     </div>
                                 </>
                             )}
                         </div> :
-                        <button className="nav-btn"><Link to='/accounts/login'>Sign In</Link></button>
+                        <Link className="nav-btn" to='/accounts/login'>Sign In</Link>
                     }
 
                 </nav>
             </section>
+
+            {reportFormOpen && <ReportForm onClose={() => { setReportFormOpen(false)} } />}
 
             {/* Sidebar Overlay */}
             <div

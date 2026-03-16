@@ -4,6 +4,7 @@ import { Header } from "../components/Header.tsx";
 import Footer from "../components/Footer";
 import "../styles/LoginPage.css";
 import { FaRegEye, FaRegEyeSlash, FaRandom } from "react-icons/fa";
+import { apiFetch } from "../utils.ts"
 
 
 function LoginPage() {
@@ -16,7 +17,7 @@ function LoginPage() {
 
     const fetchRandomUsername = async () => {
         try {
-            const res: Response = await fetch(`${import.meta.env.VITE_API_URL}/api/accounts/generate_username`);
+            const res: Response = await apiFetch("/api/accounts/generate_username");
             const data: string = await res.text();
             setUsername(data);
         } catch (err) {
@@ -34,7 +35,7 @@ function LoginPage() {
         setError("");
 
         try {
-            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/accounts/register`, {
+            const res = await apiFetch("/api/accounts/register", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ username, password }),
@@ -58,7 +59,7 @@ function LoginPage() {
         setError("");
 
         try {
-            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/accounts/login`, {
+            const res = await apiFetch("/api/accounts/login", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ username, password }),
@@ -75,7 +76,8 @@ function LoginPage() {
             localStorage.setItem("userId", String(data.userId));
             localStorage.setItem("username", data.username);
             localStorage.setItem("role", data.role);
-            navigate("/");
+            window.location.href = "/"; // Just useNavigate doesn't work. I need to reload the page for UI changes as well.
+
         } catch (err) {
             setError("Something went wrong. Please try again.");
         }
