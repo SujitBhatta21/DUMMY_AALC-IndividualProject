@@ -4,8 +4,9 @@ import { Header } from "../components/Header.tsx";
 import Footer from "../components/Footer";
 import {Link} from "react-router-dom";
 import kids_puzzle_image from "../assets/Close_up_of_Hand_Cut_Jigsaw_Puzzle.jpeg"
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import AdminPage from "./AdminPage.tsx";
+import { apiFetch } from "../utils.ts";
 
 function HomePage() {
     useEffect(() => {
@@ -13,6 +14,16 @@ function HomePage() {
     }, []);
 
     const user_role: string | null = localStorage.getItem("role"); // stores ENUM: ADMIN or USER.
+    const [hasProgress, setHasProgress] = useState(false);
+
+    useEffect(() => {
+        const userId = localStorage.getItem("userId");
+        if (!userId) return;
+        apiFetch(`/api/progress/${userId}`)
+            .then(res => res.json())
+            .then((data: unknown[]) => { if (data.length > 0) setHasProgress(true); })
+            .catch(() => { /* empty arrow func */ }); // To ignore error.
+    }, []);
 
 
     const renderAdminPage = () => {
@@ -25,7 +36,7 @@ function HomePage() {
                 <div className="home-top-container">
                     <h1>"Rebuild the Story, Piece together the struggle"</h1>
                     <Link to="/storyline">
-                        <button>Start Puzzle Experience</button>
+                        <button>{hasProgress ? "Continue Puzzle Experience" : "Start Puzzle Experience"}</button>
                     </Link>
                 </div>
 

@@ -141,6 +141,11 @@
     display: block;
 }
 
+.voice-settings-tooltip:focus-visible {
+    outline: 3px solid #8B4513;
+    outline-offset: 3px;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .context-view {

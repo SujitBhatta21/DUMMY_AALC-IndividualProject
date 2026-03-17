@@ -6,7 +6,7 @@ import {Link} from 'react-router-dom';
 import ReportForm from './ReportForm.tsx';
 
 
-const AVATAR_COLOURS = [
+const AVATAR_COLOURS: string[] = [
     '#c0392b', '#d35400', '#e67e22', '#27ae60',
     '#16a085', '#2980b9', '#8e44ad', '#2c3e50',
     '#1abc9c', '#e74c3c', '#7f8c8d', '#f39c12',
@@ -25,7 +25,7 @@ function hashUsername(str: string): number {
 
 function getInitials(username: string): string {
     const words = username.match(/[A-Z][a-z]+/g);
-    return (words[0][0] + words[1][0]);
+    return (words?.[0]?.[0] ?? '') + (words?.[1]?.[0] ?? ''); // ? used to ignore possibly null error.
 }
 
 function UserAvatar({ username, className }: { username: string; className?: string }) {

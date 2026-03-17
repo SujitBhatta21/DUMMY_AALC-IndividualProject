@@ -124,10 +124,10 @@ public class DataSeeder implements CommandLineRunner {
                         "DECISION_TREE"),
                 new Shard(5, "Penton Street Office Map",
                         "The ANC set up its London office at 28 ___ Street.\n" +
-                                "The building was used to store secret ___ and coordinate ___.",
+                                "The building was used to store secret ___ and coordinate protest ___.",
                         Map.of(1, List.of("Penton", "Kenton"),
-                                2, List.of("documents", "newsletters"),
-                                3, List.of("protests", "meetings")),
+                                2, List.of("documents", "leaflets"),
+                                3, List.of("meetings", "approvals")),
                         "\u201cThe building was small, but its voice was loud. Stories, testimonies, and strategy " +
                                 "passed through its walls every day. It was a hub for communication networks.\u201d",
                         "COMMUNICATION_NETWORK"),
