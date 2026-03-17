@@ -25,6 +25,15 @@ public class UserShardProgress {
         this.id = id;
         this.shard = shard;
         this.user = user;
-
     }
+
+    public Integer getId() { return id; }
+    public Shard getShard() { return shard; }
+    public void setShard(Shard shard) { this.shard = shard; }
+    public User getUser() { return user; }
+    public void setUser(User user) { this.user = user; }
+    public boolean getIsUnlocked() { return isUnlocked; }
+    public void setUnlocked(boolean unlocked) { isUnlocked = unlocked; }
+    public boolean getIsCompleted() { return isCompleted; }
+    public void setCompleted(boolean completed) { isCompleted = completed; }
 }

@@ -46,6 +46,11 @@
     background: #fdf6ee;
 }
 
+.blank-button:focus-visible {
+    outline: 3px solid #8B4513;
+    outline-offset: 2px;
+}
+
 .blank-button.active {
     border: 2px solid #8B4513;
     background: #fdf6ee;
@@ -109,6 +114,11 @@
     box-shadow: 0 3px 10px rgba(255, 165, 0, 0.3);
 }
 
+.a-word button:focus-visible {
+    outline: 3px solid #8B4513;
+    outline-offset: 2px;
+}
+
 .a-word button.used {
     opacity: 0.35;
     cursor: not-allowed;
@@ -141,6 +151,11 @@
     background: linear-gradient(135deg, #FFA500 0%, #FF8C00 100%);
     transform: translateY(-3px);
     box-shadow: 0 6px 20px rgba(255, 165, 0, 0.5);
+}
+
+.fitb-buttons button:focus-visible {
+    outline: 3px solid #2c2c2c;
+    outline-offset: 3px;
 }
 
 

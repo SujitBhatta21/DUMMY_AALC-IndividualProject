@@ -8,20 +8,21 @@ import { useEffect, useRef, useCallback, useState } from "react";
 interface Props {
     onComplete: () => void;
     rewardsText: string;
+    showReward?: boolean;
 }
 
 const BRUSH_RADIUS     = 50;
 const CHECK_EVERY      = 40;    // check completion every N erase calls
-const REVEAL_THRESHOLD = 0.95;  // 95% of black cleared = solved
+const REVEAL_THRESHOLD = 0.80;  // 80% of black cleared = solved
 
 
-function inkdropReveal({ onComplete, rewardsText }: Props) {
+function inkdropReveal({ onComplete, rewardsText, showReward = true }: Props) {
     const canvasRef      = useRef<HTMLCanvasElement>(null);
     const scratchAreaRef = useRef<HTMLDivElement>(null);
     const isErasingRef   = useRef(false);
     const strokeCountRef = useRef(0);
     const [solved, setSolved] = useState(false);
-    const [showReward, setShowReward] = useState(false);
+    const [showRewardPopup, setShowRewardPopup] = useState(false);
 
     // Fill canvas solid black once mounted
     useEffect(() => {
@@ -155,12 +156,12 @@ function inkdropReveal({ onComplete, rewardsText }: Props) {
             </div>
 
             { solved &&
-                <button className="solved-continue-btn" onClick={() => { setShowReward(true) }}>
+                <button className="solved-continue-btn" onClick={() => { showReward ? setShowRewardPopup(true) : onComplete() }}>
                     CONTINUE
                 </button>
             }
 
-            { showReward && <RewardPopup rewardsText={rewardsText} onComplete={onComplete} />}
+            { showRewardPopup && <RewardPopup rewardsText={rewardsText} onComplete={onComplete} />}
         </div>
     );
 }

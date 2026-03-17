@@ -128,7 +128,7 @@ function DecisionTree({ onComplete, rewardsText } : DecisionTreeProps) {
         <div>
             <h1 className="puzzle-title">You're the Activist</h1>
             <p className="puzzle-instruction">
-                Make choices as a 1970s London student discovering apartheid. Top section stores user last 3 choices with feedback.
+                Make choices as a 1970s London student learning apartheid. Top section stores user last 3 choices with feedback.
             </p>
             <section className="decisionTree-section">
                 {/* History timeline */}

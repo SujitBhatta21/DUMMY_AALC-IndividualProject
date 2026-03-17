@@ -1,10 +1,9 @@
 package com.example.server.model;
 
 import com.example.server.converter.FitbAnswerConverter;
-import jakarta.persistence.Convert;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Column;
+import jakarta.persistence.*;
+import jakarta.persistence.GeneratedValue;
+
 
 import java.util.List;
 import java.util.Map;
@@ -14,7 +13,9 @@ import java.util.Map;
 public class Shard {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String title;
 
     @Column(columnDefinition = "TEXT")
@@ -27,20 +28,14 @@ public class Shard {
     private String rewardsText;             // Confusion on types...
     private String puzzleType;
     private Integer trackNumber;
-    private boolean isUnlocked;            // If isCompleted True then isUnlocked true for shard+1.
-    private boolean isCompleted = false;
-
-
-    public Shard(Integer id, String title, String fitb_question, Map<Integer, List<String>> fitb_answer,
-                 String rewardsText, String puzzleType, boolean isUnlocked) {
-        this.id = id;
+    public Shard(Integer shardNumber, String title, String fitb_question, Map<Integer, List<String>> fitb_answer,
+                 String rewardsText, String puzzleType) {
+        this.setTrackNumber(shardNumber);
         this.title = title;
         this.fitb_question = fitb_question;
         this.fitb_answer = fitb_answer;
         this.rewardsText = rewardsText;
         this.puzzleType = puzzleType;
-        this.isUnlocked = isUnlocked;
-        this.setTrackNumber(this.id);
     }
 
     public Shard() {
@@ -101,21 +96,6 @@ public class Shard {
         return trackNumber;
     }
 
-    public boolean isCompleted() {
-        return isCompleted;
-    }
-
-    public void setCompleted(boolean completed) {
-        isCompleted = completed;
-    }
-
-    public boolean isUnlocked() {
-        return isUnlocked;
-    }
-
-    public void setUnlocked(boolean unlocked) {
-        isUnlocked = unlocked;
-    }
 
 
     public String getFitb_question() {

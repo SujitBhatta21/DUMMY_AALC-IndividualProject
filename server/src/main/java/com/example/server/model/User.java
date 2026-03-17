@@ -1,11 +1,17 @@
 package com.example.server.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+
+import java.time.Instant;
 
 
 @Entity
@@ -13,10 +19,20 @@ import jakarta.persistence.Table;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
+    private Integer userId;
+
+    // Stored as "USER" or "ADMIN" text in DB; columnDefinition gives existing rows a default
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, columnDefinition = "varchar(50) default 'USER'")
+    private Role role = Role.USER;
 
     private String username;
+
+    @JsonIgnoreProperties({"password"}) // Making sure password is not fetched in frontend.
     private String password;
+
+    @Column(nullable = true)
+    private Instant lastActiveAt;
 
     public User() {}
 
@@ -30,11 +46,11 @@ public class User {
 //        return "";
 //    }
 
-    public Long getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
@@ -53,5 +69,21 @@ public class User {
     // NOTE: Only used for changing password not on Forget password.
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public Instant getLastActiveAt() {
+        return lastActiveAt;
+    }
+
+    public void setLastActiveAt(Instant lastActiveAt) {
+        this.lastActiveAt = lastActiveAt;
     }
 }

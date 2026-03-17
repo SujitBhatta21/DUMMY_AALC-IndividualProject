@@ -1,4 +1,5 @@
 import "../App.css"
+import GlossaryTerm from "../components/GlossaryTerm.tsx";
 import type {ReactNode} from "react";
 
 
@@ -6,7 +7,7 @@ const shardContent: Record<number, ReactNode> = {
     1: (
         <div>
             <p>
-                Apartheid is a system of racial segregation and control.
+                <GlossaryTerm word="Apartheid" /> is a system of racial segregation and control.
                 The word apartheid means <strong>'separateness'</strong>.
             </p>
             <p>
@@ -18,15 +19,10 @@ const shardContent: Record<number, ReactNode> = {
                 from the people who already lived there.
             </p>
             <p>
-                The National Party, a white minority political party, began to put
+                The <GlossaryTerm word="National Party" />, a white minority political party, began to put
                 'Apartheid' laws in place after they took power in <strong>1948</strong> following
                 an election in which only white people could vote. These laws controlled where
                 black South Africans could live, work, and move.
-            </p>
-            <p>
-                On the left, you see the National Party flag.
-                On the right, the ANC (African National Congress) flag —
-                one of the organisations that resisted apartheid and who had a base in Penton Street.
             </p>
         </div>
     ),
@@ -34,8 +30,8 @@ const shardContent: Record<number, ReactNode> = {
         <div>
             <p>
                 Under apartheid, the government banned all forms of protest.
-                The <strong>Terrorism Act</strong> meant anyone who spoke out could be
-                sentenced to long prison terms on <strong>Robben Island</strong> — or
+                The <strong><GlossaryTerm word="Terrorism Act" /></strong> meant anyone who spoke out could be
+                sentenced to long prison terms on <strong><GlossaryTerm word="Robben Island" /></strong> — or
                 detained <strong>indefinitely without trial</strong>.
             </p>
             <p>
@@ -43,9 +39,9 @@ const shardContent: Record<number, ReactNode> = {
             </p>
             <p>
                 But none of this stopped the resistance. People organised in secret,
-                forming underground networks to sabotage power stations,
-                and smuggle activists out of the country to join banned liberation
-                movements - some of which operated from right here in London.
+                forming underground networks to <GlossaryTerm word="sabotage" /> power stations,
+                and smuggle activists out of the country to join banned <GlossaryTerm word="liberation movements" /> -
+                some of which operated from right here in London.
             </p>
         </div>
     ),
@@ -53,12 +49,12 @@ const shardContent: Record<number, ReactNode> = {
         <div>
             <p>
                 Apartheid sparked growing resistance — especially among young people.
-                In <strong>1960</strong>, police opened fire on peaceful protesters
-                in <strong>Sharpeville</strong>, killing 69 people, including women and children.
+                In <strong>March, 1960</strong>, police opened fire on peaceful protesters
+                in <strong><GlossaryTerm word="Sharpeville" /></strong>, killing 69 people, including women and children.
             </p>
             <p>
-                In <strong>1976</strong>, students in <strong>Soweto</strong> rose up
-                against forced Afrikaans-language instruction. Police responded with
+                In <strong>June, 1976</strong>, students in <strong><GlossaryTerm word="Soweto" /></strong> rose up
+                against forced <GlossaryTerm word="Afrikaans" />-language instruction. Police responded with
                 bullets. These moments shook the world when images taken by
                 photographers on the ground were shared internationally.
             </p>
@@ -68,18 +64,18 @@ const shardContent: Record<number, ReactNode> = {
         <div>
             <p>
                 As news of apartheid spread, people outside South Africa began to take action.
-                In the UK, students, faith groups, <strong>trade unions</strong>, and political activists organised
-                protests to show <strong>solidarity</strong>.
+                In the UK, students, faith groups, <strong><GlossaryTerm word="trade unions" /></strong>, and political activists organised
+                protests to show <strong><GlossaryTerm word="solidarity" /></strong>.
             </p>
             <p>
                 Young people played a big role.
             </p>
             <p>
-                Student groups across the country joined campaigns such as the <strong>Barclays boycott</strong>, encouraging people
+                Student groups across the country joined campaigns such as the <strong><GlossaryTerm word="Barclays boycott" /></strong>, encouraging people
                 to close their bank accounts because Barclays invested in apartheid South Africa.
             </p>
             <p>
-                Leaflets, rallies, marches, <strong>boycotts</strong>, and campus marches helped spread awareness and put pressure on
+                Leaflets, rallies, marches, <strong><GlossaryTerm word="boycotts" /></strong>, and campus marches helped spread awareness and put pressure on
                 companies and the UK government to take a stand.
             </p>
         </div>
@@ -87,25 +83,25 @@ const shardContent: Record<number, ReactNode> = {
     5: (
         <div>
             <p>
-                The <strong>ANC in exile</strong> set up its London office at <strong>28 Penton Street.</strong>
+                The <strong>ANC in <GlossaryTerm word="exile" /></strong> set up its London office at <strong>28 Penton Street.</strong>
             </p>
             <p>
                 This small building became a lifeline for the struggle:
             </p>
-            <p>  - editing and printing newsletter </p>
+            <p>  - editing and printing newsletters </p>
             <p>- storing secret documents</p>
-            <p>- working with Anti-Apartheid Movement to coordinate protests</p>
-            <p>- meeting supporters and supporting members of the exiled South African communities.</p>
+            <p>- working with <GlossaryTerm word="Anti-Apartheid Movement" /> to coordinate protests</p>
+            <p>- meeting supporters and supporting members of the exiled Southern African communities.</p>
         </div>
     ),
     6: (
         <div>
             <p>
-                On 14th March 1982, apartheid 9 agents planted a bomb at 28 Penton Street. On that day
-                they expected ANC leader Oliver Tambo to be in the building.
+                On 14th March 1982, 9 apartheid agents planted a bomb at 28 Penton Street. On that day
+                they expected ANC leader <GlossaryTerm word="Oliver Tambo" /> to be in the building.
             </p>
             <p>
-                Their aim: destroy documents, silence voices, <strong>assassinate Tambo</strong> and intimidate activists.
+                Their aim: destroy documents, silence voices, <strong><GlossaryTerm word="assassinate" /> Tambo</strong> and intimidate activists.
             </p>
             <p>
                 Miraculously, no one was killed.
@@ -115,7 +111,7 @@ const shardContent: Record<number, ReactNode> = {
     7: (
         <div>
             <p>
-                As the struggle against apartheid grew, people around the world called for <strong>sanctions</strong>
+                As the struggle against apartheid grew, people around the world called for <strong><GlossaryTerm word="sanctions" /></strong>
                 — actions that put economic and political pressure on the South African government.
             </p>
             <p>
@@ -123,12 +119,12 @@ const shardContent: Record<number, ReactNode> = {
             </p>
             <p>
                 In the UK, the government at the time did <strong>not</strong> support full sanctions against apartheid.
-                So ordinary people, community groups, <strong>trade unions</strong>, artists, and activists took the lead.
+                So ordinary people, community groups, <strong><GlossaryTerm word="trade unions" /></strong>, artists, and activists took the lead.
             </p>
             <p>
-                They organised <strong>boycotts</strong> of South African goods, refused to play or perform in South Africa,
+                They organised <strong><GlossaryTerm word="boycotts" /></strong> of South African goods, refused to play or perform in South Africa,
                 boycotted visiting South African sports teams, and pushed companies to stop trading
-                with the apartheid regime.
+                with the apartheid <GlossaryTerm word="regime" />.
             </p>
             <p>
                 These actions didn't end apartheid on their own — but they made the South African government
@@ -141,11 +137,11 @@ const shardContent: Record<number, ReactNode> = {
             <p>When you couldn't speak freely, you could still sing.</p>
             <p>
                 Music was one of apartheid's most powerful opponents. At marches, uprisings, and community gatherings,
-                songs carried messages of hope, defiance, and solidarity that no law could silence.
+                songs carried messages of hope, <GlossaryTerm word="defiance" />, and solidarity that no law could silence.
             </p>
             <p>
-                Struggle songs like <strong><em>"Senzeni Na?"</em></strong>, <strong><em>"Siyahamba"</em></strong>,
-                and <strong><em>"Nkosi Sikelel' iAfrika"</em></strong> kept people united — some were calming,
+                Struggle songs like <strong><em><GlossaryTerm word="Senzeni Na?" /></em></strong>, <strong><em><GlossaryTerm word="Siyahamba" /></em></strong>,
+                and <strong><em><GlossaryTerm word="Nkosi Sikelel' iAfrika" /></em></strong> kept people united — some were calming,
                 some were bold, and some openly mocked the apartheid government.
             </p>
             <p>
@@ -159,7 +155,7 @@ const shardContent: Record<number, ReactNode> = {
     ),
     9: (
         <div>
-            <p>In 1955, people from across South Africa — workers, students, and activists — came together to imagine a fair and equal country. Their ideas became the <strong>Freedom Charter</strong>.</p>
+            <p>In 1955, people from across South Africa — workers, students, and activists — came together to imagine a fair and equal country. Their ideas became the <strong><GlossaryTerm word="Freedom Charter" /></strong>.</p>
             <p>The Charter declared principles that the apartheid government considered dangerous:</p>
             <ul className="charter-list">
                 <li><em>"South Africa belongs to all who live in it."</em></li>
@@ -171,7 +167,7 @@ const shardContent: Record<number, ReactNode> = {
             <p><br></br>The Charter was banned. But it couldn't be silenced.</p>
             <p>
                 Nearly forty years later, when apartheid finally ended in the 1990s, the Freedom Charter's principles
-                helped shape South Africa's new <strong>Constitution</strong> - one of the most progressive in the world.
+                helped shape South Africa's new <strong><GlossaryTerm word="Constitution" /></strong> - one of the most progressive in the world.
                 The dreams of 1955 became legal rights for everyone.
             </p>
         </div>

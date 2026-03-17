@@ -4,7 +4,7 @@
     align-items: center;
     justify-content: center;
     max-width: 700px;
-    margin: 2rem auto;
+    margin: 4rem auto;
     padding: 2rem 2.5rem;
     background: linear-gradient(135deg, #f5e6d3, #e8d4c0 100%);
     border: 2px solid #c9a66b;
@@ -65,6 +65,11 @@
     box-shadow: 0 6px 20px rgba(255, 165, 0, 0.5);
 }
 
+.context-view .next-btn:focus-visible, .back-btn:focus-visible {
+    outline: 3px solid #2c2c2c;
+    outline-offset: 3px;
+}
+
 .read-aloud-btn {
     display: flex;
     align-items: center;
@@ -90,10 +95,56 @@
     box-shadow: 0 4px 12px rgba(139, 69, 19, 0.2);
 }
 
+.read-aloud-btn:focus-visible {
+    outline: 3px solid #8B4513;
+    outline-offset: 3px;
+}
+
 .read-aloud-btn svg {
     font-size: 1.2em;
 }
 
+
+.read-aloud-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.voice-settings-hint {
+    position: relative;
+    color: #8B4513;
+    font-size: 1.2rem;
+    cursor: default;
+    display: flex;
+    align-items: center;
+}
+
+.voice-settings-tooltip {
+    display: none;
+    position: absolute;
+    bottom: 130%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    color: black;
+    border: 2px dashed #c9a66b;
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.voice-settings-hint:hover .voice-settings-tooltip {
+    display: block;
+}
+
+.voice-settings-tooltip:focus-visible {
+    outline: 3px solid #8B4513;
+    outline-offset: 3px;
+}
 
 /* Responsive */
 @media (max-width: 768px) {

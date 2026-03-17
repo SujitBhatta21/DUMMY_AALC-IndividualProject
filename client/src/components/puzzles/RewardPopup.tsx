@@ -1,5 +1,7 @@
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import ReactCanvasConfetti from "react-canvas-confetti";
+import ConfettiPop from "../../assets/audio/balloon-pop.mp3";
+
 
 interface RewardPopupProps {
     rewardsText: string;
@@ -7,6 +9,10 @@ interface RewardPopupProps {
 }
 
 function RewardPopup({ rewardsText, onComplete }: RewardPopupProps) {
+    useEffect(() => {
+        new Audio(ConfettiPop).play();
+    }, []);
+
     const onInit = useCallback(({ confetti }: { confetti: (opts: object) => void }) => {
         confetti({
             particleCount: 150,

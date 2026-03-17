@@ -29,7 +29,7 @@ function JigSaw({ onComplete, rewardsText }: JigSawProps) {
             </p>
             <div className="jigsaw-container">
                 <div className="jigsaw-puzzle">
-                    <h3>Jigsaw Puzzle</h3>
+                    <h2>Puzzle</h2>
                     <div className="jigsaw-puzzle__border">
                         <JigsawPuzzle
                             imageSrc={imageSource}
@@ -40,7 +40,7 @@ function JigSaw({ onComplete, rewardsText }: JigSawProps) {
                     </div>
                 </div>
                 <div className="jigsaw-solution">
-                    <h3>Solution</h3>
+                    <h2>Solution</h2>
                     <img src={imageSource} alt="Puzzle solution" />
                 </div>
             </div>

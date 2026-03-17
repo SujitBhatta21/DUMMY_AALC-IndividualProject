@@ -1,9 +1,14 @@
 package com.example.server.repository;
 
+import com.example.server.model.Role;
 import com.example.server.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends JpaRepository<User, Integer> {
+import java.time.Instant;
+
+public interface UserRepository extends JpaRepository<User, Long> {
     boolean existsByUsername(String username);
-    User findByUsernameAndPassword(String username, String password);
+    User findByUsername(String username);
+    Long countByRole(Role role);
+    Long countByLastActiveAtGreaterThan(Instant cutoff);
 }

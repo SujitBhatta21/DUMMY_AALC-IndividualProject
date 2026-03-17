@@ -4,6 +4,7 @@ import { Header } from "../components/Header.tsx";
 import Footer from "../components/Footer";
 import "../styles/LoginPage.css";
 import { FaRegEye, FaRegEyeSlash, FaRandom } from "react-icons/fa";
+import { apiFetch } from "../utils.ts"
 
 
 function LoginPage() {
@@ -16,7 +17,7 @@ function LoginPage() {
 
     const fetchRandomUsername = async () => {
         try {
-            const res: Response = await fetch(`${import.meta.env.VITE_API_URL}/api/accounts/generate_username`);
+            const res: Response = await apiFetch("/api/accounts/generate_username");
             const data: string = await res.text();
             setUsername(data);
         } catch (err) {
@@ -34,19 +35,20 @@ function LoginPage() {
         setError("");
 
         try {
-            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/accounts/register`, {
+            const res = await apiFetch("/api/accounts/register", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ username, password }),
             });
 
             if (!res.ok) {
-                setError("Username already taken. Please reroll.");
+                setError(await res.text());
                 return;
             }
 
-            localStorage.setItem("username", username);
-            navigate("/");
+            // Register returns a success message — switch to login so user can sign in
+            setIsRegisterMode(false);
+            setPassword("");
         } catch (err) {
             setError("Something went wrong. Please try again.");
         }
@@ -57,19 +59,25 @@ function LoginPage() {
         setError("");
 
         try {
-            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/accounts/login`, {
+            const res = await apiFetch("/api/accounts/login", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ username, password }),
             });
 
-            if (res.status === 401) {
+            if (!res.ok) {
                 setError("Invalid username or password.");
                 return;
             }
 
-            localStorage.setItem("username", username);
-            navigate("/");
+            // Store token + identity — token is sent automatically by apiFetch on every request
+            const data = await res.json() as { token: string; userId: number; username: string; role: string };
+            localStorage.setItem("token", data.token);
+            localStorage.setItem("userId", String(data.userId));
+            localStorage.setItem("username", data.username);
+            localStorage.setItem("role", data.role);
+            window.location.href = "/"; // Just useNavigate doesn't work. I need to reload the page for UI changes as well.
+
         } catch (err) {
             setError("Something went wrong. Please try again.");
         }
@@ -102,7 +110,9 @@ function LoginPage() {
                                     required
                                 />
                                 {isRegisterMode && (
-                                    <FaRandom title="Reroll username" onClick={fetchRandomUsername} />
+                                    <button type="button" className="icon-btn" aria-label="Reroll username" onClick={fetchRandomUsername}>
+                                        <FaRandom />
+                                    </button>
                                 )}
                             </div>
                         </div>
@@ -118,10 +128,14 @@ function LoginPage() {
                                     onChange={(e) => { setPassword(e.target.value)} }
                                     required
                                 />
-                                {showPassword
-                                    ? <FaRegEye title="Hide Password" onClick={() => { setShowPassword(false)} } />
-                                    : <FaRegEyeSlash title="Show Password" onClick={() => { setShowPassword(true)} } />
-                                }
+                                <button
+                                    type="button"
+                                    className="icon-btn"
+                                    aria-label={showPassword ? "Hide password" : "Show password"}
+                                    onClick={() => { setShowPassword(!showPassword); }}
+                                >
+                                    {showPassword ? <FaRegEye /> : <FaRegEyeSlash />}
+                                </button>
                             </div>
                         </div>
 
@@ -130,11 +144,17 @@ function LoginPage() {
                         </button>
                     </form>
 
+                    {isRegisterMode && (
+                        <p className="privacy-note">
+                            We don't collect your name, email, or any personal information. Your username is randomly generated - we never know who you are.
+                        </p>
+                    )}
+
 
                     <div className="login-footer-links">
-                        <a  className="mode-change-link" onClick={() => { setIsRegisterMode(!isRegisterMode); setError(""); setPassword(""); }}>
+                        <button type="button" className="mode-change-link" onClick={() => { setIsRegisterMode(!isRegisterMode); setError(""); setPassword(""); }}>
                             {isRegisterMode ? "Already have an account? Login" : "No account? Register here"}
-                        </a>
+                        </button>
 
                         <Link to="/">Back to Home</Link>
                     </div>

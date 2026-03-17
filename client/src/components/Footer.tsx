@@ -20,9 +20,7 @@ const Footer = () => {
                 </div>
 
                 <div className="footer-links">
-                    <a href="/privacy">Privacy Policy</a>
-                    <span> / </span>
-                    <a href="/cookie-notice">Cookie Notice</a>
+                    <p>Cookie Notice - Not collected</p>
                 </div>
 
                 <div className="footer-license">

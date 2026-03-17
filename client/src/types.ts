@@ -1,3 +1,10 @@
+/*
+NOTE:
+ Remember field names in interface must match Jackson serialises from Java <object e.g. Shard>.
+ It's determined by getter method names, not field declaration order or db column order.
+*/
+
+// This is interface for Shard table.
 export interface Shard {
     id: number;
     title: string;
@@ -6,6 +13,30 @@ export interface Shard {
     rewardsText: string;
     puzzleType: string;
     trackNumber: number;
-    unlocked: boolean;
-    completed: boolean;
 }
+
+
+// This interface for User table
+export interface IUser {
+    userId: number;
+    username: string;
+    role: string;
+    lastActiveAt: string;
+}
+
+
+// This interface for Report table.
+export interface IReport {
+    id: number;
+    user: { userId: number; username: string };
+    title: string;
+    description: string;
+    createdAt: string;
+    status: "OPEN" | "IN_REVIEW" | "RESOLVED";
+}
+
+
+// SIZEMAP  export to be used globally within Settings and App.jsx.
+export const SIZE_MAP: Record<string, string> = { Small: '10px', Medium: '16px', Large: '32px' };
+
+

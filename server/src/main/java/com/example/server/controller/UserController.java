@@ -1,9 +1,16 @@
 package com.example.server.controller;
 
+import com.example.server.model.LoginResponse;
+import com.example.server.model.Report;
+import com.example.server.model.ReportStatus;
 import com.example.server.model.User;
+import com.example.server.repository.UserRepository;
+import com.example.server.service.JwtService;
 import com.example.server.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 
 @RestController
@@ -11,9 +18,13 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     private final UserService userService;
+    private final JwtService jwtService;
+    private final UserRepository userRepository;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, JwtService jwtService, UserRepository userRepository) {
         this.userService = userService;
+        this.jwtService = jwtService;
+        this.userRepository = userRepository;
     }
 
     @GetMapping("/generate_username")
@@ -22,22 +33,41 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<User> register(@RequestBody User user) {
+    public ResponseEntity<?> register(@RequestBody User user) {
         try {
-            User saved = userService.register(user);
-            return ResponseEntity.ok(saved);
+            userService.register(user);
+            return ResponseEntity.ok("Registration successful.");
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
     @PostMapping("/login")
-    public ResponseEntity<User> login(@RequestBody User user) {
+    public ResponseEntity<?> login(@RequestBody User user) {
         try {
             User found = userService.login(user.getUsername(), user.getPassword());
-            return ResponseEntity.ok(found);
+            // Generate token containing username + role, valid for 24h
+            String token = jwtService.generateToken(found.getUsername(), found.getRole());
+            return ResponseEntity.ok(new LoginResponse(token, found.getUserId(), found.getUsername(), found.getRole().name()));
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.status(401).build();
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<String> deleteUser(@RequestBody User user) {
+        userService.deleteUser(user);
+        return ResponseEntity.ok("Delete successful.");
+    }
+
+
+    @PatchMapping("/{id}/change_password")
+    public ResponseEntity<?> changePassword(@PathVariable Integer id, @RequestBody Map<String, String> body) {
+        try {
+            userService.changePassword(id, body.get("newPassword"));
+            return ResponseEntity.ok("Password updated.");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 }

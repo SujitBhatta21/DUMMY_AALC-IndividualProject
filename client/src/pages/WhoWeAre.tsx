@@ -1,5 +1,5 @@
-import Header from "./Header.tsx";
-import Footer from "./Footer.tsx";
+import Header from "../components/Header.tsx";
+import Footer from "../components/Footer.tsx";
 import logo from "../assets/logo/Logo pack AAL 2-01.png"
 import "../styles/WhoWeAre.css"
 import { useEffect } from "react";
@@ -10,12 +10,17 @@ function WhoWeAre(){
         document.title = 'Who We Are | AALC Interactive';
     }, []);
 
-    const cmlLink = "https://antiapartheidlegacy.org.uk/heritage-arts-culture/history/the-anti-apartheid-centre-of-memory-and-learning/";
+    const clientWebsiteLink = "https://antiapartheidlegacy.org.uk/heritage-arts-culture/history/the-anti-apartheid-centre-of-memory-and-learning/";
+    const clientWebsiteBlog = "https://antiapartheidlegacy.org.uk/blog/";
 
-    function handleOnClick() {
-        window.location.href = cmlLink;
+    const handleOnClickVisit = () => {
+        window.location.href = clientWebsiteLink;
     }
-    
+
+    const handleOnClickBlog = () => {
+        window.location.href = clientWebsiteBlog;
+    }
+
     return(
         <div className="who-we-are-page">
             <Header />
@@ -30,7 +35,7 @@ function WhoWeAre(){
             <section className="green-box-container">
                 <div className="img-readmore-section">
                     <img src={ logo } alt="AALC Logo" />
-                    <button onClick={ handleOnClick }>Visit Our Website</button>
+                    <button onClick={ handleOnClickVisit }>Visit Our Website</button>
                 </div>
                 <div className="text-container">
                     <p>
@@ -95,6 +100,11 @@ function WhoWeAre(){
                 </div>
             </section>
 
+            <section className="read-our-blog-section">
+                <p>Read out latest news and blogs</p>
+                <button onClick={ handleOnClickBlog }>Our blog</button>
+            </section>
+
             <section className="museum-container">
                 <h2>Visit Us</h2>
                 <div className="museum-stuffs">
@@ -113,7 +123,7 @@ function WhoWeAre(){
                         <p>28 Penton Street, London, N1 9PS</p>
                         <h1>OPENING HOURS</h1>
                         <p>
-                            Currently Under Construction <br/>
+                            Museum Currently Under Construction <br/>
                             <strong style={{ color: "red" }}>(COMING SOON)</strong>
                         </p>
                         {/*<ul>*/}
