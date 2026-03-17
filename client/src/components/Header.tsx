@@ -3,8 +3,39 @@ import '../styles/Header.css';
 import logo from '../assets/logo/Logo pack AAL 2-12.png'
 import { useState, useEffect } from 'react';
 import {Link} from 'react-router-dom';
-import { FaUserCircle } from "react-icons/fa"
 import ReportForm from './ReportForm.tsx';
+
+
+const AVATAR_COLOURS = [
+    '#c0392b', '#d35400', '#e67e22', '#27ae60',
+    '#16a085', '#2980b9', '#8e44ad', '#2c3e50',
+    '#1abc9c', '#e74c3c', '#7f8c8d', '#f39c12',
+];
+
+
+// Function to give same colour to that user.
+// (No backend colour storage needed for specific users)
+function hashUsername(str: string): number {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+        hash = str.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    return Math.abs(hash);
+}
+
+function getInitials(username: string): string {
+    const words = username.match(/[A-Z][a-z]+/g);
+    return (words[0][0] + words[1][0]);
+}
+
+function UserAvatar({ username, className }: { username: string; className?: string }) {
+    const colour = AVATAR_COLOURS[hashUsername(username) % AVATAR_COLOURS.length];
+    return (
+        <span className={`user-avatar ${className ?? ''}`} style={{ backgroundColor: colour }}>
+            {getInitials(username)}
+        </span>
+    );
+}
 
 
 function Header() {
@@ -65,12 +96,12 @@ function Header() {
                     { loggedInUser ?
                         <div className="user-dropdown-wrapper" onKeyDown={(e) => { if (e.key === 'Escape') setDropdownOpen(false); }}>
                             <button
-                                className="nav-btn"
+                                className="nav-btn nav-btn-avatar"
                                 aria-label={`User menu for ${loggedInUser}`}
                                 aria-expanded={dropdownOpen}
                                 onClick={() => { setDropdownOpen(!dropdownOpen); }}
                             >
-                                <FaUserCircle className="user-icon"/>
+                                <UserAvatar username={loggedInUser} />
                             </button>
                             {dropdownOpen && (
                                 <>
@@ -116,7 +147,7 @@ function Header() {
                         {loggedInUser &&
                             <>
                                 <button className="nav-btn">
-                                    <FaUserCircle className="user-icon"/>
+                                    <UserAvatar username={loggedInUser} />
                                     <p onClick={() => { setMenuOpen(false); }}> { loggedInUser } </p>
                                 </button>
                                 <button className="logout-btn" onClick={ handleLogoutOperation }><Link to='/'  />Logout</button>

@@ -46,6 +46,9 @@
     transition: 0.3s linear;
     position: relative;
     overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
 }
 
 .shards-collected-btn::before {
@@ -313,7 +316,12 @@
     box-shadow: 0 8px 20px rgba(34, 139, 85, 0.5);
 }
 
-/* ── Reduced motion ── */
+.book-icon {
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    flex-shrink: 0;
+}
+
+/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
     .shards-collected-btn,
     .shards-collected-btn::before {
@@ -348,6 +356,7 @@
         transform: none;
     }
 }
+
 
 /* Responsive Design */
 @media (max-width: 768px) {

@@ -1,7 +1,7 @@
 import '../styles/TimelinePage.css'
 import { Header } from "../components/Header.tsx";
 import {Link} from "react-router-dom";
-import { FaLock } from "react-icons/fa";
+import { FaLock, FaBook } from "react-icons/fa";
 import {useEffect, useState} from "react";
 import { driver } from 'driver.js';
 import 'driver.js/dist/driver.css';
@@ -151,7 +151,7 @@ function TimelinePage() {
                 <p id="timeline-heading-quote">
                     "Read the story. Answer the clues. Solve the puzzle. Each shard unlocks a piece of history."
                 </p>
-                <button className="shards-collected-btn">SHARDS COLLECTED: { totalSolvedShards }/9</button>
+                <button className="shards-collected-btn"><FaBook className="book-icon"/>SHARDS COLLECTED: { totalSolvedShards }/9</button>
                 <div className="tracks">
                     <div className="timeline-track1">
                         <h3>Apartheid (South Africa)<br/></h3>

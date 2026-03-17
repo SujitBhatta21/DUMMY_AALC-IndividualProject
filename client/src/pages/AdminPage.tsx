@@ -261,7 +261,7 @@ function ReportsPanel({ reports, setReports }: ReportsPanelProps) {
             <p className="admin-subtitle">Submitted reports from users</p>
             <div className="panel-list">
                 {reports.length === 0 && (
-                    <p className="empty-state">No reports found.</p>
+                    <p className="empty-state">No reports submitted yet.</p>
                 )}
                 {reports.map(report => (
                     <div className="info-card" key={report.id}>
