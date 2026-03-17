@@ -102,6 +102,14 @@ public class UserService {
     }
 
 
+    public boolean checkCorrectOldPassword(Integer userId, String oldPassword) {
+        User user = userRepository.findById(userId.longValue())
+                .orElseThrow(() -> new IllegalArgumentException("User not found."));
+        // encrypting oldPassword and checking if hashcode matches with password saved in database.
+        return passwordEncoder.matches(oldPassword, user.getPassword());
+    }
+
+
     public void changePassword(Integer userId, String newPassword) {
         User user = userRepository.findById(userId.longValue())
                 .orElseThrow(() -> new IllegalArgumentException("User not found."));

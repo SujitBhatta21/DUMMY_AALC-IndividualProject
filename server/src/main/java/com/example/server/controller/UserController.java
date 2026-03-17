@@ -63,11 +63,15 @@ public class UserController {
 
     @PatchMapping("/{id}/change_password")
     public ResponseEntity<?> changePassword(@PathVariable Integer id, @RequestBody Map<String, String> body) {
-        try {
-            userService.changePassword(id, body.get("newPassword"));
-            return ResponseEntity.ok("Password updated.");
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+        if (userService.checkCorrectOldPassword(id, body.get("currentPassword"))) {
+            try {
+                userService.changePassword(id, body.get("newPassword"));
+                return ResponseEntity.ok("Password updated.");
+            } catch (IllegalArgumentException e) {
+                return ResponseEntity.badRequest().body(e.getMessage());
+            }
+        } else {
+            return ResponseEntity.badRequest().body("Wrong old password. Please try again...");
         }
     }
 }

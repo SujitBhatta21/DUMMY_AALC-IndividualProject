@@ -54,18 +54,23 @@ function AccountPanel() {
 
 
     // Method that handles API fetch for change of password.
-    const handleChangePasswordSubmit = async () => {
+    const handleChangePasswordSubmit = async (): Promise<boolean> => {
         try {
             const res = await apiFetch(`/api/accounts/${userId}/change_password`, {
                 method: "PATCH",
-                body: JSON.stringify({ newPassword }),
+                body: JSON.stringify({ currentPassword, newPassword }),
             });
             if (!res.ok) {
                 setPasswordError(await res.text());
-                return;
+                return false;
             }
+            setCurrentPassword("");
+            setNewPassword("");
+            setConfirmPassword("");
+            return true;
         } catch (error) {
             console.error(error);
+            return false;
         }
     };
 
@@ -160,15 +165,25 @@ function AccountPanel() {
                             </button>
                         </div>
                         <button className="settings-btn" onClick={async () => {
-                            const validationError = validatePassword(newPassword);
-                            if (validationError) {
-                                setPasswordError(validationError);
+                            const validationErrorOldPW = validatePassword(currentPassword);
+                            if (validationErrorOldPW) {
+                                setPasswordError(validationErrorOldPW);
                                 setPasswordSaved(false);
-                            } else if (newPassword !== confirmPassword) {
-                                setPasswordError("Passwords do not match.");
+                                return;
+                            }
+                            const validationErrorNewPW = validatePassword(newPassword);
+                            if (validationErrorNewPW) {
+                                setPasswordError(validationErrorNewPW);
                                 setPasswordSaved(false);
-                            } else {
-                                await handleChangePasswordSubmit();
+                                return;
+                            }
+                            if (newPassword !== confirmPassword) {
+                                setPasswordError("New Passwords do not match.");
+                                setPasswordSaved(false);
+                                return;
+                            }
+                            const success = await handleChangePasswordSubmit();
+                            if (success) {
                                 setPasswordError("");
                                 setPasswordSaved(true);
                                 setTimeout(() => { setPasswordSaved(false) }, 2000);
