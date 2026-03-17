@@ -126,6 +126,13 @@
     line-height: 1;
 }
 
+.stat-card .stat-subvalue {
+    font-size: 0.72rem;
+    color: #aaa;
+    font-weight: 400;
+    line-height: 1.2;
+}
+
 .stat-card .stat-delta {
     font-size: 0.8rem;
     color: #0D6B3A;

@@ -36,7 +36,7 @@ public class AdminController {
 
     // Dashboard Panel API fetches.
     @GetMapping("/total_users")
-    public ResponseEntity<Long> getTotalUsers() {
+    public ResponseEntity<List<Long>> getTotalUsers() {
         return ResponseEntity.ok(statsService.getTotalUsers());
     }
 

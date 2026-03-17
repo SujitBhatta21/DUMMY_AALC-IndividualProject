@@ -132,7 +132,6 @@
     background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
     border: none;
     border-radius: 12px;
-    padding: clamp(1rem, 4vw, 2rem) clamp(0.5rem, 2vw, 1rem);
     text-align: center;
     font-size: clamp(1rem, 2vw, 1.25rem);
     font-weight: bold;
@@ -147,23 +146,48 @@
     box-shadow: 0 8px 20px rgba(255, 165, 0, 0.5);
 }
 
+/* Shared shard button layout — number stacked above title */
+.tt1-shards button,
+.tt2-shards button,
+.tt3-shards button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+    min-height: 90px;
+    padding: 0.75rem clamp(0.5rem, 2vw, 1rem);
+}
+
 /* Locked Shard Styles */
 .shard-btn.shard-locked {
-    background: linear-gradient(135deg, #6b6b6b 0%, #4a4a4a 100%) !important;
-    color: #999 !important;
     cursor: not-allowed;
-    opacity: 0.7;
+    opacity: 0.5;
     position: relative;
 }
 
-.shard-btn.shard-locked::after {
-    content: '\1F512';      /* Locked emoji... */
+.shard-lock-icon {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(1.5);
-    font-size: 1.5rem;
+    top: 8px;
+    right: 8px;
+    font-size: 0.90rem;
     opacity: 0.8;
+}
+
+.shard-number {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-weight: bold;
+    padding-bottom: 0.5rem;
+    line-height: 1;
+}
+
+.shard-title {
+    font-size: clamp(0.7rem, 1.5vw, 0.85rem);
+    font-weight: 600;
+    line-height: 1.3;
+    text-align: center;
+    word-break: break-word;
+    opacity: 0.9;
 }
 
 .shard-btn.shard-locked:hover {
@@ -234,7 +258,6 @@
     background: linear-gradient(135deg, #4a90d9 0%, #2563a8 100%);
     border: none;
     border-radius: 12px;
-    padding: clamp(1rem, 4vw, 2rem) clamp(0.5rem, 2vw, 1rem);
     text-align: center;
     font-size: clamp(1rem, 2vw, 1.25rem);
     font-weight: bold;
@@ -275,7 +298,6 @@
     background: linear-gradient(135deg, #3cb371 0%, #228b55 100%);
     border: none;
     border-radius: 12px;
-    padding: clamp(1rem, 4vw, 2rem) clamp(0.5rem, 2vw, 1rem);
     text-align: center;
     font-size: clamp(1rem, 2vw, 1.25rem);
     font-weight: bold;

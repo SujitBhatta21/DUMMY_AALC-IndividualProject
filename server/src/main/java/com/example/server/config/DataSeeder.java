@@ -83,7 +83,7 @@ public class DataSeeder implements CommandLineRunner {
 
     private void seedShards() {
         shardRepository.saveAll(List.of(
-                new Shard(1, "Shard-1: The Passbook Fragment",
+                new Shard(1, "The Passbook Fragment",
                         "The word \u201capartheid\" means ___. The National Party, a white minority political party, took power in ___ after an election in which only ___ people could vote. These laws controlled where black South Africans could live, work, and move. The ___ was one of the organisations that resisted apartheid.",
                         Map.of(1, List.of("separateness", "supremacy"),
                                 2, List.of("1948", "1938"),
@@ -92,7 +92,7 @@ public class DataSeeder implements CommandLineRunner {
                         "In 1952, Black South Africans were required to carry passbooks" +
                         " controlling where they could live, work, or travel. These laws turned daily life into a constant threat.",
                         "JIGSAW"),
-                new Shard(2, "Shard-2: The Silencing",
+                new Shard(2, "The Silencing",
                         " The ___ Act meant anyone who spoke out could be sentenced to prison on ___." +
                                 " ___ by black workers were illegal.",
                         Map.of(1, List.of("Terrorism", "Elections"),
@@ -102,7 +102,7 @@ public class DataSeeder implements CommandLineRunner {
                                 "– but South Africans continued to organise underground and to smuggle people " +
                                 "out to continue the struggle from outside the country. Resistance found a way.",
                         "REDACTED_REVEAL"),
-                new Shard(3, "Shard-3: The Uprising ",
+                new Shard(3, "The Uprising ",
                         "In ___, police opened fire on peaceful protesters in ___, killing at least ___ people including children." +
                                 " In 1976, students in ___ rose up against forced ___-language instruction.",
                         Map.of(1, List.of("1960", "1948", "Joannesburg", "45", "Cape Town", "English"),
@@ -113,7 +113,7 @@ public class DataSeeder implements CommandLineRunner {
                         "From Sharpeville to Soweto, uprisings revealed the courage of ordinary people — and the cruelty of the state.\n" +
                                 "These events lit a spark that spread around the world.",
                         "ORDER_EVENTS_CHRONOLOGICALLY"),
-                new Shard(4, "Shard-4: The Activist's Choice",
+                new Shard(4, "The Activist's Choice",
                         "Student groups joined the ___ boycott to put pressure on companies investing in apartheid.\n" +
                                 "Protests, marches, and boycotts were all ways of showing ___ with South Africa.",
                         Map.of(1, List.of("Barclays", "Lloyds"),
@@ -122,7 +122,7 @@ public class DataSeeder implements CommandLineRunner {
                                 "Their pressure worked - Barclays eventually pulled out of South Africa in 1986. " +
                                 "A global movement was forming, one choice at a time",
                         "DECISION_TREE"),
-                new Shard(5, "Shard-5: Penton Street Office Map",
+                new Shard(5, "Penton Street Office Map",
                         "The ANC set up its London office at 28 ___ Street.\n" +
                                 "The building was used to store secret ___ and coordinate ___.",
                         Map.of(1, List.of("Penton", "Kenton"),
@@ -131,7 +131,7 @@ public class DataSeeder implements CommandLineRunner {
                         "\u201cThe building was small, but its voice was loud. Stories, testimonies, and strategy " +
                                 "passed through its walls every day. It was a hub for communication networks.\u201d",
                         "COMMUNICATION_NETWORK"),
-                new Shard(6, "Shard-6: Bombing Puzzle",
+                new Shard(6, "The Bombing",
                         "On 14th March 1982, apartheid agents planted a bomb at ___ Penton Street, hoping t" +
                                 " assassinate ANC leader ___.\n" +
                                 "Miraculously, no one was ___.",
@@ -140,7 +140,7 @@ public class DataSeeder implements CommandLineRunner {
                                 3, List.of("killed", "survived")),
                         "\u201cThe bomb shattered windows - but not the movement. The building stood. The work continued.\u201d",
                         "CONNECT_MATCHING"),
-                new Shard(7, "Shard-7: The Sanctions Decision Board",
+                new Shard(7, "The Sanctions Decision Board",
                         "People around the world called for ___ to put pressure on the South African government.\n" +
                                 "In the UK, the government ___ support full sanctions — so ordinary people took the lead.\n" +
                                 "Activists organised ___ of South African goods and sports teams.\n" +
@@ -151,7 +151,7 @@ public class DataSeeder implements CommandLineRunner {
                                 4, List.of("apartheid", "support")),
                         "\u201cEconomic and cultural pressure sent a message: apartheid had no future.\u201d",
                         "DRAG_AND_CATEGORISE"),
-                new Shard(8, "Shard-8: Songs of Resistance",
+                new Shard(8, "Songs of Resistance",
                         "Music carried messages of ___, even when speaking freely was banned.\n" +
                                 "Struggle songs helped keep people ___.\n" +
                                 "\"Free Nelson Mandela\" became an international ___.\n" +
@@ -162,7 +162,7 @@ public class DataSeeder implements CommandLineRunner {
                         "\u201cThese songs carried courage through communities - and across the world. They inspired " +
                                 "people to get involved in the struggle for freedom and gave strength to those who kept resisting.\u201d",
                         "AUDIO_MATCHING_PUZZLE"),
-                new Shard(9, "Shard-9: The Freedom Charter Signature",
+                new Shard(9, "The Freedom Charter Signature",
                         "In ___, people from across South Africa came together to imagine a fair and equal country.\n" +
                                 "They called their ideas the ___ Charter.\n" +
                                 "The Charter said South Africa belongs to ___ who live in it.\n" +

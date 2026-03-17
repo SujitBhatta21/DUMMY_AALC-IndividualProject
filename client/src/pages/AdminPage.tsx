@@ -14,6 +14,7 @@ const NAVIGATION_OPTIONS: { id: Panel; label: string; icon: JSX.Element }[] = [
 ];
 
 interface IShardProgressCompletionRate {
+    id: number;
     title: string; // Shard title.
     percentage: number;
 }
@@ -21,7 +22,7 @@ interface IShardProgressCompletionRate {
 
 // Dashboard on the left which is styled horizontal.
 function DashboardPanel() {
-    const [totalUsers, setTotalUsers] = useState<number | null>(null);
+    const [totalUsers, setTotalUsers] = useState<number[]>([]);
     const [totalActiveToday, setTotalActiveToday] = useState<number | null>(null);
     const [totalShardsCompleted, setTotalShardsCompleted] = useState<number | null>(null);
     const [totalAllPSolved, setTotalAllPSolved] = useState<number | null>(null);
@@ -45,10 +46,7 @@ function DashboardPanel() {
             if (tShardsCompletedRes.ok) setTotalShardsCompleted(await tShardsCompletedRes.json());
             if (tAllPSolved.ok) setTotalAllPSolved(await tAllPSolved.json());
             if (tCompletionRate.ok) setShardCompletionRate(await tCompletionRate.json());
-
-            console.log("Shard Completion Rate: ", shardCompletionRate);
         }
-
         fetchStats();
     }, []);
 
@@ -57,10 +55,10 @@ function DashboardPanel() {
     }, [shardCompletionRate]);
 
     const stats = [
-        { label: "Total Users",      value: totalUsers !== null ? String(totalUsers) : "-", delta: "" },
-        { label: "Active Today",     value: totalActiveToday != null ? String(totalActiveToday) : "-", delta: "" },
-        { label: "Shards Completed", value: totalShardsCompleted !== null ? String(totalShardsCompleted) : "-", delta: "" },
-        { label: "All Puzzles Solved",   value: totalAllPSolved !== null ? String(totalAllPSolved) : "-", delta: "" },
+        { label: "Total Users",       value: totalUsers.length != 0 ? String(totalUsers.at(0)) : "-", subValue: totalUsers.length != 0 ? `${totalUsers.at(1)} Admin · ${totalUsers.at(2)} User` : "" },
+        { label: "Active Today",      value: totalActiveToday != null ? String(totalActiveToday) : "-" },
+        { label: "Shards Completed",  value: totalShardsCompleted !== null ? String(totalShardsCompleted) : "-" },
+        { label: "All Puzzles Solved", value: totalAllPSolved !== null ? String(totalAllPSolved) : "-" },
     ];
 
     const recentActivity = [
@@ -82,7 +80,7 @@ function DashboardPanel() {
                     <div className="stat-card" key={s.label}>
                         <span className="stat-label">{s.label}</span>
                         <span className="stat-value">{s.value}</span>
-                        {s.delta && <span className="stat-delta">{s.delta}</span>}
+                        {s.subValue && <span className="stat-subvalue">{s.subValue}</span>}
                     </div>
                 ))}
             </div>
@@ -107,7 +105,7 @@ function DashboardPanel() {
                         {shardCompletionRate.map(s => (
                             <div className="progress-row" key={s.title}>
                                 <div className="progress-row-header">
-                                    <span>{s.title}</span>
+                                    <span>Shard-{s.id}: {s.title}</span>
                                     <span>{s.percentage}%</span>
                                 </div>
                                 <div className="progress-bar-track">

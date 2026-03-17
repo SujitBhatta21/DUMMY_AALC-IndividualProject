@@ -1,6 +1,7 @@
 import '../styles/TimelinePage.css'
 import { Header } from "../components/Header.tsx";
 import {Link} from "react-router-dom";
+import { FaLock } from "react-icons/fa";
 import {useEffect, useState} from "react";
 import { driver } from 'driver.js';
 import 'driver.js/dist/driver.css';
@@ -129,6 +130,8 @@ function TimelinePage() {
     // BugFix: This way index of shard is not visible if the shard is locked.
     const getShardLabel = (index: number) => isShardAccessible(index) ? shards[index]?.id : "";
 
+    const isLocked = (index: number) => !isShardAccessible(index);
+
     // Helper function to get the appropriate CSS class for a shard button
     const getShardButtonClass = (index: number): string => {
         const isAccessible = isShardAccessible(index);
@@ -154,7 +157,10 @@ function TimelinePage() {
                         <h3>Apartheid (South Africa)<br/></h3>
                         <div className="tt1-shards">
                             <Link to={`/storyline/shard/${ shards[0]?.id }`}>
-                                <button className={getShardButtonClass(0)}>{ getShardLabel(0) }</button>
+                                <button className={getShardButtonClass(0)}>
+                                    <span className="shard-number">{ getShardLabel(0) }</span>
+                                    <span className="shard-title">{ shards[0]?.title }</span>
+                                </button>
                             </Link>
 
                             <Link
@@ -165,7 +171,11 @@ function TimelinePage() {
                                     }
                                 }}
                             >
-                                <button className={getShardButtonClass(1)}>{ getShardLabel(1) }</button>
+                                <button className={getShardButtonClass(1)} disabled={isLocked(1)}>
+                                    <span className="shard-number">{ getShardLabel(1) }</span>
+                                    <span className="shard-title">{ shards[1]?.title }</span>
+                                    {isLocked(1) && <FaLock className="shard-lock-icon" />}
+                                </button>
                             </Link>
 
                             <Link
@@ -176,7 +186,11 @@ function TimelinePage() {
                                     }
                                 }}
                             >
-                                <button className={getShardButtonClass(2)}>{ getShardLabel(2) }</button>
+                                <button className={getShardButtonClass(2)} disabled={isLocked(2)}>
+                                    <span className="shard-number">{ getShardLabel(2) }</span>
+                                    <span className="shard-title">{ shards[2]?.title }</span>
+                                    {isLocked(2) && <FaLock className="shard-lock-icon" />}
+                                </button>
                             </Link>
                         </div>
                     </div>
@@ -191,7 +205,11 @@ function TimelinePage() {
                                     }
                                 }}
                             >
-                                <button className={getShardButtonClass(3)}>{ getShardLabel(3) }</button>
+                                <button className={getShardButtonClass(3)} disabled={isLocked(3)}>
+                                    <span className="shard-number">{ getShardLabel(3) }</span>
+                                    <span className="shard-title">{ shards[3]?.title }</span>
+                                    {isLocked(3) && <FaLock className="shard-lock-icon" />}
+                                </button>
                             </Link>
 
                             <Link
@@ -202,7 +220,11 @@ function TimelinePage() {
                                     }
                                 }}
                             >
-                                <button className={getShardButtonClass(4)}>{ getShardLabel(4) }</button>
+                                <button className={getShardButtonClass(4)} disabled={isLocked(4)}>
+                                    <span className="shard-number">{ getShardLabel(4) }</span>
+                                    <span className="shard-title">{ shards[4]?.title }</span>
+                                    {isLocked(4) && <FaLock className="shard-lock-icon" />}
+                                </button>
                             </Link>
 
                             <Link
@@ -213,7 +235,11 @@ function TimelinePage() {
                                     }
                                 }}
                             >
-                                <button className={getShardButtonClass(5)}>{ getShardLabel(5) }</button>
+                                <button className={getShardButtonClass(5)} disabled={isLocked(5)}>
+                                    <span className="shard-number">{ getShardLabel(5) }</span>
+                                    <span className="shard-title">{ shards[5]?.title }</span>
+                                    {isLocked(5) && <FaLock className="shard-lock-icon" />}
+                                </button>
                             </Link>
                         </div>
                     </div>
@@ -228,7 +254,11 @@ function TimelinePage() {
                                     }
                                 }}
                             >
-                                <button className={getShardButtonClass(6)}>{ getShardLabel(6) }</button>
+                                <button className={getShardButtonClass(6)} disabled={isLocked(6)}>
+                                    <span className="shard-number">{ getShardLabel(6) }</span>
+                                    <span className="shard-title">{ shards[6]?.title }</span>
+                                    {isLocked(6) && <FaLock className="shard-lock-icon" />}
+                                </button>
                             </Link>
 
                             <Link
@@ -239,7 +269,11 @@ function TimelinePage() {
                                     }
                                 }}
                             >
-                                <button className={ getShardButtonClass(7)}>{ getShardLabel(7) }</button>
+                                <button className={getShardButtonClass(7)} disabled={isLocked(7)}>
+                                    <span className="shard-number">{ getShardLabel(7) }</span>
+                                    <span className="shard-title">{ shards[7]?.title }</span>
+                                    {isLocked(7) && <FaLock className="shard-lock-icon" />}
+                                </button>
                             </Link>
 
                             <Link
@@ -250,7 +284,11 @@ function TimelinePage() {
                                     }
                                 }}
                             >
-                                <button className={getShardButtonClass(8)}>{ getShardLabel(8) }</button>
+                                <button className={getShardButtonClass(8)} disabled={isLocked(8)}>
+                                    <span className="shard-number">{ getShardLabel(8) }</span>
+                                    <span className="shard-title">{ shards[8]?.title }</span>
+                                    {isLocked(8) && <FaLock className="shard-lock-icon" />}
+                                </button>
                             </Link>
                         </div>
                     </div>

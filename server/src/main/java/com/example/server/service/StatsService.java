@@ -34,8 +34,12 @@ public class StatsService {
     /*
      * STATS FOR ADMIN METHODS...
      */
-    public Long getTotalUsers() {
-        return userRepository.count();
+    public List<Long> getTotalUsers() {
+        List<Long> userList = new ArrayList<>();
+        userList.add(userRepository.count());
+        userList.add(getTotalAdminUsers());
+        userList.add(getTotalNormalUsers());
+        return userList;
     }
 
     public Long getTotalAdminUsers() {
@@ -62,27 +66,28 @@ public class StatsService {
 
 
 
-    public record ShardProgress(String title, Integer percentage) {}
+    // Record that is send to the frontend when detched.
+    public record ShardProgress(Integer id, String title, Integer percentage) {}
 
     public List<ShardProgress> getAdminShardCompletionRate() {
-        long totalUsers = userRepository.count();
+        long totalNormalUsers = userRepository.countByRole(Role.USER);
 
         // Edge case to avoid division with 0 if there is no user. (still i'll have an admin in DataSeeder.)
-        if (totalUsers == 0) {
+        if (totalNormalUsers == 0) {
             return new ArrayList<>();
         }
 
         List<Shard> allShards = shardRepository.findAll();
-        List<ShardProgress> pairs = new ArrayList<>();
+        List<ShardProgress> shardProgresses = new ArrayList<>();
 
         for (Shard shard : allShards) {
             int percentCompletion = 0;
             long completedCount = userShardProgressRepository.countByShardIdAndIsCompletedTrue(shard.getId());
             if (completedCount > 0) {
-                percentCompletion = (int)(completedCount * 100.0 / totalUsers);
+                percentCompletion = (int)(completedCount * 100.0 / totalNormalUsers);
             }
-            pairs.add(new ShardProgress(shard.getTitle(), percentCompletion));
+            shardProgresses.add(new ShardProgress(shard.getId(), shard.getTitle(), percentCompletion));
         }
-        return pairs;
+        return shardProgresses;
     }
 }

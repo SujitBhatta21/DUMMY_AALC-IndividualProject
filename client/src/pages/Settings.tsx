@@ -443,15 +443,18 @@ function AboutPanel() {
 
 
 function Settings() {
+    const isLoggedIn = !!localStorage.getItem("token");
     const [activePanel, setActivePanel] = useState<SettingsPanel>("accessibility");
 
     useEffect(() => {
         document.title = 'Settings | AALC Interactive';
     }, []);
 
+    const visibleOptions = NAVIGATION_OPTIONS.filter(item => item.id !== "account" || isLoggedIn);
+
     const renderPanel = () => {
         switch (activePanel) {
-            case "account":       return <AccountPanel />;
+            case "account":       return isLoggedIn ? <AccountPanel /> : <AccessibilityPanel />;
             case "accessibility": return <AccessibilityPanel />;
             case "about":         return <AboutPanel />;
         }
@@ -463,7 +466,7 @@ function Settings() {
             <div className="settings-layout">
                 <nav className="settings-sidebar">
                     <h2 className="settings-sidebar-title">Settings</h2>
-                    {NAVIGATION_OPTIONS.map(item => (
+                    {visibleOptions.map(item => (
                         <button
                             key={item.id}
                             className={`settings-sidebar-item ${activePanel === item.id ? "active" : ""}`}
