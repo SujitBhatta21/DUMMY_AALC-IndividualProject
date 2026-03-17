@@ -340,9 +340,9 @@ function AdminPage() {
                     ))}
                 </nav>
 
-                <main className="admin-main">
+                <section className="admin-main">
                     {renderPanel()}
-                </main>
+                </section>
             </div>
 
         </div>

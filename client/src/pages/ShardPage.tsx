@@ -75,7 +75,7 @@ function ShardPage() {
     const [showShard9Reward, setShowShard9Reward] = useState(false);
 
     return (
-        <div className="shard-page">
+        <main className="shard-page">
             <Header />
 
             {/* Shard-9 custom sequence: InkDropReveal → ContextView → FillInTheBlank */}
@@ -201,7 +201,7 @@ function ShardPage() {
                     }
                 </>
             )}
-        </div>
+        </main>
     );
 }
 

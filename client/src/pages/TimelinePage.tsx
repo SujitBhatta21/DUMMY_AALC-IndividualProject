@@ -144,7 +144,7 @@ function TimelinePage() {
     };
 
     return (
-        <div className="timeline-page">
+        <main className="timeline-page">
             <Header/>
             <section className="timeline-section">
                 <h1>Solve the Puzzles</h1>
@@ -294,7 +294,7 @@ function TimelinePage() {
                     </div>
                 </div>
             </section>
-        </div>
+        </main>
     )
 }
 
