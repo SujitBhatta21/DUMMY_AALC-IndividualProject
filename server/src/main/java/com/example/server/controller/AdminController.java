@@ -63,8 +63,18 @@ public class AdminController {
 
     // USERPANEL API Fetches...
     @GetMapping("/users")
-    public ResponseEntity<?>  getAllUsers() {
+    public ResponseEntity<?> getAllUsers() {
         return ResponseEntity.ok(userService.getUser());
+    }
+
+    @DeleteMapping("/users/{userId}")
+    public ResponseEntity<?> deleteUser(@PathVariable Integer userId) {
+        try {
+            userService.deleteUserById(userId);
+            return ResponseEntity.ok("User deleted.");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
 

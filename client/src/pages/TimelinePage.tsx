@@ -21,7 +21,7 @@ async function fetchShards() : Promise<Shard[]> {
 
 
 function TimelinePage() {
-    const DEVELOPMENT_MODE = true; // I set this to true to test popup tour.
+    const DEVELOPMENT_MODE = false; // I set this to true to test popup tour.
 
     const [shards, setShards] = useState<Shard[]>([]);
     const [completedShardIds, setCompletedShardIds] = useState<Set<number>>(new Set());

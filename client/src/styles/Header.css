@@ -376,7 +376,14 @@ body.menu-open {
     display: flex;
     align-items: center;
     justify-content: center;
+    border: red;
+    border-radius: 5px;
+    padding: 10px;
     color: white;
+    background-color: darkred;
+}
+
+.logout-btn:hover {
     background-color: red;
 }
 

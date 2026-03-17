@@ -300,9 +300,10 @@
 }
 
 .card-date {
-    font-size: 0.8rem;
-    color: #888;
+    font-size: 0.9rem;
+    color: black;
     white-space: nowrap;
+
 }
 
 .card-meta {
@@ -346,6 +347,56 @@
 .badge-open     { background: #fef3c7; color: #92400e; }
 .badge-in-review { background: #dbeafe; color: #1e40af; }
 .badge-resolved { background: #d1fae5; color: #065f46; }
+
+/* Admin user delete button */
+.admin-delete-btn {
+    margin-left: auto;
+    padding: 0.3rem 0.85rem;
+    background: white;
+    color: #b91c1c;
+    border: 1.5px solid #b91c1c;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+}
+
+.admin-delete-btn:hover {
+    background: #b91c1c;
+    color: white;
+}
+
+/* Confirm dialog buttons (admin context) */
+.admin-btn-outline {
+    padding: 0.5rem 1.25rem;
+    background: white;
+    color: #333;
+    border: 1.5px solid #ccc;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.admin-btn-outline:hover {
+    background: #f3f4f6;
+}
+
+.admin-btn-danger {
+    padding: 0.5rem 1.25rem;
+    background: #b91c1c;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.admin-btn-danger:hover {
+    background: #991b1b;
+}
 
 /* Empty state message */
 .empty-state {

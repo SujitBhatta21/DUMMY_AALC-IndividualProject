@@ -20,6 +20,10 @@ function App() {
     useEffect(() => {
         const size = localStorage.getItem('aalc-text-size');
         if (size && SIZE_MAP[size]) document.body.style.fontSize = SIZE_MAP[size];
+
+        // Adding accessibility toggle at main App controlled in Settings.
+        if (localStorage.getItem('aalc-high-contrast') === 'true') document.body.classList.add('high-contrast');
+        if (localStorage.getItem('aalc-reduce-motion') === 'true') document.body.classList.add('reduce-motion');
     }, []);
 
     return (

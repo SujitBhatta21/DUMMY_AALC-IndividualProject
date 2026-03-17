@@ -126,6 +126,7 @@ function UserPanel() {
     const [users, setUsers] = useState<IUser[]>([]);
     const [searchTermUsername, setSearchTermUsername] = useState("");
     const [roleFilter, setRoleFilter] = useState("ALL");
+    const [deleteTargetId, setDeleteTargetId] = useState<number | null>(null);
 
     useEffect(() => {
         async function fetchUsers() {
@@ -135,9 +136,20 @@ function UserPanel() {
         fetchUsers();
     }, []);
 
+    const handleDeleteUser = async () => {
+        if (deleteTargetId === null) return;
+        const res = await apiFetch(`/api/accounts/admin/users/${deleteTargetId}`, { method: "DELETE" });
+        if (res.ok) {
+            setUsers(prev => prev.filter(u => u.userId !== deleteTargetId));
+            setDeleteTargetId(null);
+        }
+    };
+
     const filteredUsers = users
         .filter(u => u.username.toLowerCase().includes(searchTermUsername.toLowerCase()))
         .filter(u => roleFilter === "ALL" || u.role === roleFilter);
+
+    const deleteTarget = users.find(u => u.userId === deleteTargetId);
 
     return (
         <section>
@@ -150,12 +162,12 @@ function UserPanel() {
                     placeholder="Search by username..."
                     aria-label="Search by username"
                     value={searchTermUsername}
-                    onChange={e => setSearchTermUsername(e.target.value)}
+                    onChange={e => { setSearchTermUsername(e.target.value)} }
                     className="user-filter-input"
                 />
                 <select
                     value={roleFilter}
-                    onChange={e => setRoleFilter(e.target.value)}
+                    onChange={e => { setRoleFilter(e.target.value)} }
                     className="user-filter-select"
                     aria-label="Filter by role"
                 >
@@ -176,6 +188,12 @@ function UserPanel() {
                             <span className={`badge ${user.role === "ADMIN" ? "badge-admin" : "badge-user"}`}>
                                 {user.role}
                             </span>
+                            <button
+                                className="admin-delete-btn"
+                                onClick={() => setDeleteTargetId(user.userId)}
+                            >
+                                Delete
+                            </button>
                         </div>
                         <p className="card-meta">ID: {user.userId}</p>
                         <p className="card-meta">
@@ -186,6 +204,26 @@ function UserPanel() {
                     </div>
                 ))}
             </div>
+
+            {deleteTargetId !== null && (
+                <div className="confirm-overlay" onClick={() => { setDeleteTargetId(null)} }>
+                    <div className="confirm-dialog" onClick={e => { e.stopPropagation()} }>
+                        <h2>Delete user?</h2>
+                        <p>
+                            This will permanently delete <strong>{deleteTarget?.username}</strong> and all
+                            their data. This cannot be undone.
+                        </p>
+                        <div className="confirm-actions">
+                            <button className="admin-btn-outline" onClick={() => { setDeleteTargetId(null)} }>
+                                Cancel
+                            </button>
+                            <button className="admin-btn-danger" onClick={handleDeleteUser}>
+                                Yes, delete user
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </section>
     );
 }
@@ -232,7 +270,8 @@ function ReportsPanel({ reports, setReports }: ReportsPanelProps) {
                         <div className="card-header">
                             <span className="card-title">{report.title}</span>
                             <span className="card-date">
-                                {new Date(report.createdAt).toLocaleDateString()}
+                                Date Issued (Time) :
+                                {` ${new Date(report.createdAt).toLocaleDateString()}`}
                                 {` (${new Date(report.createdAt).toLocaleTimeString()})`}
                             </span>
                         </div>

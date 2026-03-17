@@ -119,7 +119,6 @@ function Header() {
                                     <FaUserCircle className="user-icon"/>
                                     <p onClick={() => { setMenuOpen(false); }}> { loggedInUser } </p>
                                 </button>
-                                <button className="">Change Password</button>
                                 <button className="logout-btn" onClick={ handleLogoutOperation }><Link to='/'  />Logout</button>
                             </>
                         }
