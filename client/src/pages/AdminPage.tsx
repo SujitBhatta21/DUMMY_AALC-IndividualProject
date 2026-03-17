@@ -7,7 +7,7 @@ import type { IReport, IUser } from "../types.ts";
 
 type Panel = "dashboard" | "users" | "reports";
 
-const NAVIGATION_OPTIONS: { id: Panel; label: string; icon: JSX.Element }[] = [
+const NAVIGATION_OPTIONS: { id: Panel; label: string; icon: React.ReactElement } [] = [
     { id: "dashboard", label: "Dashboard",  icon: <FiGrid /> },
     { id: "users",     label: "Users",       icon: <FiUsers /> },
     { id: "reports",   label: "Report / Issue",     icon: <FiBarChart2 /> },
@@ -232,7 +232,6 @@ interface ReportsPanelProps {
 }
 
 function ReportsPanel({ reports, setReports }: ReportsPanelProps) {
-    const [postError, setPostError] = useState<string>("");
 
     const handleStatusChange = async (id: number, newStatus: IReport["status"]) => {
         // TODO: PATCH /api/accounts/admin/reports/{id}/status
@@ -243,7 +242,7 @@ function ReportsPanel({ reports, setReports }: ReportsPanelProps) {
             });
 
             if (!res.ok) {
-                setPostError(await res.text());
+                console.log(res.statusText);
                 return;
             }
 

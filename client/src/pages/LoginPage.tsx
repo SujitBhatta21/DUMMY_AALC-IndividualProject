@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Header } from "../components/Header.tsx";
 import Footer from "../components/Footer";
 import "../styles/LoginPage.css";
@@ -13,7 +13,6 @@ function LoginPage() {
     const [error, setError] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const [isRegisterMode, setIsRegisterMode] = useState(false);
-    const navigate = useNavigate();
 
     const fetchRandomUsername = async () => {
         try {
