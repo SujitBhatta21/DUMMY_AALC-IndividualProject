@@ -1,7 +1,7 @@
 import "../../styles/Puzzle.css"
 import "../../styles/RedactedReveal.css"
 import {useEffect, useRef, useState} from "react";
-import RewardPopup from "./RewardPopup";
+import RewardPopup from "../RewardPopup.tsx";
 
 
 interface RedactedRevealProps {

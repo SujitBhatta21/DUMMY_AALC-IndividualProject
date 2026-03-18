@@ -19,6 +19,54 @@ interface IShardProgressCompletionRate {
     percentage: number;
 }
 
+interface IActivityLog {
+    text: string;
+    timestamp: string;
+}
+
+
+
+function displayTime(isoString: string): string {
+    const diff = Math.floor((Date.now() - new Date(isoString).getTime()) / 1000);
+
+    // min, hr, day, week, month, year all in seconds.
+    const MINUTE = 60;
+    const HOUR = 3600;
+    const DAY = 86400;
+    const WEEK = 604800;
+    const MONTH = 2592000; // ~30 days
+    const YEAR = 31536000; // 365 days i.e. 1 year
+
+    if (diff < MINUTE) return "just now";
+
+    if (diff < HOUR) {
+        const mins = Math.floor(diff / MINUTE);
+        return `${mins} min${mins > 1 ? "s" : ""} ago`;
+    }
+
+    if (diff < DAY) {
+        const hrs = Math.floor(diff / HOUR);
+        return `${hrs} hr${hrs > 1 ? "s" : ""} ago`;
+    }
+
+    if (diff < WEEK) {
+        const days = Math.floor(diff / DAY);
+        return `${days} day${days > 1 ? "s" : ""} ago`;
+    }
+
+    if (diff < MONTH) {
+        const weeks = Math.floor(diff / WEEK);
+        return `${weeks} week${weeks > 1 ? "s" : ""} ago`;
+    }
+
+    if (diff < YEAR) {
+        const months = Math.floor(diff / MONTH);
+        return `${months} month${months > 1 ? "s" : ""} ago`;
+    }
+
+    const years = Math.floor(diff / YEAR);
+    return `${years} year${years > 1 ? "s" : ""} ago`;
+}
 
 // Dashboard on the left which is styled horizontal.
 function DashboardPanel() {
@@ -28,6 +76,7 @@ function DashboardPanel() {
     const [totalAllPSolved, setTotalAllPSolved] = useState<number | null>(null);
 
     const [shardCompletionRate, setShardCompletionRate] = useState<IShardProgressCompletionRate[]>([]);
+    const [activityLogs, setActivityLogs] = useState<IActivityLog[]>([]);
 
     useEffect(() => {
         async function fetchStats() {
@@ -38,7 +87,7 @@ function DashboardPanel() {
                 apiFetch("/api/accounts/admin/active_today"),
                 apiFetch("/api/accounts/admin/shards_completed"),
                 apiFetch("/api/accounts/admin/total_all_puzzle_solved"),
-                apiFetch("/api/accounts/admin/shard_completion_rate")
+                apiFetch("/api/accounts/admin/shard_completion_rate"),
             ])
 
             if (tUsersRes.ok) setTotalUsers(await tUsersRes.json());
@@ -51,22 +100,29 @@ function DashboardPanel() {
     }, []);
 
     useEffect(() => {
-        console.log("Shard Completion Rate: ", shardCompletionRate);
-    }, [shardCompletionRate]);
+        console.log("Activtiy logs fetch testing: ", activityLogs);
 
+        async function fetchActivityLog() {
+            const res = await apiFetch("/api/accounts/admin/activity_log");
+            if (res.ok) setActivityLogs(await res.json());
+        }
+        fetchActivityLog();
+
+        // This refreshed / calls fetchActivityLogs every 60 sec...
+        const warmFetchActivityLog = setInterval(fetchActivityLog, 6000);
+        return () => { clearInterval(warmFetchActivityLog) }
+
+    }, []);
+
+    useEffect(() => {
+        console.log("Testing: Activtiy logs fetch testing: ", activityLogs);
+    }, [activityLogs]);
+    
     const stats = [
         { label: "Total Users",       value: totalUsers.length != 0 ? String(totalUsers.at(0)) : "-", subValue: totalUsers.length != 0 ? `${totalUsers.at(1)} Admin · ${totalUsers.at(2)} User` : "" },
         { label: "Active Today",      value: totalActiveToday != null ? String(totalActiveToday) : "-" },
         { label: "Shards Completed",  value: totalShardsCompleted !== null ? String(totalShardsCompleted) : "-" },
         { label: "All Puzzles Solved", value: totalAllPSolved !== null ? String(totalAllPSolved) : "-" },
-    ];
-
-    const recentActivity = [
-        { text: "New user registered", time: "just now" },
-        { text: "Shard #4 completed by user", time: "2 min ago" },
-        { text: "Puzzle solved — Shard #2", time: "10 min ago" },
-        { text: "New user registered", time: "18 min ago" },
-        { text: "Shard #1 completed by user", time: "32 min ago" },
     ];
 
 
@@ -89,11 +145,12 @@ function DashboardPanel() {
                 <div className="admin-panel">
                     <h3 className="admin-section-title">Recent Activity</h3>
                     <div className="activity-list">
-                        {recentActivity.map((item, i) => (
+                        {activityLogs.length === 0 && <p className="empty-state">No activity yet.</p>}
+                        {activityLogs.map((item, i) => (
                             <div className="activity-item" key={i}>
                                 <span className="activity-dot" />
                                 {item.text}
-                                <span className="activity-time">{item.time}</span>
+                                <span className="activity-time">{displayTime(item.timestamp)}</span>
                             </div>
                         ))}
                     </div>

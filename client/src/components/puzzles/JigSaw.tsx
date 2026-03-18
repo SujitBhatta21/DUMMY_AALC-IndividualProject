@@ -3,7 +3,7 @@ import { JigsawPuzzle } from "react-jigsaw-puzzle"
 import "react-jigsaw-puzzle/lib/jigsaw-puzzle.css";
 import "../../styles/Puzzle.css";
 import "../../styles/JigSaw.css";
-import RewardPopup from "./RewardPopup";
+import RewardPopup from "../RewardPopup.tsx";
 
 interface JigSawProps {
     onComplete?: () => void

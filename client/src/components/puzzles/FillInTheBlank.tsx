@@ -9,10 +9,11 @@ interface FITBlankProps {
     answers: Record<number, string[]>;
     onCorrect: (question: string) => void;
     onBack: () => void;
+    isShard9: boolean;
 }
 
 
-function FillInTheBlank({ question, answers, onCorrect, onBack }: FITBlankProps) {
+function FillInTheBlank({ question, answers, onCorrect, onBack, isShard9 }: FITBlankProps) {
 
     const [correctAnswer, setCorrectAnswer] = useState<string[]>([])
     const [showSuccess, setShowSuccess] = useState(false)
@@ -44,11 +45,6 @@ function FillInTheBlank({ question, answers, onCorrect, onBack }: FITBlankProps)
 
     const handlePuzzleCorrect = () => {
         setShowSuccess(true);
-
-        // setTimeout(() => {
-        //     setShowSuccess(false);
-        //     onCorrect(question);
-        // }, 1500);
     }
 
     const handleContinueToNextPuzzle = () => {
@@ -65,7 +61,11 @@ function FillInTheBlank({ question, answers, onCorrect, onBack }: FITBlankProps)
 
         const isCorrect = correctAnswer.every((ans, i) => ans === userAnswers[i]);
         if (isCorrect) {
-            handlePuzzleCorrect();
+            if (isShard9) {
+                onCorrect(question)
+            } else {
+                handlePuzzleCorrect();
+            }
         } else {
             // Send wrong answers back to word bank, keep correct ones in place.
             setFilledBlanks(prev => {
@@ -210,10 +210,10 @@ function FillInTheBlank({ question, answers, onCorrect, onBack }: FITBlankProps)
                     <button onClick={handleSubmit}>Submit</button>
                 </div>
             </div>
-            { showSuccess && (
+            { showSuccess && !isShard9 && (
                 <div className="reward-overlay">
                     <div className="reward-popup">
-                        <h3>Congratulations! You're ready for the next puzzle.</h3>
+                        <h3>Congratulations! You're ready for the next puzzle. </h3>
                         <button className="next-button" onClick={ handleContinueToNextPuzzle }>CONTINUE</button>
                     </div>
                 </div>

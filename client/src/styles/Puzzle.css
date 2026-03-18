@@ -81,3 +81,21 @@
         transform: none;
     }
 }
+
+
+/* Shard-9 puzzle exit simple ease out transition */
+
+.shard9-content {
+    transition: opacity 0.45s ease-out;
+}
+
+.shard9-content--exit {
+    opacity: 0;
+    pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .shard9-content {
+        transition: none;
+    }
+}

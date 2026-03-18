@@ -6,6 +6,7 @@ import com.example.server.repository.ReportRepository;
 import com.example.server.service.JwtService;
 import com.example.server.service.StatsService;
 import com.example.server.service.UserService;
+import com.example.server.service.UserService.ActivityItem;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -58,6 +59,11 @@ public class AdminController {
     @GetMapping("shard_completion_rate")
     public ResponseEntity<List<StatsService.ShardProgress>> getShardCompletionRate() {
         return ResponseEntity.ok(statsService.getAdminShardCompletionRate());
+    }
+
+    @GetMapping("activity_log")
+    public ResponseEntity<List<ActivityItem>> getActivityLog() {
+        return ResponseEntity.ok(userService.getRecentActivity());
     }
 
 

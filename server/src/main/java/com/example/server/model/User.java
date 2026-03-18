@@ -10,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.Instant;
 
@@ -33,6 +34,10 @@ public class User {
 
     @Column(nullable = true)
     private Instant lastActiveAt;
+
+    @CreationTimestamp
+    @Column(nullable = true)
+    private Instant createdAt;
 
     public User() {}
 
@@ -85,5 +90,13 @@ public class User {
 
     public void setLastActiveAt(Instant lastActiveAt) {
         this.lastActiveAt = lastActiveAt;
+    }
+
+    public Instant getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Instant createdAt) {
+        this.createdAt = createdAt;
     }
 }

@@ -7,7 +7,7 @@ import song3 from "../../assets/audio/Chimurenga Dzakatanga  (The Struggle Conti
 import song4 from "../../assets/audio/Thina Sizwe - SABC Choir (Amandla!).mp3";
 import song5 from "../../assets/audio/Thuma Mina.mp3";
 import song6 from "../../assets/audio/Tsoha Vuka.mp3";
-import RewardPopup from "./RewardPopup.tsx";
+import RewardPopup from "../RewardPopup.tsx";
 
 interface Props {
     onComplete: () => void;
