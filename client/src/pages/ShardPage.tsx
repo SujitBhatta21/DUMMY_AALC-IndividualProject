@@ -153,6 +153,7 @@ function ShardPage() {
                             answers={ shardData.fitb_answer }    // Contains wrong options as well. 1st is the is right answer.
                             onCorrect={() => { setCurrentStep(currentStep + 1); }}
                             onBack={() => { setCurrentStep(currentStep - 1); }}
+                            isShard9={ isShard9 }
                         />
                     )}
 
