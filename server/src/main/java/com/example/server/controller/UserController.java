@@ -1,10 +1,7 @@
 package com.example.server.controller;
 
 import com.example.server.model.LoginResponse;
-import com.example.server.model.Report;
-import com.example.server.model.ReportStatus;
 import com.example.server.model.User;
-import com.example.server.repository.UserRepository;
 import com.example.server.service.JwtService;
 import com.example.server.service.UserService;
 import org.springframework.http.ResponseEntity;
@@ -19,12 +16,10 @@ public class UserController {
 
     private final UserService userService;
     private final JwtService jwtService;
-    private final UserRepository userRepository;
 
-    public UserController(UserService userService, JwtService jwtService, UserRepository userRepository) {
+    public UserController(UserService userService, JwtService jwtService) {
         this.userService = userService;
         this.jwtService = jwtService;
-        this.userRepository = userRepository;
     }
 
     @GetMapping("/generate_username")
