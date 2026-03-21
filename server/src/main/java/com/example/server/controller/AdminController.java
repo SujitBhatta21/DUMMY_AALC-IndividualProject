@@ -2,11 +2,11 @@ package com.example.server.controller;
 
 import com.example.server.model.Report;
 import com.example.server.model.ReportStatus;
-import com.example.server.repository.ReportRepository;
 import com.example.server.service.JwtService;
+import com.example.server.service.ReportService;
 import com.example.server.service.StatsService;
 import com.example.server.service.UserService;
-import org.springframework.data.domain.Sort;
+import com.example.server.service.UserService.ActivityItem;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,18 +20,18 @@ public class AdminController {
     private final StatsService statsService;
     private final UserService userService;
     private final JwtService jwtService;
-    private final ReportRepository reportRepository;
+    private final ReportService reportService;
 
     public AdminController(
             StatsService statsService,
             UserService userService,
             JwtService jwtService,
-            ReportRepository reportRepository
+            ReportService reportService
     ) {
         this.statsService = statsService;
         this.userService = userService;
         this.jwtService = jwtService;
-        this.reportRepository = reportRepository;
+        this.reportService = reportService;
     }
 
     // Dashboard Panel API fetches.
@@ -60,8 +60,13 @@ public class AdminController {
         return ResponseEntity.ok(statsService.getAdminShardCompletionRate());
     }
 
+    @GetMapping("activity_log")
+    public ResponseEntity<List<ActivityItem>> getActivityLog() {
+        return ResponseEntity.ok(userService.getRecentActivity());
+    }
 
-    // USERPANEL API Fetches...
+
+    // USERPANEL API Fetches.
     @GetMapping("/users")
     public ResponseEntity<?> getAllUsers() {
         return ResponseEntity.ok(userService.getUser());
@@ -81,19 +86,16 @@ public class AdminController {
     // REPORTS PANEL API Fetches.
     @GetMapping("/reports")
     public ResponseEntity<List<Report>> getReports() {
-        List<Report> reports = reportRepository.findAll(Sort.by(Sort.Direction.DESC, "createdAt"));
-        return ResponseEntity.ok(reports);
+        return ResponseEntity.ok(reportService.getAllReports());
     }
 
-    // Updating the report status using PatchMapping...
     @PatchMapping("/reports/{id}/status")
-    public ResponseEntity<Report> updateReportStatus(@PathVariable Integer id, @RequestBody ReportStatus reportStatus) {
-        Report report = reportRepository.findById(id).orElse(null);
-        if (report == null) {
+    public ResponseEntity<?> updateReportStatus(@PathVariable Integer id, @RequestBody ReportStatus reportStatus) {
+        try {
+            Report updated = reportService.updateStatus(id, reportStatus);
+            return ResponseEntity.ok(updated);
+        } catch (IllegalArgumentException e) {
             return ResponseEntity.notFound().build();
         }
-        report.setStatus(reportStatus);
-        reportRepository.save(report);
-        return ResponseEntity.ok(report);
     }
 }

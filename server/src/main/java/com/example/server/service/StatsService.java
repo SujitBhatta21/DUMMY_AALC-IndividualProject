@@ -12,8 +12,9 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
+
+// This file interacts with UserShardProgressRepo so, don't need separate UserShardProgresService class.
 @Service
 public class StatsService {
     private UserRepository userRepository;

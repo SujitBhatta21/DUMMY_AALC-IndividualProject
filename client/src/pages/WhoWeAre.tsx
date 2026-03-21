@@ -22,7 +22,7 @@ function WhoWeAre(){
     }
 
     return(
-        <div className="who-we-are-page">
+        <main className="who-we-are-page">
             <Header />
 
             <section className="who-we-are-hero">
@@ -141,7 +141,7 @@ function WhoWeAre(){
             </section>
 
             <Footer />
-        </div>
+        </main>
     )
 }
 

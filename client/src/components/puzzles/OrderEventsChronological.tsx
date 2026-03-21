@@ -2,7 +2,7 @@ import {useState} from "react";
 import { shuffle } from "../../utils.ts"
 import "../../styles/Puzzle.css"
 import "../../styles/OrderEventsChronolical.css"
-import RewardPopup from "./RewardPopup";
+import RewardPopup from "../RewardPopup.tsx";
 
 
 interface OrderEventsProps {

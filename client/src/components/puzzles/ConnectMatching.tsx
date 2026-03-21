@@ -1,7 +1,7 @@
 import { useRef, useState, useCallback } from "react";
 import "../../styles/Puzzle.css";
 import "../../styles/ConnectMatching.css";
-import RewardPopup from "./RewardPopup";
+import RewardPopup from "../RewardPopup.tsx";
 
 
 interface Props {

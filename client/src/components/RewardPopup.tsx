@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from "react";
 import ReactCanvasConfetti from "react-canvas-confetti";
-import ConfettiPop from "../../assets/audio/balloon-pop.mp3";
+import ConfettiPop from "../assets/audio/balloon-pop.mp3";
 
 
 interface RewardPopupProps {

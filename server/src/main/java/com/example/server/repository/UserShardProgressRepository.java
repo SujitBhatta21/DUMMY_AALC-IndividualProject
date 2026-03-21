@@ -23,4 +23,7 @@ public interface UserShardProgressRepository extends JpaRepository<UserShardProg
 
     Long countByShardIdAndIsCompletedTrue(Integer shardId);
     void deleteByUserUserId(Integer userId);
+
+    // Activity log repo fetch.
+    List<UserShardProgress> findTop10ByIsCompletedTrueOrderByCompletedAtDesc();
 }

@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import "../../styles/Puzzle.css";
 import "../../styles/CommunicationNetwork.css";
 import { shuffle } from "../../utils.ts";
-import RewardPopup from "./RewardPopup";
+import RewardPopup from "../RewardPopup.tsx";
 
 interface Props {
     onComplete: () => void;

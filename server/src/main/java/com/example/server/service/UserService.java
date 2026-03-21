@@ -9,6 +9,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 
@@ -102,6 +105,14 @@ public class UserService {
     }
 
 
+    public boolean checkCorrectOldPassword(Integer userId, String oldPassword) {
+        User user = userRepository.findById(userId.longValue())
+                .orElseThrow(() -> new IllegalArgumentException("User not found."));
+        // encrypting oldPassword and checking if hashcode matches with password saved in database.
+        return passwordEncoder.matches(oldPassword, user.getPassword());
+    }
+
+
     public void changePassword(Integer userId, String newPassword) {
         User user = userRepository.findById(userId.longValue())
                 .orElseThrow(() -> new IllegalArgumentException("User not found."));
@@ -125,5 +136,26 @@ public class UserService {
         User user = userRepository.findById(Long.valueOf(userId))
                 .orElseThrow(() -> new IllegalArgumentException("User not found."));
         deleteUser(user);
+    }
+
+    public record ActivityItem(String text, Instant timestamp) {}
+
+    public List<ActivityItem> getRecentActivity() {
+        List<ActivityItem> items = new ArrayList<>();
+
+        userRepository.findTop10ByOrderByCreatedAtDesc().forEach(user ->
+                items.add(new ActivityItem("New user registered: " + user.getUsername(), user.getCreatedAt()))
+        );
+
+        userShardProgressRepository.findTop10ByIsCompletedTrueOrderByCompletedAtDesc().forEach(progress ->
+                items.add(new ActivityItem(
+                        "Shard #" + progress.getShard().getId() + " completed by " + progress.getUser().getUsername(),
+                        progress.getCompletedAt()
+                ))
+        );
+
+        items.removeIf(item -> item.timestamp() == null);
+        items.sort(Comparator.comparing(ActivityItem::timestamp).reversed());
+        return items.subList(0, Math.min(10, items.size()));
     }
 }

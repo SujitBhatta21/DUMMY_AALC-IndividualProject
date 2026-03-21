@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "../../styles/Puzzle.css"
 import "../../styles/DecisionTree.css"
-import RewardPopup from "./RewardPopup";
+import RewardPopup from "../RewardPopup.tsx";
 
 
 interface DecisionTreeProps {

@@ -16,7 +16,8 @@ import CommunicationNetwork from "../components/puzzles/CommunicationNetwork.tsx
 import ConnectMatching from "../components/puzzles/ConnectMatching.tsx";
 import InkDropReveal from "../components/puzzles/InkDropReveal.tsx";
 import AudioMatching from "../components/puzzles/AudioMatching.tsx";
-import RewardPopup from "../components/puzzles/RewardPopup.tsx";
+import RewardPopup from "../components/RewardPopup.tsx";
+import FinalMessage from "../components/FinalMessage.tsx";
 
 
 function ShardPage() {
@@ -71,43 +72,66 @@ function ShardPage() {
     }
 
 
+    // Shard-9 has specialised rewards Complete for final Message rendering.
     const isShard9 = shardData?.id === 9;
     const [showShard9Reward, setShowShard9Reward] = useState(false);
+    const [showFinalMessage, setShowFinalMessage] = useState(false);
+    const [puzzleExiting, setPuzzleExiting] = useState(false);
+
+    const handleShard9RewardComplete = () => {
+        const userId = localStorage.getItem("userId");
+        if (!userId) return;
+        setShowShard9Reward(false); 
+        setPuzzleExiting(true);    // Removing puzzle render for FinalMessage render.
+        void apiFetch("/api/progress/complete", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ userId: Number(userId), shardId: Number(id) })
+        }).then(() => setTimeout(() => setShowFinalMessage(true), 1000));
+    };
 
     return (
-        <div className="shard-page">
+        <main className="shard-page">
             <Header />
 
-            {/* Shard-9 custom sequence: InkDropReveal → ContextView → FillInTheBlank */}
+            {/* Shard-9 custom sequence: InkDropReveal -> ContextView -> FillInTheBlank -> FinalMessage */}
             { isShard9 && shardData && (
                 <>
-                    { currentStep === 0 && (
-                        <InkDropReveal
-                            onComplete={() => { setCurrentStep(1); }}
-                            rewardsText={ shardData.rewardsText }
-                            showReward={false}
-                        />
+                    { !showFinalMessage && (
+                        <div className={`shard9-content ${puzzleExiting ? "shard9-content--exit" : ""}`}>
+                            { currentStep === 0 && (
+                                <InkDropReveal
+                                    onComplete={() => { setCurrentStep(1); }}
+                                    rewardsText={ shardData.rewardsText }
+                                    showReward={false}
+                                />
+                            )}
+                            { currentStep === 1 && (
+                                <ContextView
+                                    content={ shardContent[shardData.id] }
+                                    onNext={() => { setCurrentStep(2); }}
+                                    onBack={() => { setCurrentStep(0); }}
+                                />
+                            )}
+                            { currentStep === 2 && (
+                                <FillInTheBlank
+                                    question={shardData.fitb_question}
+                                    answers={ shardData.fitb_answer }
+                                    onCorrect={() => { setShowShard9Reward(true); }}
+                                    onBack={() => { setCurrentStep(1); }}
+                                    isShard9={isShard9}
+                                />
+                            )}
+                            { showShard9Reward && (
+                                <RewardPopup
+                                    rewardsText={ shardData.rewardsText }
+                                    onComplete={ handleShard9RewardComplete }
+                                />
+                            )}
+                        </div>
                     )}
-                    { currentStep === 1 && (
-                        <ContextView
-                            content={ shardContent[shardData.id] }
-                            onNext={() => { setCurrentStep(2); }}
-                            onBack={() => { setCurrentStep(0); }}
-                        />
-                    )}
-                    { currentStep === 2 && (
-                        <FillInTheBlank
-                            question={shardData.fitb_question}
-                            answers={ shardData.fitb_answer }
-                            onCorrect={() => { setShowShard9Reward(true); }}
-                            onBack={() => { setCurrentStep(1); }}
-                        />
-                    )}
-                    { showShard9Reward && (
-                        <RewardPopup
-                            rewardsText={ shardData.rewardsText }
-                            onComplete={ handleShardComplete }
-                        />
+                    { showFinalMessage && (
+                        <FinalMessage onBack={() => navigate("/")} />
                     )}
                 </>
             )}
@@ -201,7 +225,7 @@ function ShardPage() {
                     }
                 </>
             )}
-        </div>
+        </main>
     );
 }
 

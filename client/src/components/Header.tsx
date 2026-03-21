@@ -66,7 +66,7 @@ function Header() {
 
     return (
         <>
-            <section id='header'>
+            <header id='header'>
                 <div className='header-text-container'>
                     <Link to={"/"}>
                         <img src={logo} alt="AALC Logo"/>
@@ -121,7 +121,7 @@ function Header() {
                     }
 
                 </nav>
-            </section>
+            </header>
 
             {reportFormOpen && <ReportForm onClose={() => { setReportFormOpen(false)} } />}
 
