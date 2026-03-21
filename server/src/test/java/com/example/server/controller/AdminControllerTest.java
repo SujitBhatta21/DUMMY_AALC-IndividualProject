@@ -3,9 +3,9 @@ package com.example.server.controller;
 import com.example.server.model.Report;
 import com.example.server.model.ReportStatus;
 import com.example.server.model.User;
-import com.example.server.repository.ReportRepository;
 import com.example.server.repository.UserRepository;
 import com.example.server.service.JwtService;
+import com.example.server.service.ReportService;
 import com.example.server.service.StatsService;
 import com.example.server.service.UserService;
 import com.example.server.config.SecurityConfig;
@@ -14,14 +14,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.context.annotation.Import;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.Instant;
 import java.util.List;
-import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -52,7 +50,7 @@ public class AdminControllerTest {
     private UserService userService;
 
     @MockitoBean
-    private ReportRepository reportRepository;
+    private ReportService reportService;
 
 
     // GET /api/accounts/admin/total_users
@@ -71,7 +69,7 @@ public class AdminControllerTest {
 
     // Just incase I have test for non-users as well for all AdminController HTTP requests test.
     @Test
-    public void getTotalUsers_returnsErrorForNonAdmin() throws Exception {
+    public void getTotalUsers_returns403ErrorForNonAdmin() throws Exception {
         mockMvc.perform(get("/api/accounts/admin/total_users").with(user("user").roles("USER")))
                 .andExpect(status().isForbidden());
     }
@@ -107,7 +105,7 @@ public class AdminControllerTest {
     }
 
     @Test
-    public void getShardsCompleted_returnsErrorForNonAdmin() throws Exception {
+    public void getShardsCompleted_returns403ErrorForNonAdmin() throws Exception {
         when(statsService.getTotalShardsCompleted()).thenReturn(42L);
         mockMvc.perform(get("/api/accounts/admin/shards_completed").with(user("user").roles("USER")))
                 .andExpect(status().isForbidden());
@@ -125,7 +123,7 @@ public class AdminControllerTest {
     }
 
     @Test
-    public void getTotalAllPuzzleSolved_returnsErrorForNonAdmin() throws Exception {
+    public void getTotalAllPuzzleSolved_returns403ErrorForNonAdmin() throws Exception {
         when(statsService.getTotalAllPuzzlesSolved()).thenReturn(3L);
 
         mockMvc.perform(get("/api/accounts/admin/total_all_puzzle_solved").with(user("user").roles("USER")))
@@ -161,7 +159,7 @@ public class AdminControllerTest {
     }
 
     @Test
-    public void getShardCompletionRate_returnsErrorForNonAdmin() throws Exception {
+    public void getShardCompletionRate_returns403ErrorForNonAdmin() throws Exception {
         when(statsService.getAdminShardCompletionRate()).thenReturn(List.of());
         mockMvc.perform(get("/api/accounts/admin/shard_completion_rate").with(user("user").roles("USER")))
                 .andExpect(status().isForbidden());
@@ -172,20 +170,20 @@ public class AdminControllerTest {
     @Test
     public void getActivityLog_returns200WithItems() throws Exception {
         List<UserService.ActivityItem> items = List.of(
-                new UserService.ActivityItem("New user registered: Alice", Instant.now()),
-                new UserService.ActivityItem("Shard #1 completed by Bob", Instant.now())
+                new UserService.ActivityItem("New user registered: FOO", Instant.now()),
+                new UserService.ActivityItem("Shard #1 completed by BAR", Instant.now())
         );
         when(userService.getRecentActivity()).thenReturn(items);
 
         mockMvc.perform(get("/api/accounts/admin/activity_log").with(user("user").roles("ADMIN")))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(2))
-                .andExpect(jsonPath("$[0].text").value("New user registered: Alice"))
-                .andExpect(jsonPath("$[1].text").value("Shard #1 completed by Bob"));
+                .andExpect(jsonPath("$[0].text").value("New user registered: FOO"))
+                .andExpect(jsonPath("$[1].text").value("Shard #1 completed by BAR"));
     }
 
     @Test
-    public void getActivityLog_returnsErrorForNonAdmin() throws Exception {
+    public void getActivityLog_returns403ErrorForNonAdmin() throws Exception {
         when(userService.getRecentActivity()).thenReturn(List.of());
         mockMvc.perform(get("/api/accounts/admin/activity_log").with(user("user").roles("USER")))
                 .andExpect(status().isForbidden());
@@ -195,14 +193,14 @@ public class AdminControllerTest {
 
     @Test
     public void getAllUsers_returns200WithUserList() throws Exception {
-        User alice = new User("hashed");
-        alice.setUsername("Alice");
-        when(userService.getUser()).thenReturn(List.of(alice));
+        User foo = new User("hashed");
+        foo.setUsername("FOO");
+        when(userService.getUser()).thenReturn(List.of(foo));
 
         mockMvc.perform(get("/api/accounts/admin/users").with(user("user").roles("ADMIN")))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(1))
-                .andExpect(jsonPath("$[0].username").value("Alice"));
+                .andExpect(jsonPath("$[0].username").value("FOO"));
     }
 
     @Test
@@ -247,10 +245,9 @@ public class AdminControllerTest {
     @Test
     public void getReports_returns200WithReportList() throws Exception {
         User user = new User("hashed");
-        user.setUsername("Alice");
+        user.setUsername("FOO");
         Report report = new Report(user, "Bug", "Something broke.");
-        when(reportRepository.findAll(Sort.by(Sort.Direction.DESC, "createdAt")))
-                .thenReturn(List.of(report));
+        when(reportService.getAllReports()).thenReturn(List.of(report));
 
         mockMvc.perform(get("/api/accounts/admin/reports").with(user("user").roles("ADMIN")))
                 .andExpect(status().isOk())
@@ -270,10 +267,10 @@ public class AdminControllerTest {
     @Test
     public void updateReportStatus_returns200WithUpdatedReport() throws Exception {
         User user = new User("hashed");
-        user.setUsername("Alice");
+        user.setUsername("FOO");
         Report report = new Report(user, "Bug", "Something broke.");
-        when(reportRepository.findById(1)).thenReturn(Optional.of(report));
-        when(reportRepository.save(any())).thenAnswer(inv -> inv.getArgument(0));
+        report.setStatus(com.example.server.model.ReportStatus.RESOLVED);
+        when(reportService.updateStatus(1, ReportStatus.RESOLVED)).thenReturn(report);
 
         mockMvc.perform(patch("/api/accounts/admin/reports/1/status")
                         .with(user("user").roles("ADMIN"))
@@ -286,7 +283,8 @@ public class AdminControllerTest {
 
     @Test
     public void updateReportStatus_returns404WhenReportNotFound() throws Exception {
-        when(reportRepository.findById(999)).thenReturn(Optional.empty());
+        when(reportService.updateStatus(eq(999), any()))
+                .thenThrow(new IllegalArgumentException("Report not found."));
 
         mockMvc.perform(patch("/api/accounts/admin/reports/999/status")
                         .with(user("user").roles("ADMIN"))
@@ -302,7 +300,7 @@ public class AdminControllerTest {
                         .with(user("user").roles("USER"))
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("\"RESOLVED\""))
+                        .content("RESOLVED"))
                 .andExpect(status().isForbidden());
     }
 
@@ -310,7 +308,7 @@ public class AdminControllerTest {
     // Unauthenticated access
 
     @Test
-    public void anyAdminEndpoint_returns403WhenNotAuthenticated() throws Exception {
+    public void anyAdmin_returns403WhenNotAuthenticated() throws Exception {
         mockMvc.perform(get("/api/accounts/admin/users"))
                 .andExpect(status().isForbidden()); // It's isForbidden with error code 403 not 401 .isUnexpected()
     }
