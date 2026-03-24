@@ -11,7 +11,6 @@ interface JigSawProps {
 }
 
 
-
 function JigSaw({ onComplete, rewardsText }: JigSawProps) {
     const imageSource = "https://upload.wikimedia.org/wikipedia/commons/7/72/Protestors_discarding_passbooks_in_South_Africa.jpg"
 
@@ -25,7 +24,7 @@ function JigSaw({ onComplete, rewardsText }: JigSawProps) {
         <div className="jigsaw-page">
             <h1 className="puzzle-title">Jigsaw Puzzle</h1>
             <p className="puzzle-instruction">
-                Drag and Drop fragments of real passbook image in correct slot
+                Hold the puzzle slot piece then Drag and Drop fragments of real passbook image in correct slot
             </p>
             <div className="jigsaw-container">
                 <div className="jigsaw-puzzle">

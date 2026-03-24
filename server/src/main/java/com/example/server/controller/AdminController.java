@@ -45,6 +45,11 @@ public class AdminController {
         return ResponseEntity.ok(statsService.getActiveTodayUsers());
     }
 
+    @GetMapping("/active_last_30_days")
+    public ResponseEntity<Long> getActiveLast30DaysUsers() {
+        return ResponseEntity.ok(statsService.getActiveLast30DaysUsers());
+    }
+
     @GetMapping("/shards_completed")
     public ResponseEntity<Long> getShardsCompleted() {
         return ResponseEntity.ok(statsService.getTotalShardsCompleted());

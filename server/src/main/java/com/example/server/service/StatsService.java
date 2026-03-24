@@ -56,6 +56,11 @@ public class StatsService {
         return userRepository.countByLastActiveAtGreaterThan(cutoff);
     }
 
+    public Long getActiveLast30DaysUsers() {
+        Instant cutoff = Instant.now().minus(30, ChronoUnit.DAYS);
+        return userRepository.countByLastActiveAtGreaterThan(cutoff);
+    }
+
     public Long getTotalShardsCompleted() {
         return userShardProgressRepository.countByIsCompletedTrue();
     }

@@ -11,10 +11,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.Mockito.when;
 
 
@@ -44,6 +47,30 @@ public class StatsServiceTest {
         List<Long> result = statsService.getTotalUsers();
 
         assertThat(result).containsExactly(10L, 2L, 8L);
+    }
+
+
+    // getActiveTodayUsers
+    @Test
+    public void getActiveTodayUsers_returnsCountFromRepositoryWithin24Hours() {
+        when(userRepository.countByLastActiveAtGreaterThan(argThat(cutoff ->
+                cutoff.isAfter(Instant.now().minus(25, ChronoUnit.HOURS)) &&
+                cutoff.isBefore(Instant.now().minus(23, ChronoUnit.HOURS))
+        ))).thenReturn(7L);
+
+        assertThat(statsService.getActiveTodayUsers()).isEqualTo(7L);
+    }
+
+
+    // getActiveLast30DaysUsers
+    @Test
+    public void getActiveLast30DaysUsers_returnsCountFromRepositoryWithin30Days() {
+        when(userRepository.countByLastActiveAtGreaterThan(argThat(cutoff ->
+                cutoff.isAfter(Instant.now().minus(31, ChronoUnit.DAYS)) &&
+                cutoff.isBefore(Instant.now().minus(29, ChronoUnit.DAYS))
+        ))).thenReturn(120L);
+
+        assertThat(statsService.getActiveLast30DaysUsers()).isEqualTo(120L);
     }
 
 

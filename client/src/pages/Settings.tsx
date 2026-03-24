@@ -42,6 +42,7 @@ function AccountPanel() {
     const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
     const [passwordSaved, setPasswordSaved] = useState(false);
     const [passwordError, setPasswordError] = useState("");
+    const [dataCleared, setDataCleared] = useState(false);
     const [showCurrentPassword, setShowCurrentPassword] = useState(false);
     const [showNewPassword, setShowNewPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -50,6 +51,8 @@ function AccountPanel() {
         localStorage.removeItem('aalc-tts-voice');
         localStorage.removeItem('aalc-tts-rate');
         localStorage.removeItem('aalc-text-size');
+        setDataCleared(true);
+        setTimeout(() => { setDataCleared(false); }, 2000);
     };
 
 
@@ -202,9 +205,12 @@ function AccountPanel() {
                         <span className="settings-row-label">Clear saved preferences</span>
                         <p className="settings-hint">Resets voice, speed, and text size to defaults.</p>
                     </div>
-                    <button className="settings-btn settings-btn-outline" onClick={handleClearLocalData}>
-                        Clear
-                    </button>
+                    <div className="settings-inline-feedback">
+                        {dataCleared && <span className="settings-saved"><FiCheckCircle /> Cleared</span>}
+                        <button className="settings-btn settings-btn-outline" onClick={handleClearLocalData}>
+                            Clear
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -284,15 +290,17 @@ function AccessibilityPanel() {
         setTimeout(() => { setVoiceSaved(false) }, 2000);
     };
 
+    // handling Settings reduce speed toggle change.
     const handleSpeedChange = (value: number) => {
         setSpeed(value);
         localStorage.setItem('aalc-tts-rate', String(value));
     };
 
+    // Settings text size change.
     const handleSizeChange = (size: string) => {
         setTextSize(size);
         localStorage.setItem('aalc-text-size', size);
-        document.body.style.fontSize = SIZE_MAP[size];
+        document.documentElement.style.fontSize = SIZE_MAP[size];
     };
 
     const handleHighContrast = (val: boolean) => {
