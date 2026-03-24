@@ -1,5 +1,11 @@
 # Anti-Apartheid Legacy Centre - Interactive Timeline
 
+<p align="center">
+  <img src="client/src/assets/logo/Logo%20pack%20AAL%202-01.png" alt="AALC Logo" width="200"/>
+  <br/>
+  <a href="https://antiapartheidlegacy.org.uk/">Anti-Apartheid Legacy Centre</a>
+</p>
+
 An interactive educational web application built for the **Anti-Apartheid Legacy Centre (AALC)** as a Final Year BSc project.
 The app introduces users aged 10–14 to the apartheid regime in South Africa and the resistance movements centred around
 **28 Penton Street** - the ANC's London office — through a series of engaging, puzzle-based learning experiences.
