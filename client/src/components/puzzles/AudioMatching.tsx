@@ -59,6 +59,7 @@ function AudioMatching({ onComplete, rewardsText }: Props) {
         } else {
             audioRef.current.pause();
             audioRef.current.src = src;
+            audioRef.current.volume = parseFloat(localStorage.getItem('aalc-tts-volume') ?? '0.5');
             audioRef.current.play();
             setPlayingId(id);
         }

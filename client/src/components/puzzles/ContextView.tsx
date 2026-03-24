@@ -38,6 +38,7 @@ function ContextView({ content, onNext, onBack } : Props) {
 
         if ('speechSynthesis' in window) {
             const utterance = new SpeechSynthesisUtterance(textToRead);
+            utterance.volume = parseFloat(localStorage.getItem('aalc-tts-volume') ?? '0.5'); // Updates volume slider changes.
             const savedVoice = localStorage.getItem('aalc-tts-voice');
             if (savedVoice) {
                 const match = window.speechSynthesis.getVoices().find(v => v.name === savedVoice);
