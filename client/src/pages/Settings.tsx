@@ -253,6 +253,7 @@ function AccessibilityPanel() {
     const [selectedVoice, setSelectedVoice] = useState(localStorage.getItem('aalc-tts-voice') ?? '');
     const [voiceSaved, setVoiceSaved] = useState(false);
     const [speed, setSpeed] = useState(parseFloat(localStorage.getItem('aalc-tts-rate') ?? '1'));
+    const [volume, setVolume] = useState(parseFloat(localStorage.getItem('aalc-tts-volume') ?? '1'));
     const [textSize, setTextSize] = useState(localStorage.getItem('aalc-text-size') ?? 'Medium');
     const [highContrast, setHighContrast] = useState(localStorage.getItem('aalc-high-contrast') === 'true');
     const [reduceMotion, setReduceMotion] = useState(localStorage.getItem('aalc-reduce-motion') === 'true');
@@ -295,6 +296,12 @@ function AccessibilityPanel() {
         setSpeed(value);
         localStorage.setItem('aalc-tts-rate', String(value));
     };
+
+    // handling volume range change.
+    const handleVolumeChange = (value: number) => {
+        setVolume(value);
+        localStorage.setItem('aalc-tts-volume', String(value));
+    }
 
     // Settings text size change.
     const handleSizeChange = (size: string) => {
@@ -354,6 +361,26 @@ function AccessibilityPanel() {
                                 {opt.label}
                             </button>
                         ))}
+                    </div>
+                </div>
+            </div>
+
+            <div className="settings-section">
+                <h2>Volume Slider</h2>
+                <div className="settings-row">
+                    <label>Volume</label>
+                    <div className="slider-container">
+                        <input
+                            type="range"
+                            min="0"
+                            max="1"
+                            step="0.01"
+                            value={volume}
+                            onChange={e => { handleVolumeChange(parseFloat(e.target.value)) }}
+                            className="slider"
+                            id="volumeRange"
+                        />
+                        { Math.round(volume * 100) }
                     </div>
                 </div>
             </div>

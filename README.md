@@ -163,9 +163,11 @@ export DB_PASSWORD=root
 
 Then run:
 
+> **Note:** Dataseeder in config seeds default data automatically on server startup when database is empty. To reseed(delete and restart db) simply set FORCE_RESEED=true before running server.
+
 ```bash
 cd server
-./mvnw spring-boot:run     // Using local Maven wrapper if global use mvn not ./mvnw
+./mvnw spring-boot:run     # Using local Maven wrapper if global use mvn not ./mvnw
 ```
 
 The API will be available at `http://localhost:8080`.
