@@ -1,4 +1,4 @@
-# Anti-Apartheid Legacy Centre - Interactive Timeline
+# Anti-Apartheid Legacy Centre - Interactive Storyline
 
 <p align="center">
   <img src="client/src/assets/logo/Logo%20pack%20AAL%202-01.png" alt="AALC Logo" width="200"/>
