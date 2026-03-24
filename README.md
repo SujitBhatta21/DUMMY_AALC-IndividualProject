@@ -7,12 +7,14 @@
 </p>
 
 An interactive educational web application built for the **Anti-Apartheid Legacy Centre (AALC)** as a Final Year BSc project.
-The app introduces users aged 10–14 to the apartheid regime in South Africa and the resistance movements centred around
-**28 Penton Street** - the ANC's London office — through a series of engaging, puzzle-based learning experiences.
+The app introduces users aged 10–14 or anyone new to the apartheid regime in South Africa and the resistance movements centred around
+**28 Penton Street** - the African National Congress(ANC's) London office - through a series of engaging, puzzle-based learning experiences.
 
 ---
 
 ## Live Demo
+
+> Note: the backend is hosted on Render's free tier and may take ~30-120 seconds to wake up on first request.
 
 | Service                   | URL                                                                                |
 |---------------------------|------------------------------------------------------------------------------------|
@@ -24,7 +26,7 @@ The app introduces users aged 10–14 to the apartheid regime in South Africa an
 
 ## Features
 
-PUZZLE PATTERN ---> [Context] --> [Fill-in-the-blanks] --> [Shard specific puzzle]
+PUZZLE PATTERN ---> [Context] --> [Fill-in-the-blanks] --> [Shard specific puzzle] (except for Shard-9)
 
 - **9 interactive Shards** = puzzle-gated learning modules covering apartheid history
 - **10 puzzle types** = Fill-in-the-Blank, Jigsaw, Redacted Reveal, Drag & Categorise, Decision Tree, Audio Matching, and more
@@ -42,7 +44,7 @@ PUZZLE PATTERN ---> [Context] --> [Fill-in-the-blanks] --> [Shard specific puzzl
 | Technology | Version |
 |---|---|
 | React | 19.2.0 |
-| TypeScript | — |
+| TypeScript | 5.9.3 |
 | Vite + SWC | 7.2.4 |
 | React Router DOM | 7.12.0 |
 | driver.js | 1.4.0 |
