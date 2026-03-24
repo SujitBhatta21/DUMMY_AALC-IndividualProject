@@ -108,7 +108,7 @@ function DragAndCategorise({ onComplete, rewardsText }: Props) {
         <div className="drag-and-categorise">
             <h1 className="puzzle-title">Sort the Sanctions</h1>
             <p className="puzzle-instruction">
-                Drag each word into the correct category bucket.
+                Hold and Drag each word into the correct category bucket.
             </p>
 
             {/* Word bank */}

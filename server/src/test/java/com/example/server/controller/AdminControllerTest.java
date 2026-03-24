@@ -93,6 +93,24 @@ public class AdminControllerTest {
                 .andExpect(status().isForbidden());
     }
 
+    // GET /api/accounts/admin/active_last_30_days
+
+    @Test
+    public void getActiveLast30DaysUsers_returns200WithCount() throws Exception {
+        when(statsService.getActiveLast30DaysUsers()).thenReturn(120L);
+
+        mockMvc.perform(get("/api/accounts/admin/active_last_30_days").with(user("user").roles("ADMIN")))
+                .andExpect(status().isOk())
+                .andExpect(content().string("120"));
+    }
+
+    @Test
+    public void getActiveLast30DaysUsers_returns403ForNonAdmin() throws Exception {
+        when(statsService.getActiveLast30DaysUsers()).thenReturn(120L);
+        mockMvc.perform(get("/api/accounts/admin/active_last_30_days").with(user("user").roles("USER")))
+                .andExpect(status().isForbidden());
+    }
+
     // GET /api/accounts/admin/shards_completed
 
     @Test

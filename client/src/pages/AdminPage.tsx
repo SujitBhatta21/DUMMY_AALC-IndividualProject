@@ -72,6 +72,7 @@ function displayTime(isoString: string): string {
 function DashboardPanel() {
     const [totalUsers, setTotalUsers] = useState<number[]>([]);
     const [totalActiveToday, setTotalActiveToday] = useState<number | null>(null);
+    const [activeLast30days, setActiveLast30days] = useState<number | null>(null);
     const [totalShardsCompleted, setTotalShardsCompleted] = useState<number | null>(null);
     const [totalAllPSolved, setTotalAllPSolved] = useState<number | null>(null);
 
@@ -81,10 +82,11 @@ function DashboardPanel() {
     useEffect(() => {
         async function fetchStats() {
             const [
-                tUsersRes, tActiveTodayRes, tShardsCompletedRes, tAllPSolved, tCompletionRate
+                tUsersRes, tActiveTodayRes, tActiveLast30days, tShardsCompletedRes, tAllPSolved, tCompletionRate
             ] = await Promise.all([
                 apiFetch("/api/accounts/admin/total_users"),
                 apiFetch("/api/accounts/admin/active_today"),
+                apiFetch("/api/accounts/admin/active_last_30_days"),
                 apiFetch("/api/accounts/admin/shards_completed"),
                 apiFetch("/api/accounts/admin/total_all_puzzle_solved"),
                 apiFetch("/api/accounts/admin/shard_completion_rate"),
@@ -92,6 +94,7 @@ function DashboardPanel() {
 
             if (tUsersRes.ok) setTotalUsers(await tUsersRes.json());
             if (tActiveTodayRes.ok) setTotalActiveToday(await tActiveTodayRes.json());
+            if (tActiveLast30days.ok) setActiveLast30days(await tActiveLast30days.json());
             if (tShardsCompletedRes.ok) setTotalShardsCompleted(await tShardsCompletedRes.json());
             if (tAllPSolved.ok) setTotalAllPSolved(await tAllPSolved.json());
             if (tCompletionRate.ok) setShardCompletionRate(await tCompletionRate.json());
@@ -121,6 +124,7 @@ function DashboardPanel() {
     const stats = [
         { label: "Total Users",       value: totalUsers.length != 0 ? String(totalUsers.at(0)) : "-", subValue: totalUsers.length != 0 ? `${totalUsers.at(1)} Admin · ${totalUsers.at(2)} User` : "" },
         { label: "Active Today",      value: totalActiveToday != null ? String(totalActiveToday) : "-" },
+        { label: "Active (30 Days)",  value: activeLast30days !== null ? String(activeLast30days) : "-" },
         { label: "Shards Completed",  value: totalShardsCompleted !== null ? String(totalShardsCompleted) : "-" },
         { label: "All Puzzles Solved", value: totalAllPSolved !== null ? String(totalAllPSolved) : "-" },
     ];

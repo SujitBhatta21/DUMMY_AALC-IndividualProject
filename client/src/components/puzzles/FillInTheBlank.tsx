@@ -196,7 +196,9 @@ function FillInTheBlank({ question, answers, onCorrect, onBack, isShard9 }: FITB
     return (
         <div>
             <h1 className="puzzle-title">Fill In The Blank</h1>
-            <p className="puzzle-instruction">Drag and Drop correct answer from the word bank below</p>
+            <p className="puzzle-instruction">
+                Hold the word from word bank then Drag and Drop correct answer in blanks
+            </p>
             <div className="FillInTheBlank-section">
                 <div className="FillInTheBlank">
                     { renderQuestionWithBlank() }
