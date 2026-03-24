@@ -1,9 +1,14 @@
-# Anti-Apartheid Legacy Centre — Interactive Timeline
+# Anti-Apartheid Legacy Centre - Interactive Timeline
 
-An interactive educational web application built for the **Anti-Apartheid Legacy Centre (AALC)** as a Final Year BSc project. 
-The app teaches by introducing users aged 10–14 about the apartheid regime in South Africa and the resistance movements 
-centred around **28 Penton Street** — the ANC's London office — through a series of engaging, puzzle-based learning experiences.
-(NOTE: apartheid regime was not just)
+<p align="center">
+  <img src="client/src/assets/logo/Logo%20pack%20AAL%202-01.png" alt="AALC Logo" width="200"/>
+  <br/>
+  <a href="https://antiapartheidlegacy.org.uk/">Anti-Apartheid Legacy Centre</a>
+</p>
+
+An interactive educational web application built for the **Anti-Apartheid Legacy Centre (AALC)** as a Final Year BSc project.
+The app introduces users aged 10–14 to the apartheid regime in South Africa and the resistance movements centred around
+**28 Penton Street** - the ANC's London office — through a series of engaging, puzzle-based learning experiences.
 
 ---
 
@@ -63,7 +68,7 @@ PUZZLE PATTERN ---> [Context] --> [Fill-in-the-blanks] --> [Shard specific puzzl
 
 ---
 
-## Project Structure (NOTE: DON"T THINK I NEED THIS)
+## Project Structure
 
 ```
 AALC-IndividualProject/
@@ -75,10 +80,15 @@ AALC-IndividualProject/
 │   │   │   ├── ShardPage.tsx
 │   │   │   ├── LoginPage.tsx
 │   │   │   ├── Settings.tsx
-│   │   │   └── WhoWeAre.tsx
+│   │   │   ├── WhoWeAre.tsx
+│   │   │   ├── AdminPage.tsx
+│   │   │   └── FinalMessage.tsx
 │   │   ├── components/
 │   │   │   ├── Header.tsx
 │   │   │   ├── Footer.tsx
+│   │   │   ├── GlossaryTerm.tsx
+│   │   │   ├── ReportForm.tsx
+│   │   │   ├── RewardPopup.tsx
 │   │   │   └── puzzles/             # Individual puzzle type components
 │   │   │       ├── FillInTheBlank.tsx
 │   │   │       ├── JigSaw.tsx
@@ -89,8 +99,9 @@ AALC-IndividualProject/
 │   │   │       ├── CommunicationNetwork.tsx
 │   │   │       ├── ConnectMatching.tsx
 │   │   │       ├── InkDropReveal.tsx
-│   │   │       └── AudioMatching.tsx
-│   │   ├── data/                    # Static shard content & seed data
+│   │   │       ├── AudioMatching.tsx
+│   │   │       └── ContextView.tsx
+│   │   ├── data/                    # Static shard content in ContextView.tsx
 │   │   ├── styles/                  # Per-component CSS
 │   │   ├── types.ts                 # Shared TypeScript interfaces
 │   │   └── utils.ts
@@ -103,8 +114,8 @@ AALC-IndividualProject/
 │   │   ├── config/                  # CORS + database seeder
 │   │   ├── controller/              # REST controllers
 │   │   ├── model/                   # JPA entities
-│   │   ├── service/                 # Business logic
-│   │   ├── repository/              # Spring Data repositories
+│   │   ├── service/                 # Business logic services
+│   │   ├── repository/              # Spring Data repositories using JpaRepository
 │   │   └── converter/               # JSON type converters (Need for FITB attribute in shard)
 │   ├── src/main/resources/
 │   │   └── application.properties
@@ -140,12 +151,7 @@ This starts a PostgreSQL 16 container on port `5433` with database `aalcDB`.
 
 ### 2. Start the Backend
 
-## EITHER THIS:
-```bash
-cd server
-```
-
-Set the required environment variables (or create a `.env` / add them to your shell):
+Set the required environment variables:
 
 ```bash
 export DB_URL=jdbc:postgresql://localhost:5433/aalcDB
@@ -156,34 +162,25 @@ export DB_PASSWORD=root
 Then run:
 
 ```bash
-mvn spring-boot:run
+cd server
+./mvnw spring-boot:run     // Using local Maven wrapper if global use mvn not ./mvnw
 ```
 
 The API will be available at `http://localhost:8080`.
 
-## OR THIS:
-```bash
-cd server
-```
-
-Go To: Run > Edit Configuration > Build and Run (Click Modify options) 
--> Environment Variables (enter this in inputfield)
-```bash
-DB_URL=jdbc:postgresql://localhost:5433/aalcDB;
-DB_USERNAME=sujitbhatta;
-DB_PASSWORD=root
-```
-
-(Run ServerApplication.java file inside server once if not found.)
-
-```aiignore
-Simply run ServerApplication.java using run icon don't need 
-to touch terminal if you're not comfortable.
-```
+> **IDE alternative:** In IntelliJ go to Run → Edit Configurations → Modify Options → Environment Variables and enter `DB_URL`, `DB_USERNAME`, and `DB_PASSWORD`, then run `ServerApplication.java` directly.
 
 ---
 
 ### 3. Start the Frontend
+
+Create `client/.env.local` with the following content:
+
+```env
+VITE_API_URL=http://localhost:8080
+```
+
+Then install dependencies and start the dev server:
 
 ```bash
 cd client
@@ -274,9 +271,9 @@ npm run lint      # Run ESLint
 ### Backend
 
 ```bash
-mvn spring-boot:run    # Run the server
-mvn clean package      # Build JAR
-mvn test               # Run tests
+./mvnw spring-boot:run    # Run the server
+./mvnw clean package      # Build JAR
+./mvnw test               # Run tests
 ```
 
 ---

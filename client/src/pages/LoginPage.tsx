@@ -143,9 +143,13 @@ function LoginPage() {
                         </button>
                     </form>
 
+                    <p className="privacy-note">
+                        A login is required to save your progress.
+                    </p>
+
                     {isRegisterMode && (
                         <p className="privacy-note">
-                            We don't collect your name, email, or any personal information. Your username is randomly generated - we never know who you are.
+                            Your username is randomly generated and your password is securely hashed — we never store personal information.
                         </p>
                     )}
 
