@@ -3,14 +3,17 @@ package com.example.server.config;
 import com.example.server.model.Role;
 import com.example.server.model.Shard;
 import com.example.server.model.User;
+import com.example.server.model.UserShardProgress;
 import com.example.server.repository.ShardRepository;
 import com.example.server.repository.UserRepository;
 import com.example.server.repository.UserShardProgressRepository;
+import com.example.server.service.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -60,6 +63,10 @@ public class DataSeeder implements CommandLineRunner {
 
         seedUsers();
         seedShards();
+
+        // User created inside seedUsers() method.
+        User toAllSolveUser = userRepository.findByUsername("TestPlayerAllSolved");
+        seedProgress(toAllSolveUser);
     }
 
     private void seedUsers() {
@@ -78,8 +85,29 @@ public class DataSeeder implements CommandLineRunner {
         player.setPassword(passwordEncoder.encode("Player123"));
         player.setRole(Role.USER);
 
-        userRepository.saveAll(List.of(admin1, admin2, player));
+        User player2 = new User();
+        player2.setUsername("TestPlayerAllSolved");
+        player2.setPassword(passwordEncoder.encode("Player123"));
+        player2.setRole(Role.USER);
+
+
+        userRepository.saveAll(List.of(admin1, admin2, player, player2));
         System.out.println("DATA SEEDER: Users seeded.");
+    }
+
+    private void seedProgress(User user) {
+        List<Shard> shards = shardRepository.findAll();
+        List<UserShardProgress> progressList = new ArrayList<>();
+        for (Shard shard : shards) {
+            UserShardProgress progress = new UserShardProgress();
+            progress.setUser(user);
+            progress.setShard(shard);
+            progress.setUnlocked(true);
+            progress.setCompleted(true);
+            progressList.add(progress);
+        }
+        userShardProgressRepository.saveAll(progressList);
+        System.out.println("DATA SEEDER: Progress seeded for user: " + user.getUsername());
     }
 
     private void seedShards() {
