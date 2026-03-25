@@ -54,7 +54,7 @@ public class DataSeeder implements CommandLineRunner {
 
             System.out.println("DataSeeder: All tables cleared.");
         } else {
-            // Normally this done..
+            // Normally this done.
             if (shardRepository.count() > 0) return;
         }
 
@@ -79,7 +79,7 @@ public class DataSeeder implements CommandLineRunner {
         player.setRole(Role.USER);
 
         userRepository.saveAll(List.of(admin1, admin2, player));
-        System.out.println("DATASEEDER: Users seeded.");
+        System.out.println("DATA SEEDER: Users seeded.");
     }
 
     private void seedShards() {
@@ -99,7 +99,7 @@ public class DataSeeder implements CommandLineRunner {
                         Map.of(1, List.of("Terrorism", "Elections"),
                                 2, List.of("Robben Island", "Johannesburg"),
                                 3, List.of("Strikes", "Protests", "Marches")),
-                        "The government aimed to silence resistance with Imprisonment and bannings " +
+                        "The government aimed to silence resistance with Imprisonment and banning " +
                                 "– but South Africans continued to organise underground and to smuggle people " +
                                 "out to continue the struggle from outside the country. Resistance found a way.",
                         "REDACTED_REVEAL"),
@@ -107,7 +107,7 @@ public class DataSeeder implements CommandLineRunner {
                         "In ___, police opened fire on peaceful protesters in ___, killing at least ___ people including children." +
                                 " In 1976, students in ___ rose up against forced ___-language instruction.",
                         Map.of(1, List.of("1960", "1948", "1963"),
-                                2, List.of("Sharpeville", "Joannesburg"),
+                                2, List.of("Sharpeville", "Johannesburg"),
                                 3, List.of("69", "45"),
                                 4, List.of("Soweto", "Cape Town"),
                                 5, List.of("Afrikaans", "English")),
@@ -117,7 +117,7 @@ public class DataSeeder implements CommandLineRunner {
                 new Shard(4, "The Activist's Choice",
                         "Student groups joined the ___ boycott to put pressure on companies investing in apartheid.\n" +
                                 "Protests, marches, and boycotts were all ways of showing ___ with South Africa.",
-                        Map.of(1, List.of("Barclays", "Lloyds"),
+                        Map.of(1, List.of("Barclays", "Lloyd's"),
                                 2, List.of("solidarity", "sympathy")),
                         "You took action. So did thousands of real students across the UK. " +
                                 "Their pressure worked - Barclays eventually pulled out of South Africa in 1986. " +
