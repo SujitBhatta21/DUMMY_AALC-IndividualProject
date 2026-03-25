@@ -87,6 +87,9 @@ function LoginPage() {
             <Header />
 
             <main className="login-main">
+                <div className="login-notice">
+                    <strong>Notice:</strong> The backend is hosted on Render's free tier and may take 30–120 seconds to respond on first request. Please be patient after submitting.
+                </div>
                 <div className="login-card">
                     <h1>{isRegisterMode ? "Create Account" : "Welcome Back"}</h1>
                     <p className="login-subtitle">

@@ -3,14 +3,17 @@ package com.example.server.config;
 import com.example.server.model.Role;
 import com.example.server.model.Shard;
 import com.example.server.model.User;
+import com.example.server.model.UserShardProgress;
 import com.example.server.repository.ShardRepository;
 import com.example.server.repository.UserRepository;
 import com.example.server.repository.UserShardProgressRepository;
+import com.example.server.service.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -54,12 +57,16 @@ public class DataSeeder implements CommandLineRunner {
 
             System.out.println("DataSeeder: All tables cleared.");
         } else {
-            // Normally this done..
+            // Normally this done.
             if (shardRepository.count() > 0) return;
         }
 
         seedUsers();
         seedShards();
+
+        // User created inside seedUsers() method.
+        User toAllSolveUser = userRepository.findByUsername("TestPlayerAllSolved");
+        seedProgress(toAllSolveUser);
     }
 
     private void seedUsers() {
@@ -78,8 +85,29 @@ public class DataSeeder implements CommandLineRunner {
         player.setPassword(passwordEncoder.encode("Player123"));
         player.setRole(Role.USER);
 
-        userRepository.saveAll(List.of(admin1, admin2, player));
-        System.out.println("DATASEEDER: Users seeded.");
+        User player2 = new User();
+        player2.setUsername("TestPlayerAllSolved");
+        player2.setPassword(passwordEncoder.encode("Player123"));
+        player2.setRole(Role.USER);
+
+
+        userRepository.saveAll(List.of(admin1, admin2, player, player2));
+        System.out.println("DATA SEEDER: Users seeded.");
+    }
+
+    private void seedProgress(User user) {
+        List<Shard> shards = shardRepository.findAll();
+        List<UserShardProgress> progressList = new ArrayList<>();
+        for (Shard shard : shards) {
+            UserShardProgress progress = new UserShardProgress();
+            progress.setUser(user);
+            progress.setShard(shard);
+            progress.setUnlocked(true);
+            progress.setCompleted(true);
+            progressList.add(progress);
+        }
+        userShardProgressRepository.saveAll(progressList);
+        System.out.println("DATA SEEDER: Progress seeded for user: " + user.getUsername());
     }
 
     private void seedShards() {
@@ -99,7 +127,7 @@ public class DataSeeder implements CommandLineRunner {
                         Map.of(1, List.of("Terrorism", "Elections"),
                                 2, List.of("Robben Island", "Johannesburg"),
                                 3, List.of("Strikes", "Protests", "Marches")),
-                        "The government aimed to silence resistance with Imprisonment and bannings " +
+                        "The government aimed to silence resistance with Imprisonment and banning " +
                                 "– but South Africans continued to organise underground and to smuggle people " +
                                 "out to continue the struggle from outside the country. Resistance found a way.",
                         "REDACTED_REVEAL"),
@@ -107,7 +135,7 @@ public class DataSeeder implements CommandLineRunner {
                         "In ___, police opened fire on peaceful protesters in ___, killing at least ___ people including children." +
                                 " In 1976, students in ___ rose up against forced ___-language instruction.",
                         Map.of(1, List.of("1960", "1948", "1963"),
-                                2, List.of("Sharpeville", "Joannesburg"),
+                                2, List.of("Sharpeville", "Johannesburg"),
                                 3, List.of("69", "45"),
                                 4, List.of("Soweto", "Cape Town"),
                                 5, List.of("Afrikaans", "English")),
@@ -117,7 +145,7 @@ public class DataSeeder implements CommandLineRunner {
                 new Shard(4, "The Activist's Choice",
                         "Student groups joined the ___ boycott to put pressure on companies investing in apartheid.\n" +
                                 "Protests, marches, and boycotts were all ways of showing ___ with South Africa.",
-                        Map.of(1, List.of("Barclays", "Lloyds"),
+                        Map.of(1, List.of("Barclays", "Lloyd's"),
                                 2, List.of("solidarity", "sympathy")),
                         "You took action. So did thousands of real students across the UK. " +
                                 "Their pressure worked - Barclays eventually pulled out of South Africa in 1986. " +
