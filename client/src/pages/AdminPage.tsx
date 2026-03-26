@@ -112,7 +112,7 @@ function DashboardPanel() {
         fetchActivityLog();
 
         // This refreshed / calls fetchActivityLogs every 60 sec...
-        const warmFetchActivityLog = setInterval(fetchActivityLog, 6000);
+        const warmFetchActivityLog = setInterval(fetchActivityLog, 60000);
         return () => { clearInterval(warmFetchActivityLog) }
 
     }, []);
