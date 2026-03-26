@@ -128,7 +128,7 @@ function TimelinePage() {
     }
 
     // BugFix: This way index of shard is not visible if the shard is locked.
-    const getShardLabel = (index: number) => isShardAccessible(index) ? shards[index]?.id : "";
+    const getShardLabel = (index: number) => isShardAccessible(index) ? index + 1 : "";
 
     const isLocked = (index: number) => !isShardAccessible(index);
 
