@@ -56,8 +56,6 @@ function ShardPage() {
     }, [shardData]);
 
 
-    console.log(shardData);
-
 
     function handleShardComplete() {
         const userId = localStorage.getItem("userId");

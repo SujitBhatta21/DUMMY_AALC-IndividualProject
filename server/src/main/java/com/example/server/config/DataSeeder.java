@@ -23,7 +23,7 @@ public class DataSeeder implements CommandLineRunner {
 
     // set to true to wipe all tables and re-seed on startup.
     // Set back to false for normal operation.
-    private static final boolean FORCE_RESEED = false;
+    private static final boolean FORCE_RESEED = true;
 
     private final ShardRepository shardRepository;
     private final UserRepository userRepository;
@@ -51,9 +51,9 @@ public class DataSeeder implements CommandLineRunner {
             userRepository.deleteAll();
             shardRepository.deleteAll();
 
-
-            // Example of how to execute any sql query if needed.
-            // jdbcTemplate.execute("SELECT * FROM shard WHERE shard_id = 1");
+            // BugFix: During reseed shard_id restarts with 1 now. Previously it made fetch /shard/10 onwards.
+            jdbcTemplate.execute("ALTER SEQUENCE shard_id_seq RESTART WITH 1");
+            jdbcTemplate.execute("ALTER SEQUENCE app_user_user_id_seq RESTART WITH 1");
 
             System.out.println("DataSeeder: All tables cleared.");
         } else {

@@ -31,7 +31,6 @@ function ContextView({ content, onNext, onBack } : Props) {
 
     /* REGEX for bugfix. Regex adds space after full stop _ before a capital letter. */
     const textToRead: string = extractText(content).replace(/([.!?])([A-Z])/g, '$1 $2');
-    console.log(textToRead);
 
     const handleReadText = () => {
         setIsReading(true);
