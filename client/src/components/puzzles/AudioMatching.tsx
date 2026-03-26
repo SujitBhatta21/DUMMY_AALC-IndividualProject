@@ -29,7 +29,7 @@ interface BUCKET {
 
 const SONGS: SONG[] = [
     { id: 1, title: "A Luta Continua",           origin: "Mozambican Freedom Song",     src: song1, type: "DEFIANCE" },
-    { id: 2, title: "Afrika Mayibuye Response",  origin: "South African Freedom Song",  src: song2, type: "HOPE"     },
+    { id: 2, title: "Afrika Mayibuye Response",  origin: "South African Freedom Song",  src: song2, type: "DEFIANCE"     },
     { id: 3, title: "Chimurenga Dzakatanga",     origin: "Zimbabwean Liberation Song",  src: song3, type: "DEFIANCE" },
     { id: 4, title: "Thina Sizwe",               origin: "South African Hymn",          src: song4, type: "HOPE"     },
     { id: 5, title: "Thuma Mina",                origin: "South African Hymn",          src: song5, type: "HOPE"     },
