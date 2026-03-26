@@ -4,6 +4,7 @@ import com.example.server.model.Role;
 import com.example.server.model.Shard;
 import com.example.server.model.User;
 import com.example.server.model.UserShardProgress;
+import com.example.server.repository.ReportRepository;
 import com.example.server.repository.ShardRepository;
 import com.example.server.repository.UserRepository;
 import com.example.server.repository.UserShardProgressRepository;
@@ -23,22 +24,25 @@ public class DataSeeder implements CommandLineRunner {
 
     // set to true to wipe all tables and re-seed on startup.
     // Set back to false for normal operation.
-    private static final boolean FORCE_RESEED = true;
+    private static final boolean FORCE_RESEED = false;
 
     private final ShardRepository shardRepository;
     private final UserRepository userRepository;
     private final UserShardProgressRepository userShardProgressRepository;
+    private final ReportRepository reportRepository;
     private final PasswordEncoder passwordEncoder;
     private final JdbcTemplate jdbcTemplate;
 
     public DataSeeder(ShardRepository shardRepository,
                       UserRepository userRepository,
                       UserShardProgressRepository userShardProgressRepository,
+                      ReportRepository reportRepository,
                       PasswordEncoder passwordEncoder,
                       JdbcTemplate jdbcTemplate) {
         this.shardRepository = shardRepository;
         this.userRepository = userRepository;
         this.userShardProgressRepository = userShardProgressRepository;
+        this.reportRepository = reportRepository;
         this.passwordEncoder = passwordEncoder;
         this.jdbcTemplate = jdbcTemplate;
     }
@@ -46,8 +50,9 @@ public class DataSeeder implements CommandLineRunner {
     @Override
     public void run(String... args) {
         if (FORCE_RESEED) {
-            // UserShardProgress references both User and Shard — must go first
+            // Delete in FK-safe order: dependents first
             userShardProgressRepository.deleteAll();
+            reportRepository.deleteAll();
             userRepository.deleteAll();
             shardRepository.deleteAll();
 
