@@ -26,12 +26,12 @@ const redactedWords: RedactedWord[] = [
 
 
 const documentDescription: string[] = [
-    "Following the events at ",       // before {0}
-    ", the government has declared the ", // before {1}
-    " to be a banned organisation. All members found in possession of ", // before {2}
-    " will face arrest. Public ",      // before {3}
-    " of any kind are now illegal. Citizens are reminded that ", // before {4}
-    " is required at all times.",       // after {4}
+    "Following the liberation movements at ",
+    ", the government has declared the ",
+    " to be a banned organisation. All members found in possession of ",
+    " will face arrest. Public ",
+    " of any kind are now illegal. Citizens are reminded that ",
+    " is required at all times.",
 ];
 
 
