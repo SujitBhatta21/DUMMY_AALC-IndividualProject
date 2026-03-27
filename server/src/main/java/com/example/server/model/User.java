@@ -22,9 +22,9 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userId;
 
-    // Stored as "USER" or "ADMIN" text in DB; columnDefinition gives existing rows a default
+    // Stored as "USER" or "ADMIN" text in DB
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, columnDefinition = "varchar(50) default 'USER'")
+    @Column(nullable = false)
     private Role role = Role.USER;
 
     private String username;
