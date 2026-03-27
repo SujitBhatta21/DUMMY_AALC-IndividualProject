@@ -30,10 +30,10 @@ function FillInTheBlank({ question, answers, onCorrect, onBack, isShard9 }: FITB
             }
         }
         setCorrectAnswer(results)
-        console.log("ANSWERS IN BANK: ", answers)
+        // console.log("ANSWERS IN BANK: ", answers)
     }, [answers])
 
-    console.log("ANSWER FIRST ITEMS EXTRACTED::", correctAnswer)
+    // console.log("ANSWER FIRST ITEMS EXTRACTED::", correctAnswer)
 
     const shuffledWords = useMemo(() => {
         return shuffle([...Object.values(answers).flat()]);
